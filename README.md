@@ -60,12 +60,12 @@
 - **[Astro Content Collections](https://docs.astro.build/en/guides/content-collections/)** - Type-safe content management
 - **[DevIcons](https://devicon.dev/)** - Technology logos and icons
 
-### **Development & Deployment**
+### **Development & Build Tools**
 
 - **[Vite](https://vitejs.dev/)** - Lightning-fast build tool and dev server
 - **[Sharp](https://sharp.pixelplumbing.com/)** - High-performance image processing
-- **[Vercel](https://vercel.com/)** - Serverless deployment platform
 - **[Formspree](https://formspree.io/)** - Contact form handling
+- **[Git](https://git-scm.com/)** - Version control and collaboration
 
 ### **SEO & Performance**
 
@@ -264,32 +264,22 @@ Update `src/data/skills.ts` to add new technologies:
 
 ## 🚀 Deployment
 
-### **Vercel (Recommended)**
+This static site can be deployed to any platform that supports static site hosting:
 
-The site is optimized for deployment on Vercel:
+### **Build Configuration**
 
-1. **Connect Repository**
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Node.js Version**: 18.x or higher
 
-   - Link your GitHub repository to Vercel
-   - Import the project automatically
+### **Deployment Options**
 
-2. **Configure Build Settings**
-
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-   - Node.js Version: 18.x
-
-3. **Automatic Deployment**
-   - Deploys automatically on push to main branch
-   - Preview deployments for pull requests
-   - Custom domain support
-
-### **Alternative Deployment Options**
-
-- **Netlify**: Compatible with static site generation
 - **GitHub Pages**: Free hosting for public repositories
+- **Netlify**: Easy deployment with continuous integration
 - **Cloudflare Pages**: Global CDN with edge computing
 - **AWS S3 + CloudFront**: Enterprise-grade hosting
+- **Firebase Hosting**: Google's hosting platform
+- **Surge.sh**: Simple static site deployment
 
 ### **Environment Variables**
 
@@ -302,6 +292,13 @@ FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
 # Analytics (Optional)
 GOOGLE_ANALYTICS_ID=G-XXXXXXXXXX
 ```
+
+### **Deployment Steps**
+
+1. **Build the site**: `npm run build`
+2. **Upload the `dist` folder** to your hosting platform
+3. **Configure custom domain** (optional)
+4. **Set up continuous deployment** from your Git repository
 
 ## 🎨 Customization Guide
 
