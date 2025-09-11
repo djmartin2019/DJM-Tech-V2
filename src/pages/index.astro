@@ -1,16 +1,701 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+import { Code, Folder, FileText, Mail, Star, ExternalLink, Github } from 'lucide-astro';
+import { getFeaturedProjects } from '../data/projects';
+import { getRecentPosts } from '../data/blog';
+import { getAllSkills } from '../data/skills';
 
+const featuredProjects = getFeaturedProjects();
+const recentPosts = await getRecentPosts(3);
+const allSkills = getAllSkills();
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="David Martin - Full Stack Developer | DJM Tech">
+  <Header />
+  
+  <!-- Hero Section -->
+  <section class="relative hero-bg py-20 lg:py-32 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- Left Content -->
+        <div class="space-y-8">
+          <!-- Status Tag -->
+          <div class="inline-flex items-center space-x-2 status-tag">
+            <div class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+            <span class="text-sm font-medium">Exploring new ideas</span>
+          </div>
+          
+          <!-- Main Heading -->
+          <h1 class="text-5xl md:text-6xl font-bold hero-title leading-tight">
+            Building Future-Proof
+            <span class="neon-glow"> Web Experiences</span>
+          </h1>
+          
+          <!-- Description -->
+          <p class="text-xl hero-subtitle max-w-2xl">
+            Hi, I'm David — a developer driven by curiosity, always exploring how to build better, 
+            faster, and smarter with Next.js, TypeScript, and Vercel.
+          </p>
+          
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/contact" class="primary-cta-button">
+              Let's Connect
+            </a>
+            <a href="/projects" class="secondary-cta-button">
+              View Projects
+            </a>
+          </div>
+        </div>
+        
+        <!-- Right Content - Image -->
+        <div class="relative hidden lg:block">
+          <div class="hero-image-container">
+            <img 
+              src="/assets/djm-image.png" 
+              alt="David Martin - Full Stack Developer" 
+              class="hero-image"
+            />
+            <div class="hero-image-glow"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Background Elements -->
+    <div class="absolute inset-0 hero-bg-elements">
+      <div class="hero-bg-gradient"></div>
+      <div class="hero-bg-pattern"></div>
+    </div>
+  </section>
+
+         <!-- Tech Arsenal -->
+         <section class="py-20 section-bg">
+           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+             <div class="text-center mb-16">
+               <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Tech Arsenal</h2>
+               <p class="text-xl section-subtitle">Technologies I use to bring ideas to life</p>
+             </div>
+
+             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8">
+               {allSkills.slice(0, 8).map((skill) => (
+                 <div class="text-center group">
+                   <div class="neon-card p-8 mb-4 group-hover:shadow-neon-glow transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-1">
+                     <div class="skill-icon-container">
+                       <img 
+                         src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${skill.icon}/${skill.icon}-original.svg`}
+                         alt={skill.name}
+                         class="h-12 w-12 mx-auto skill-icon"
+                         loading="lazy"
+                       />
+                     </div>
+                   </div>
+                   <span class="text-sm font-medium tech-label">{skill.name}</span>
+                 </div>
+               ))}
+             </div>
+           </div>
+         </section>
+
+  <!-- Featured Projects -->
+  <section class="py-20 projects-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold projects-title mb-4">Featured Projects</h2>
+        <p class="text-xl projects-subtitle">Some of my recent work and ongoing projects</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {featuredProjects.slice(0, 3).map((project) => (
+          <div class="neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300">
+            <div class="h-48 project-image-bg flex items-center justify-center overflow-hidden">
+              <Image 
+                src={project.image} 
+                alt={`${project.title} project screenshot`}
+                width={400}
+                height={192}
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="text-xl font-semibold project-title">{project.title}</h3>
+                <span class={`px-2 py-1 text-xs font-medium rounded-full status-badge status-${project.status}`}>
+                  {project.status}
+                </span>
+              </div>
+              <p class="project-description mb-4">{project.description}</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.technologies.slice(0, 3).map((tech) => (
+                  <span class="px-2 py-1 tech-tag text-xs rounded">{tech}</span>
+                ))}
+              </div>
+              <div class="flex flex-col sm:flex-row gap-3">
+                {project.liveUrl && (
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="primary-cta-button flex items-center justify-center">
+                    <ExternalLink class="h-4 w-4 mr-2" />
+                    View Website
+                  </a>
+                )}
+                {project.githubUrl && (
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="secondary-cta-button flex items-center justify-center">
+                    <Github class="h-4 w-4 mr-2" />
+                    GitHub
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="/projects" class="neon-button">
+          View All Projects
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Blog Posts -->
+  <section class="py-20 blog-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold blog-title mb-4">Latest Posts</h2>
+        <p class="text-xl blog-subtitle">Thoughts on web development, technology, and building better software</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {recentPosts.slice(0, 3).map((post) => (
+          <article class="neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300">
+            <div class="h-48 blog-image-bg flex items-center justify-center">
+              <FileText class="h-16 w-16 blog-icon" />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center text-sm blog-meta mb-2">
+                <span>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                <span class="mx-2">•</span>
+                <span>{post.readTime} min read</span>
+              </div>
+              <h3 class="text-xl font-semibold blog-post-title mb-3">{post.title}</h3>
+              <p class="blog-post-description mb-4">{post.description}</p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                {post.tags.slice(0, 3).map((tag) => (
+                  <span class="px-2 py-1 blog-tag text-xs rounded">{tag}</span>
+                ))}
+              </div>
+              <a href={`/blog/${post.slug}`} class="blog-link">
+                Read More →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+      
+      <div class="text-center mt-12">
+        <a href="/blog" class="neon-button">
+          View All Posts
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 cta-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold cta-title mb-4">Let's Chat</h2>
+      <p class="text-xl cta-subtitle mb-8 max-w-2xl mx-auto">
+        Have a project in mind or just want to talk tech, music, or startups? 
+        Drop a message and let's make something epic.
+      </p>
+      <a href="/contact" class="cta-button inline-flex items-center">
+        <Mail class="h-5 w-5 mr-2" />
+        Send Message
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .hero-bg {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    position: relative;
+  }
+  
+  html.light .hero-bg {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 50%, rgba(240, 248, 255, 0.85) 100%);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .hero-bg-elements {
+    pointer-events: none;
+  }
+  
+  .hero-bg-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(0, 212, 255, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(0, 212, 255, 0.03) 0%, transparent 50%);
+  }
+  
+  html.light .hero-bg-gradient {
+    background: radial-gradient(circle at 30% 20%, rgba(0, 212, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(0, 212, 255, 0.02) 0%, transparent 50%);
+  }
+  
+  .hero-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(0, 212, 255, 0.08) 1px, transparent 0);
+    background-size: 20px 20px;
+    opacity: 0.2;
+  }
+  
+  html.light .hero-bg-pattern {
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(0, 212, 255, 0.05) 1px, transparent 0);
+    opacity: 0.15;
+  }
+  
+  .hero-title {
+    color: var(--text-primary);
+  }
+  
+  .hero-subtitle {
+    color: var(--text-secondary);
+  }
+  
+  html.light .hero-title {
+    color: rgba(15, 23, 42, 0.8);
+    font-weight: 700;
+  }
+  
+  html.light .hero-subtitle {
+    color: rgba(71, 85, 105, 0.7);
+    font-weight: 500;
+  }
+  
+  /* Status Tag */
+  .status-tag {
+    background-color: rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(0, 212, 255, 0.4);
+    border-radius: 9999px;
+    padding: 0.5rem 1rem;
+    color: #ffffff;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.2);
+  }
+  
+  html.light .status-tag {
+    background-color: rgba(0, 212, 255, 0.8);
+    border-color: rgba(0, 212, 255, 0.9);
+    color: #000000;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.2);
+  }
+  
+  /* CTA Buttons */
+  .primary-cta-button {
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    color: #0a0a0a;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 212, 255, 0.3), 0 0 15px rgba(0, 212, 255, 0.2);
+    border: none;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .primary-cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 212, 255, 0.4), 0 0 20px rgba(0, 212, 255, 0.3);
+    background: linear-gradient(135deg, #33dfff 0%, #00d4ff 100%);
+  }
+  
+  .secondary-cta-button {
+    background-color: transparent;
+    color: #00d4ff;
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: 2px solid #00d4ff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+  }
+  
+  .secondary-cta-button:hover {
+    background-color: #00d4ff;
+    color: #0a0a0a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 212, 255, 0.3), 0 0 20px rgba(0, 212, 255, 0.2);
+  }
+  
+  html.light .secondary-cta-button {
+    color: #00d4ff;
+    border-color: #00d4ff;
+  }
+  
+  html.light .secondary-cta-button:hover {
+    background-color: #00d4ff;
+    color: #ffffff;
+  }
+  
+  /* Hero Image */
+  .hero-image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hero-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 1rem;
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .hero-image:hover {
+    transform: scale(1.02);
+  }
+  
+  .hero-image-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 110%;
+    height: 110%;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 60%);
+    border-radius: 50%;
+    z-index: 1;
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 0.2;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: translate(-50%, -50%) scale(1.05);
+    }
+  }
+  
+  html.light .hero-image-glow {
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 0%, transparent 60%);
+  }
+  
+  .secondary-button {
+    color: var(--accent-color);
+  }
+  
+  .secondary-button:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-primary);
+  }
+  
+  .code-text {
+    color: var(--text-primary);
+  }
+  
+  html.light .code-text {
+    color: #0f172a;
+  }
+  
+  .section-bg {
+    background-color: var(--bg-secondary);
+  }
+  
+  .section-title {
+    color: var(--text-primary);
+  }
+  
+  .section-subtitle {
+    color: var(--text-secondary);
+  }
+  
+  .accent-icon {
+    color: var(--accent-color);
+  }
+  
+  .tech-label {
+    color: var(--text-primary);
+  }
+
+  .skill-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    width: 3rem;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+  }
+
+  .skill-icon {
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.3));
+  }
+
+  .group:hover .skill-icon-container {
+    transform: scale(1.1);
+  }
+
+  .group:hover .skill-icon {
+    filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.4)) drop-shadow(0 0 25px rgba(0, 212, 255, 0.2));
+    transform: scale(1.05);
+  }
+
+  html.light .skill-icon {
+    filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.2));
+  }
+
+  html.light .group:hover .skill-icon {
+    filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.4)) drop-shadow(0 0 25px rgba(0, 212, 255, 0.2));
+  }
+  
+  /* Featured Projects Styles */
+  .projects-bg {
+    background-color: var(--bg-primary);
+  }
+  
+  .projects-title {
+    color: var(--text-primary);
+  }
+  
+  .projects-subtitle {
+    color: var(--text-secondary);
+  }
+  
+  .project-image-bg {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+  }
+  
+  .project-icon {
+    color: var(--accent-color);
+  }
+  
+  .project-title {
+    color: var(--text-primary);
+  }
+  
+  .project-description {
+    color: var(--text-secondary);
+  }
+  
+  .status-badge {
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+  
+  .status-completed {
+    background-color: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+    border-color: #22c55e;
+  }
+  
+  .status-current {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+    border-color: #3b82f6;
+  }
+  
+  .status-roadmap {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+    border-color: #f59e0b;
+  }
+  
+  .tech-tag {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+  }
+  
+  .project-link {
+    color: var(--accent-color);
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .project-link:hover {
+    color: var(--accent-hover);
+  }
+  
+  /* Blog Posts Styles */
+  .blog-bg {
+    background-color: var(--bg-secondary);
+  }
+  
+  .blog-title {
+    color: var(--text-primary);
+  }
+  
+  .blog-subtitle {
+    color: var(--text-secondary);
+  }
+  
+  .blog-image-bg {
+    background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
+  }
+  
+  .blog-icon {
+    color: var(--accent-color);
+  }
+  
+  .blog-meta {
+    color: var(--text-secondary);
+  }
+  
+  .blog-post-title {
+    color: var(--text-primary);
+  }
+  
+  .blog-post-description {
+    color: var(--text-secondary);
+  }
+  
+  .blog-tag {
+    background-color: rgba(0, 212, 255, 0.2);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+  }
+  
+  .blog-link {
+    color: var(--accent-color);
+    font-weight: 500;
+    transition: color 0.3s;
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+    text-decoration: none;
+  }
+  
+  .blog-link:hover {
+    color: var(--accent-hover);
+  }
+  
+  /* CTA Section Styles */
+  .cta-bg {
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-dark) 100%);
+  }
+  
+  .cta-title {
+    color: var(--bg-primary);
+  }
+  
+  .cta-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .cta-button {
+    background-color: var(--bg-primary);
+    color: var(--accent-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: 2px solid var(--bg-primary);
+  }
+  
+  .cta-button:hover {
+    background-color: transparent;
+    color: var(--bg-primary);
+    border-color: var(--bg-primary);
+  }
+
+  /* CTA Buttons */
+  .primary-cta-button {
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    color: #0a0a0a;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 212, 255, 0.3), 0 0 15px rgba(0, 212, 255, 0.2);
+    border: none;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .primary-cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 212, 255, 0.4), 0 0 20px rgba(0, 212, 255, 0.3);
+    background: linear-gradient(135deg, #33dfff 0%, #00d4ff 100%);
+  }
+  
+  .secondary-cta-button {
+    background-color: transparent;
+    color: #00d4ff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 2px solid #00d4ff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .secondary-cta-button:hover {
+    background-color: #00d4ff;
+    color: #0a0a0a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 212, 255, 0.3), 0 0 20px rgba(0, 212, 255, 0.2);
+  }
+  
+  html.light .secondary-cta-button {
+    color: #00d4ff;
+    border-color: #00d4ff;
+  }
+  
+  html.light .secondary-cta-button:hover {
+    background-color: #00d4ff;
+    color: #ffffff;
+  }
+</style>

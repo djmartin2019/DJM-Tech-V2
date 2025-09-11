@@ -1,0 +1,136 @@
+---
+import { Code, Menu } from 'lucide-astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+// Get current page from Astro.url
+const currentPath = Astro.url.pathname;
+const isActive = (path: string) => currentPath === path;
+---
+
+<header class="sticky top-0 z-50 backdrop-blur-md border-b transition-colors duration-300 header-bg">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0">
+        <a href="/" class="flex items-center space-x-2 text-xl font-bold transition-colors nav-link">
+          <Code class="h-6 w-6 neon-glow" />
+          <span class="neon-glow">DJM Tech</span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:block">
+        <div class="ml-10 flex items-baseline space-x-8">
+          <a href="/" class={`px-3 py-2 text-sm font-medium transition-colors nav-link ${isActive('/') ? 'active' : ''}`}>Home</a>
+          <a href="/projects" class={`px-3 py-2 text-sm font-medium transition-colors nav-link ${isActive('/projects') ? 'active' : ''}`}>Projects</a>
+          <a href="/blog" class={`px-3 py-2 text-sm font-medium transition-colors nav-link ${isActive('/blog') ? 'active' : ''}`}>Blog</a>
+          <a href="/about" class={`px-3 py-2 text-sm font-medium transition-colors nav-link ${isActive('/about') ? 'active' : ''}`}>About</a>
+          <a href="/contact" class={`px-3 py-2 text-sm font-medium transition-colors nav-link ${isActive('/contact') ? 'active' : ''}`}>Contact</a>
+        </div>
+      </div>
+
+      <!-- Theme Toggle and Mobile Menu Button -->
+      <div class="flex items-center space-x-4">
+        <ThemeToggle />
+        
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md transition-colors" aria-controls="mobile-menu" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <Menu class="block h-6 w-6" />
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="md:hidden hidden mobile-menu" id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 transition-colors duration-300 mobile-menu">
+        <a href="/" class={`block px-3 py-2 text-base font-medium nav-link ${isActive('/') ? 'active' : ''}`}>Home</a>
+        <a href="/projects" class={`block px-3 py-2 text-base font-medium transition-colors nav-link ${isActive('/projects') ? 'active' : ''}`}>Projects</a>
+        <a href="/blog" class={`block px-3 py-2 text-base font-medium transition-colors nav-link ${isActive('/blog') ? 'active' : ''}`}>Blog</a>
+        <a href="/about" class={`block px-3 py-2 text-base font-medium transition-colors nav-link ${isActive('/about') ? 'active' : ''}`}>About</a>
+        <a href="/contact" class={`block px-3 py-2 text-base font-medium transition-colors nav-link ${isActive('/contact') ? 'active' : ''}`}>Contact</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .header-bg {
+    background-color: #000000; /* Pure black navbar */
+    border-color: #2a2a2a;
+  }
+  
+  html.light .header-bg {
+    background-color: #000000; /* Keep navbar black in light mode too */
+    border-color: #2a2a2a;
+    backdrop-filter: blur(10px);
+  }
+  
+  .nav-link {
+    color: #e5e5e5; /* White text for better contrast on black */
+  }
+  
+  .nav-link:hover {
+    color: #00d4ff; /* Bright blue on hover */
+  }
+  
+  .nav-link.active {
+    color: #00d4ff; /* Bright blue for active state */
+  }
+  
+  html.light .nav-link {
+    color: #e5e5e5; /* Keep white text in light mode */
+    font-weight: 500;
+  }
+  
+  html.light .nav-link.active {
+    color: #00d4ff; /* Keep bright blue for active */
+    font-weight: 600;
+  }
+  
+  .mobile-menu-button {
+    background-color: #1a1a1a;
+    color: #e5e5e5;
+  }
+  
+  .mobile-menu-button:hover {
+    color: #00d4ff;
+    background-color: #2a2a2a;
+  }
+  
+  .mobile-menu {
+    background-color: #000000;
+    border-color: #2a2a2a;
+  }
+  
+  .mobile-menu .nav-link {
+    color: #e5e5e5;
+  }
+  
+  .mobile-menu .nav-link:hover {
+    color: #00d4ff;
+  }
+  
+  .mobile-menu .nav-link.active {
+    color: #00d4ff;
+  }
+</style>
+
+<script>
+  // Mobile menu toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.querySelector('.mobile-menu-button');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', function() {
+        const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+        mobileMenuButton.setAttribute('aria-expanded', (!isExpanded).toString());
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+  });
+</script>

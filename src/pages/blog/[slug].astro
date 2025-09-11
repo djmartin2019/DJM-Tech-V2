@@ -1,0 +1,540 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { ChevronRight, User, Twitter, Linkedin, Github, FileText, Mail } from 'lucide-astro';
+import { getCollection } from 'astro:content';
+import { getAllBlogPosts } from '../../data/blog';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post: any) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post }: { post: any } = Astro.props;
+const { Content } = await post.render();
+
+// Find the corresponding blog post data
+const allBlogPosts = await getAllBlogPosts();
+const blogPost = allBlogPosts.find((p: any) => p.slug === post.slug);
+---
+
+<Layout 
+  title={`${post.data.title} - David Martin | DJM Tech`} 
+  description={post.data.summary || post.data.description}
+  image={post.data.image || "/assets/og-default.png"}
+>
+  <Header />
+  
+  <!-- Article Header -->
+  <article class="py-20 article-bg">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="mb-8">
+        <ol class="flex items-center space-x-2 text-sm breadcrumb-text">
+          <li><a href="/" class="breadcrumb-link">Home</a></li>
+          <li><ChevronRight class="h-4 w-4" /></li>
+          <li><a href="/blog" class="breadcrumb-link">Blog</a></li>
+          <li><ChevronRight class="h-4 w-4" /></li>
+          <li class="breadcrumb-current">{post.data.title}</li>
+        </ol>
+      </nav>
+
+      <!-- Article Meta -->
+      <div class="mb-8">
+        <div class="flex items-center text-sm article-meta mb-4">
+          <span>{new Date(post.data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          <span class="mx-2">•</span>
+          <span>{blogPost?.readTime || 5} min read</span>
+          {post.data.featured && (
+            <>
+              <span class="mx-2">•</span>
+              <span class="featured-badge">Featured</span>
+            </>
+          )}
+        </div>
+        
+        <h1 class="text-4xl md:text-5xl font-bold article-title mb-6">{post.data.title}</h1>
+        
+        <p class="text-xl article-description mb-6">{post.data.description}</p>
+        
+        <div class="flex flex-wrap gap-2">
+          {post.data.tags.map((tag: string) => (
+            <span class="px-3 py-1 article-tag text-sm rounded-full">{tag}</span>
+          ))}
+        </div>
+      </div>
+
+      <!-- Article Image -->
+      {post.data.image && (
+        <div class="mb-12">
+          <img 
+            src={post.data.image} 
+            alt={post.data.title}
+            class="w-full h-64 object-cover rounded-lg shadow-lg article-image"
+          />
+        </div>
+      )}
+
+      <!-- Article Content -->
+      <div class="prose prose-lg max-w-none article-content">
+        <Content />
+      </div>
+
+      <!-- Article Footer -->
+      <div class="mt-16 pt-8 article-footer-border">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-4">
+            <div class="author-icon-container">
+              <img src="/assets/about-me-photo.jpeg" alt="David Martin" class="author-profile-image" />
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold author-name">David Martin</h3>
+              <p class="author-title">Full Stack Developer</p>
+            </div>
+          </div>
+          
+          <div class="flex space-x-4">
+            <a href="https://x.com/djmartin2019" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="social-link">
+              <Twitter class="h-5 w-5" />
+            </a>
+            <a href="https://www.linkedin.com/in/davidjmartin2025" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="social-link">
+              <Linkedin class="h-5 w-5" />
+            </a>
+            <a href="https://github.com/djmartin2019" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="social-link">
+              <Github class="h-5 w-5" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Related Posts -->
+  {(() => {
+    const relatedPosts = allBlogPosts.filter((p: any) => p.slug !== post.slug && p.tags.some((tag: string) => post.data.tags.includes(tag))).slice(0, 3);
+    
+    if (relatedPosts.length > 0) {
+      return (
+        <section class="py-20 related-posts-bg">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold related-posts-title mb-8 text-center">Related Posts</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {relatedPosts.map((relatedPost: any) => (
+                <article class="related-post-card neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300">
+                  <div class="h-48 related-post-image-bg flex items-center justify-center">
+                    <FileText class="h-16 w-16 related-post-icon" />
+                  </div>
+                  <div class="p-6">
+                    <div class="flex items-center text-sm related-post-meta mb-3">
+                      <span>{new Date(relatedPost.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                      <span class="mx-2">•</span>
+                      <span>{relatedPost.readTime} min read</span>
+                    </div>
+                    <h3 class="text-xl font-semibold related-post-title mb-3">{relatedPost.title}</h3>
+                    <p class="related-post-description mb-4">{relatedPost.description}</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      {relatedPost.tags.slice(0, 3).map((tag: string) => (
+                        <span class="px-2 py-1 related-post-tag text-xs rounded">{tag}</span>
+                      ))}
+                    </div>
+                    <a href={`/blog/${relatedPost.slug}`} class="related-post-link">
+                      Read More →
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+    return null;
+  })()}
+
+  <!-- CTA Section -->
+  <section class="py-20 cta-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold cta-title mb-4">Enjoyed this post?</h2>
+      <p class="text-xl cta-subtitle mb-8 max-w-2xl mx-auto">
+        Have questions about this topic or want to discuss web development, technology, and building better software? Let's chat!
+      </p>
+      <a href="/contact" class="cta-button inline-flex items-center">
+        <Mail class="h-5 w-5 mr-2" />
+        Get In Touch
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* Article Styles */
+  .article-bg {
+    background-color: var(--bg-primary);
+  }
+
+  .breadcrumb-text {
+    color: var(--text-secondary);
+  }
+
+  .breadcrumb-link {
+    color: var(--text-secondary);
+    transition: color 0.3s;
+  }
+
+  .breadcrumb-link:hover {
+    color: var(--accent-color);
+  }
+
+  .breadcrumb-current {
+    color: var(--text-primary);
+  }
+
+  .article-meta {
+    color: var(--text-secondary);
+  }
+
+  .featured-badge {
+    color: #f59e0b;
+    font-weight: 500;
+  }
+
+  .article-title {
+    color: var(--text-primary);
+  }
+
+  .article-description {
+    color: var(--text-secondary);
+  }
+
+  .article-tag {
+    background-color: rgba(0, 212, 255, 0.2);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+  }
+
+  .article-image {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  html.light .article-image {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .article-content {
+    color: var(--text-primary);
+  }
+
+  .article-content h1,
+  .article-content h2,
+  .article-content h3,
+  .article-content h4,
+  .article-content h5,
+  .article-content h6 {
+    color: var(--text-primary);
+  }
+
+  .article-content p {
+    color: var(--text-secondary);
+  }
+
+  .article-content a {
+    color: var(--accent-color);
+  }
+
+  .article-content a:hover {
+    color: var(--accent-hover);
+  }
+
+  .article-content blockquote {
+    border-left: 4px solid var(--accent-color);
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+  }
+
+  .article-content code {
+    background-color: var(--bg-secondary);
+    color: var(--accent-color);
+    border: 1px solid var(--border-color);
+  }
+
+  .article-content pre {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+  }
+
+  .article-content pre code {
+    background-color: transparent;
+    border: none;
+  }
+
+  .article-footer-border {
+    border-top: 1px solid var(--border-color);
+  }
+
+  .author-icon-container {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .author-profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .author-icon {
+    color: var(--accent-color);
+  }
+
+  .author-name {
+    color: var(--text-primary);
+  }
+
+  .author-title {
+    color: var(--text-secondary);
+  }
+
+  .social-link {
+    color: var(--text-secondary);
+    transition: color 0.3s;
+  }
+
+  .social-link:hover {
+    color: var(--accent-color);
+  }
+
+  /* Related Posts Styles */
+  .related-posts-bg {
+    background-color: var(--bg-secondary);
+  }
+
+  .related-posts-title {
+    color: var(--text-primary);
+  }
+
+  .related-post-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+  }
+
+  .related-post-image-bg {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+  }
+
+  .related-post-icon {
+    color: var(--accent-color);
+  }
+
+  .related-post-meta {
+    color: var(--text-secondary);
+  }
+
+  .related-post-title {
+    color: var(--text-primary);
+  }
+
+  .related-post-description {
+    color: var(--text-secondary);
+  }
+
+  .related-post-tag {
+    background-color: rgba(0, 212, 255, 0.2);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+  }
+
+  .related-post-link {
+    color: var(--accent-color);
+    font-weight: 500;
+    transition: color 0.3s;
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+    text-decoration: none;
+  }
+
+  .related-post-link:hover {
+    color: var(--accent-hover);
+  }
+
+  /* CTA Styles */
+  .cta-bg {
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-dark) 100%);
+  }
+
+  .cta-title {
+    color: var(--bg-primary);
+  }
+
+  .cta-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .cta-button {
+    background-color: var(--bg-primary);
+    color: var(--accent-color);
+    padding: 1rem 2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: none;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+
+  /* Light mode overrides */
+  html.light .article-title {
+    color: #0f172a;
+    font-weight: 700;
+  }
+
+  html.light .article-description {
+    color: #475569;
+    font-weight: 500;
+  }
+
+  html.light .breadcrumb-current {
+    color: #0f172a;
+  }
+
+  html.light .author-name {
+    color: #0f172a;
+  }
+
+  html.light .author-title {
+    color: #475569;
+  }
+
+  html.light .related-posts-title {
+    color: #0f172a;
+    font-weight: 700;
+  }
+
+  html.light .related-post-title {
+    color: #0f172a;
+  }
+
+  html.light .related-post-description {
+    color: #475569;
+  }
+
+  /* Resources Grid Styling */
+  .resources-grid {
+    display: grid;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .resources-grid h2 {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .resources-grid h2::before {
+    content: '';
+    width: 4px;
+    height: 1.5rem;
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+    border-radius: 2px;
+  }
+
+  .resources-grid p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .resources-grid blockquote {
+    background: rgba(0, 212, 255, 0.1);
+    border-left: 4px solid var(--accent-color);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0 0.5rem 0.5rem 0;
+    font-style: italic;
+  }
+
+  .resources-grid blockquote p {
+    margin: 0;
+    color: var(--text-primary);
+  }
+
+  .resources-grid a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+    color: var(--bg-primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 212, 255, 0.3);
+  }
+
+  .resources-grid a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 212, 255, 0.4);
+  }
+
+  .resources-grid hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--accent-color) 50%, transparent 100%);
+    margin: 2rem 0;
+  }
+
+  /* Light mode overrides for resources */
+  html.light .resources-grid h2 {
+    color: var(--accent-color);
+  }
+
+  html.light .resources-grid blockquote {
+    background: rgba(0, 212, 255, 0.15);
+    border-left-color: var(--accent-color);
+  }
+
+  html.light .resources-grid blockquote p {
+    color: #0f172a;
+  }
+</style>

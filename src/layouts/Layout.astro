@@ -1,0 +1,84 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const { 
+  title, 
+  description = "David Martin - Full Stack Developer building scalable web experiences with Next.js, TypeScript, and modern web technologies.",
+  image = "/assets/og-default.png",
+  canonical,
+  noindex = false
+} = Astro.props;
+
+const canonicalURL = canonical ? new URL(canonical, Astro.site) : Astro.url;
+const imageURL = new URL(image, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/android-chrome-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/android-chrome-512x512.png" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <link rel="canonical" href={canonicalURL} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:site_name" content="DJM Tech" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={imageURL} />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "David Martin",
+        "url": "https://www.djm-tech.dev",
+        "image": "https://www.djm-tech.dev/assets/og-default.png",
+        "description": "Full Stack Developer building scalable web experiences",
+        "jobTitle": "Full Stack Developer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "DJM Tech"
+        },
+        "sameAs": [
+          "https://github.com/djmartin2019",
+          "https://www.linkedin.com/in/davidjmartin2025",
+          "https://x.com/djmartin2019"
+        ]
+      }
+    </script>
+    
+    <!-- Import Tailwind CSS -->
+    <link rel="stylesheet" href="/src/styles/global.css" />
+  </head>
+  <body class="bg-gray-50 text-gray-900 antialiased">
+    <slot />
+  </body>
+</html>

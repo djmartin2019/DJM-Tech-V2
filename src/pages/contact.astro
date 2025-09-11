@@ -1,0 +1,494 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Mail, Github, Linkedin, Clock, Twitter } from 'lucide-astro';
+---
+
+<Layout title="Contact - David Martin | DJM Tech" description="Get in touch with David Martin for web development projects, collaborations, or just to chat about technology and startups.">
+  <Header />
+  
+  <!-- Hero Section -->
+  <section class="relative hero-bg py-20 lg:py-32 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-bold hero-title mb-6">Let's Connect</h1>
+        <p class="text-xl hero-subtitle max-w-3xl mx-auto">
+          Have a project in mind or just want to talk tech, music, or startups? 
+          Drop a message and let's make something epic.
+        </p>
+      </div>
+    </div>
+    
+    <!-- Background Elements -->
+    <div class="absolute inset-0 hero-bg-elements">
+      <div class="hero-bg-gradient"></div>
+      <div class="hero-bg-pattern"></div>
+    </div>
+  </section>
+
+  <!-- Contact Form & Info -->
+  <section class="py-20 section-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Contact Form -->
+        <div>
+          <h2 class="text-3xl font-bold section-title mb-8">Send a Message</h2>
+          <form class="space-y-6" id="contact-form" action="https://formspree.io/f/xpwaawlp" method="POST">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-sm font-medium form-label mb-2">Name</label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name" 
+                  required
+                  class="w-full px-4 py-3 form-input"
+                />
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium form-label mb-2">Email</label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  required
+                  class="w-full px-4 py-3 form-input"
+                />
+              </div>
+            </div>
+            
+            <div>
+              <label for="subject" class="block text-sm font-medium form-label mb-2">Subject</label>
+              <input 
+                type="text" 
+                id="subject" 
+                name="subject" 
+                required
+                class="w-full px-4 py-3 form-input"
+              />
+            </div>
+            
+            <div>
+              <label for="message" class="block text-sm font-medium form-label mb-2">Message</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="6" 
+                required
+                class="w-full px-4 py-3 form-input"
+              ></textarea>
+            </div>
+            
+            <button 
+              type="submit" 
+              class="w-full primary-cta-button"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h2 class="text-3xl font-bold section-title mb-8">Get In Touch</h2>
+          
+          <div class="space-y-8">
+            <!-- Email -->
+            <div class="flex items-start space-x-4">
+              <div class="contact-icon-container rounded-full p-3">
+                <Mail class="h-6 w-6 contact-icon" />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold contact-title mb-1">Email</h3>
+                <a href="mailto:djmartin2019@gmail.com" class="contact-link mb-2 block">djmartin2019@gmail.com</a>
+                <p class="text-sm contact-description">I typically respond within 24 hours</p>
+              </div>
+            </div>
+
+            <!-- GitHub -->
+            <div class="flex items-start space-x-4">
+              <div class="contact-icon-container rounded-full p-3">
+                <Github class="h-6 w-6 contact-icon" />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold contact-title mb-1">GitHub</h3>
+                <a href="https://github.com/djmartin2019" target="_blank" rel="noopener noreferrer" class="contact-link mb-2 block">github.com/djmartin2019</a>
+                <p class="text-sm contact-description">Check out my open source projects</p>
+              </div>
+            </div>
+
+            <!-- LinkedIn -->
+            <div class="flex items-start space-x-4">
+              <div class="contact-icon-container rounded-full p-3">
+                <Linkedin class="h-6 w-6 contact-icon" />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold contact-title mb-1">LinkedIn</h3>
+                <a href="https://www.linkedin.com/in/davidjmartin2025" target="_blank" rel="noopener noreferrer" class="contact-link mb-2 block">linkedin.com/in/davidjmartin2025</a>
+                <p class="text-sm contact-description">Connect with me professionally</p>
+              </div>
+            </div>
+
+            <!-- Twitter -->
+            <div class="flex items-start space-x-4">
+              <div class="contact-icon-container rounded-full p-3">
+                <Twitter class="h-6 w-6 contact-icon" />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold contact-title mb-1">Twitter</h3>
+                <a href="https://x.com/djmartin2019" target="_blank" rel="noopener noreferrer" class="contact-link mb-2 block">@djmartin2019</a>
+                <p class="text-sm contact-description">Follow me for tech updates and thoughts</p>
+              </div>
+            </div>
+
+            <!-- Response Time -->
+            <div class="neon-card p-6">
+              <h3 class="text-lg font-semibold contact-title mb-2">Response Time</h3>
+              <p class="contact-description mb-4">
+                I'm committed to responding to all inquiries within 24 hours. 
+                For urgent matters, please mention it in your message.
+              </p>
+              <div class="flex items-center text-sm contact-description">
+                <Clock class="h-4 w-4 mr-2" />
+                <span>Usually responds within a few hours</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-20 faq-bg">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Frequently Asked Questions</h2>
+        <p class="text-xl section-subtitle">Common questions about working with me</p>
+      </div>
+      
+      <div class="space-y-8">
+        <div class="neon-card p-6">
+          <h3 class="text-lg font-semibold faq-title mb-3">What types of projects do you work on?</h3>
+          <p class="faq-description">
+            I specialize in web applications, from simple landing pages to complex full-stack applications. 
+            I work with modern technologies like React, Next.js, TypeScript, and Node.js to build scalable, 
+            performant solutions.
+          </p>
+        </div>
+        
+        <div class="neon-card p-6">
+          <h3 class="text-lg font-semibold faq-title mb-3">What's your typical project timeline?</h3>
+          <p class="faq-description">
+            Project timelines vary depending on complexity and scope. Simple websites typically take 2-4 weeks, 
+            while complex applications can take 2-6 months. I'll provide a detailed timeline during our initial consultation.
+          </p>
+        </div>
+        
+        <div class="neon-card p-6">
+          <h3 class="text-lg font-semibold faq-title mb-3">Do you work with clients remotely?</h3>
+          <p class="faq-description">
+            Yes! I work with clients worldwide and have experience collaborating remotely. I use modern 
+            communication tools and maintain regular check-ins to keep projects on track.
+          </p>
+        </div>
+        
+        <div class="neon-card p-6">
+          <h3 class="text-lg font-semibold faq-title mb-3">What's included in your services?</h3>
+          <p class="faq-description">
+            My services include design, development, testing, deployment, and ongoing maintenance. 
+            I also provide documentation, training, and support to ensure your project's long-term success.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <script>
+    // Contact form handling with Formspree
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('contact-form');
+      
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Get form data
+          const formData = new FormData(form as HTMLFormElement);
+          const data = Object.fromEntries(formData);
+          
+          // Simple validation
+          if (!data.name || !data.email || !data.subject || !data.message) {
+            alert('Please fill in all fields');
+            return;
+          }
+          
+          // Update button state
+          const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+          const originalText = submitButton.textContent;
+          
+          submitButton.textContent = 'Sending...';
+          submitButton.disabled = true;
+          
+          // Submit to Formspree
+          fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          })
+          .then(response => {
+            if (response.ok) {
+              alert('Thank you for your message! I\'ll get back to you soon.');
+              (form as HTMLFormElement).reset();
+            } else {
+              throw new Error('Network response was not ok');
+            }
+          })
+          .catch(error => {
+            alert('There was a problem sending your message. Please try again or email me directly.');
+            console.error('Error:', error);
+          })
+          .finally(() => {
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+          });
+        });
+      }
+    });
+  </script>
+
+  <style>
+    .hero-bg {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+      position: relative;
+    }
+
+    html.light .hero-bg {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-bg-elements {
+      pointer-events: none;
+    }
+
+    .hero-bg-gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(0, 212, 255, 0.03) 0%, transparent 50%);
+    }
+
+    .hero-bg-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 1px 1px, rgba(0, 212, 255, 0.08) 1px, transparent 0);
+      background-size: 20px 20px;
+      opacity: 0.2;
+    }
+
+    .hero-title {
+      color: var(--text-primary);
+    }
+
+    html.light .hero-title {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .hero-subtitle {
+      color: var(--text-secondary);
+    }
+
+    html.light .hero-subtitle {
+      color: #475569;
+      font-weight: 500;
+    }
+
+    .section-bg {
+      background-color: var(--bg-secondary);
+    }
+
+    .section-title {
+      color: var(--text-primary);
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+    }
+
+    .form-label {
+      color: var(--text-primary);
+    }
+
+    .form-input {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    /* Primary CTA Button Styling */
+    .primary-cta-button {
+      background-color: var(--accent-color);
+      color: var(--bg-primary);
+      border: 1px solid var(--accent-color);
+      border-radius: 0.5rem;
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      box-shadow: 0 0 3px rgba(0, 212, 255, 0.3);
+    }
+
+    .primary-cta-button:hover {
+      background-color: var(--accent-hover);
+      border-color: var(--accent-hover);
+      box-shadow: 0 0 6px rgba(0, 212, 255, 0.4), 0 0 12px rgba(0, 212, 255, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .primary-cta-button:active {
+      transform: translateY(0);
+    }
+
+    .primary-cta-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Light mode button styling */
+    html.light .primary-cta-button {
+      background-color: var(--accent-color);
+      color: #ffffff;
+      border-color: var(--accent-color);
+    }
+
+    html.light .primary-cta-button:hover {
+      background-color: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+
+    .contact-icon-container {
+      background-color: rgba(0, 212, 255, 0.2);
+      border: 2px solid var(--accent-color);
+    }
+
+    .contact-icon {
+      color: var(--accent-color);
+    }
+
+    .contact-title {
+      color: var(--text-primary);
+    }
+
+    .contact-link {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-link:hover {
+      color: var(--accent-hover);
+    }
+
+    .contact-description {
+      color: var(--text-secondary);
+    }
+
+    .faq-bg {
+      background-color: var(--bg-primary);
+    }
+
+    .faq-title {
+      color: var(--text-primary);
+    }
+
+    .faq-description {
+      color: var(--text-secondary);
+    }
+
+    /* Enhanced contrast for light mode */
+    html.light .hero-title {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    html.light .hero-subtitle {
+      color: #475569;
+      font-weight: 500;
+    }
+
+    html.light .section-title {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    html.light .section-subtitle {
+      color: #475569;
+      font-weight: 500;
+    }
+
+    html.light .form-label {
+      color: #0f172a;
+      font-weight: 500;
+    }
+
+    html.light .form-input {
+      background-color: #ffffff;
+      border-color: #d1d5db;
+      color: #0f172a;
+    }
+
+    html.light .form-input:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+    }
+
+    html.light .form-input::placeholder {
+      color: #6b7280;
+    }
+
+    html.light .contact-title {
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    html.light .contact-description {
+      color: #6b7280;
+    }
+
+    html.light .faq-title {
+      color: #0f172a;
+      font-weight: 600;
+    }
+
+    html.light .faq-description {
+      color: #6b7280;
+    }
+  </style>
+</Layout>

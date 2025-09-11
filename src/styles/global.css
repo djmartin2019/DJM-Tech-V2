@@ -1,0 +1,216 @@
+@import "tailwindcss";
+
+/* CSS Custom Properties for theming */
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-card: #1a1a1a;
+  --border-color: #2a2a2a;
+  --text-primary: #e5e5e5;
+  --text-secondary: #a3a3a3;
+  --accent-color: #00d4ff; /* Brighter blue */
+  --accent-hover: #33dfff; /* Even brighter on hover */
+  --accent-dark: #0099cc;
+}
+
+html.light {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-card: #ffffff;
+  --border-color: #e2e8f0;
+  --text-primary: #0f172a; /* Darker for better contrast */
+  --text-secondary: #475569; /* Darker for better contrast */
+  --accent-color: #00d4ff;
+  --accent-hover: #0099cc;
+  --accent-dark: #0066cc;
+}
+
+/* Custom styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s, color 0.3s;
+  }
+}
+
+@layer components {
+  .prose {
+    color: var(--text-primary);
+    line-height: 1.75;
+  }
+
+  .prose h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .prose h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  }
+
+  .prose h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  .prose ul {
+    list-style-type: disc;
+    list-style-position: inside;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .prose ol {
+    list-style-type: decimal;
+    list-style-position: inside;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .prose li {
+    color: var(--text-primary);
+  }
+
+  .prose blockquote {
+    border-left: 4px solid var(--accent-color);
+    padding-left: 1rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    margin: 1.5rem 0;
+  }
+
+  .prose code {
+    background-color: var(--bg-secondary);
+    color: var(--accent-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    border: 1px solid var(--border-color);
+  }
+
+  .prose pre {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border-color);
+  }
+
+  .prose pre code {
+    background-color: transparent;
+    color: var(--text-primary);
+    padding: 0;
+    border: 0;
+  }
+
+  .prose a {
+    color: var(--accent-color);
+    text-decoration: underline;
+    transition: color 0.3s;
+  }
+
+  .prose a:hover {
+    color: var(--accent-hover);
+  }
+
+  .prose strong {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .prose em {
+    font-style: italic;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Neon effects */
+  .neon-glow {
+    color: var(--accent-color);
+    text-shadow: 0 0 2px var(--accent-color), 0 0 4px var(--accent-color);
+  }
+
+  .neon-border {
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 0 3px var(--accent-color);
+  }
+
+  .neon-button {
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 0 3px var(--accent-color);
+  }
+
+  .neon-button:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-primary);
+    box-shadow: 0 0 6px var(--accent-color), 0 0 12px var(--accent-color);
+  }
+
+  .neon-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 5px rgba(0, 212, 255, 0.05),
+      0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .neon-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 212, 255, 0.05) 0%,
+      transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .neon-card:hover {
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.15),
+      0 8px 25px rgba(0, 212, 255, 0.1), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .neon-card:hover::before {
+    opacity: 1;
+  }
+}

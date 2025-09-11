@@ -1,0 +1,96 @@
+---
+import { Sun, Moon } from 'lucide-astro';
+---
+
+<button 
+  id="theme-toggle" 
+  class="theme-toggle-btn relative p-2 rounded-md transition-all duration-300 hover:scale-110"
+  aria-label="Toggle theme"
+>
+  <!-- Moon icon for dark mode (default) -->
+  <Moon 
+    id="moon-icon" 
+    class="h-5 w-5 theme-icon absolute inset-0 m-auto" 
+  />
+  
+  <!-- Sun icon for light mode -->
+  <Sun 
+    id="sun-icon" 
+    class="h-5 w-5 theme-icon absolute inset-0 m-auto opacity-0" 
+  />
+</button>
+
+<style>
+  .theme-toggle-btn {
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 0 5px rgba(0, 212, 255, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 8px; /* Square with rounded corners */
+  }
+  
+  .theme-toggle-btn:hover {
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+    background-color: #2a2a2a;
+  }
+  
+  .theme-icon {
+    color: #00d4ff; /* Bright blue */
+    transition: all 0.3s ease;
+  }
+  
+  /* Icon transitions */
+  html.light #moon-icon {
+    opacity: 0;
+    transform: rotate(180deg) scale(0.8);
+  }
+  
+  html.light #sun-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  
+  #moon-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  
+  #sun-icon {
+    opacity: 0;
+    transform: rotate(-180deg) scale(0.8);
+  }
+</style>
+
+<script>
+  // Theme toggle functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    
+    // Check for saved theme preference or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    
+    // Apply saved theme
+    if (savedTheme === 'light') {
+      html.classList.add('light');
+    } else {
+      html.classList.remove('light');
+    }
+    
+    // Theme toggle event listener
+    themeToggle.addEventListener('click', function() {
+      html.classList.toggle('light');
+      
+      // Save theme preference
+      const currentTheme = html.classList.contains('light') ? 'light' : 'dark';
+      localStorage.setItem('theme', currentTheme);
+      
+      // Add a subtle animation effect
+      themeToggle.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        themeToggle.style.transform = 'scale(1)';
+      }, 150);
+    });
+  });
+</script>

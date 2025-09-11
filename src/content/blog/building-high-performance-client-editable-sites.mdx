@@ -1,0 +1,47 @@
+---
+title: "Building High-Performance, Client-Editable Sites Without Compromise"
+date: "2025-08-26"
+summary: "For small and medium businesses, the balance between performance and content flexibility is notoriously hard to strike. Traditional CMS-driven sites often come bloated and slow, while many 'headless' setups are overengineered or too rigid for clients who just want to swap out a photo or update some text."
+tags: ["Astro", "Performance", "CMS", "Web Development", "SMB", "Contentful"]
+featured: true
+readTime: 8
+image: "/assets/og-default.png"
+---
+
+For small and medium businesses, the balance between performance and content flexibility is notoriously hard to strike. Traditional CMS-driven sites often come bloated and slow, while many "headless" setups are overengineered or too rigid for clients who just want to swap out a photo or update some text.
+
+So I built a stack that solves that.
+
+**_The goal:_** create modern, lightning-fast websites with developer-grade architecture that still empower non-technical users to control their content.
+
+## 🛠️ The Stack
+
+- **Astro** – For static site generation and partial hydration. Astro allows me to ship less JavaScript by default, which keeps load times fast and lighthouse scores in the 90s+ without breaking a sweat.
+- **TailwindCSS** – For rapid UI development with a consistent design system that doesn't bloat my CSS bundle. Utility-first isn't just trendy—it keeps the codebase lean and manageable.
+- **TypeScript** – For maintainability, reliability, and sanity. Strong typing helps future-proof client projects, especially when building reusable components and templates.
+- **Contentful** – For structured content editing. Clients get a clean UI to manage content without touching code, and I get structured, queryable data I can render exactly how I want.
+- **Cloudflare Pages** – For deployment and edge-caching. No vendor lock-in. Global performance without the cold sweat of wondering when my host will change pricing tiers.
+
+No single piece here is groundbreaking on its own, but together they form a stack that delivers what SMBs actually need—a site that's fast, editable, secure, and maintainable. Most importantly, it's affordable to build and painless to hand off.
+
+## 🏗️ Architecture Overview
+
+Astro renders pages at build time and hydrates only the components that need it—think search bars, carousels, contact forms. This dramatically reduces JavaScript execution and avoids the kind of full-page hydration you still see in some Next.js projects stuck in 2020.
+
+Contentful acts as the content API, which I query via server-side scripts at build time. This allows business owners or marketing teams to update content (hours, bios, promotions, etc.) without dev involvement, while I retain full control over design and component logic.
+
+Cloudflare handles build and deploy directly from GitHub. No nonsense CI/CD, and content updates can be pushed via webhook-triggered rebuilds for real-time deployment.
+
+## ⛪ Real Use: Church Website in Progress
+
+I'm currently building out my church's new website with this stack, and so far, development has been smooth and efficient. Non-technical staff are already uploading and managing content—event updates, sermon archives, etc.—without needing to touch code. Even in this early phase, we're seeing clear performance improvements over their old WordPress setup. I'm excited to see the full launch come together soon.
+
+## 🎁 Free Starter Template
+
+If you're a developer or freelancer looking to offer high-performance, client-editable websites to SMBs—or you're just tired of slow monolithic CMS projects—I've open-sourced a starter template with this stack.
+
+👉 **[GitHub Repo – Astro/Contentful Starter](https://github.com/djmartin2019/Astro-Contentful-Starter-Project)**
+
+---
+
+This isn't about selling a trend—it's about delivering performance and control to the businesses that need it most. No compromises, no bloated backends, no unnecessary client dependencies. Just clean, modern web architecture that works.

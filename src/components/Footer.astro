@@ -1,0 +1,87 @@
+---
+import { Code, Github, Linkedin, Mail } from 'lucide-astro';
+---
+
+<footer class="footer-dark">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Brand -->
+      <div class="col-span-1 md:col-span-2">
+        <div class="flex items-center space-x-2 mb-4">
+          <Code class="h-6 w-6 neon-glow" />
+          <span class="text-xl font-bold neon-glow">DJM Tech</span>
+        </div>
+        <p class="footer-text mb-4 max-w-md">
+          Building future-proof web experiences with modern technologies. 
+          Let's create something amazing together.
+        </p>
+        <div class="flex space-x-4">
+          <a href="https://github.com/djmartin2019" class="footer-link" aria-label="GitHub">
+            <Github class="h-5 w-5" />
+          </a>
+          <a href="https://www.linkedin.com/in/davidjmartin2025" class="footer-link" aria-label="LinkedIn">
+            <Linkedin class="h-5 w-5" />
+          </a>
+          <a href="mailto:djmartin2019@gmail.com" class="footer-link" aria-label="Email">
+            <Mail class="h-5 w-5" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 footer-heading">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><a href="/" class="footer-link">Home</a></li>
+          <li><a href="/projects" class="footer-link">Projects</a></li>
+          <li><a href="/blog" class="footer-link">Blog</a></li>
+          <li><a href="/about" class="footer-link">About</a></li>
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-lg font-semibold mb-4 footer-heading">Get In Touch</h3>
+        <ul class="space-y-2">
+          <li><a href="/contact" class="footer-link">Contact</a></li>
+          <li><a href="mailto:djmartin2019@gmail.com" class="footer-link">djmartin2019@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-divider mt-8 pt-8 text-center">
+      <p class="footer-text">
+        © 2025 DJM Tech. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-dark {
+    background-color: #111111; /* Always dark */
+    color: #e5e5e5; /* Always light text */
+    border-top: 1px solid #2a2a2a; /* Always dark border */
+  }
+  
+  .footer-heading {
+    color: #e5e5e5; /* Always light text */
+  }
+  
+  .footer-text {
+    color: #a3a3a3; /* Always muted light text */
+  }
+  
+  .footer-link {
+    color: #a3a3a3; /* Always muted light text */
+    transition: color 0.3s;
+  }
+  
+  .footer-link:hover {
+    color: #00d4ff; /* Always neon blue on hover */
+  }
+  
+  .footer-divider {
+    border-top: 1px solid #2a2a2a; /* Always dark border */
+  }
+</style>

@@ -1,0 +1,428 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Check } from 'lucide-astro';
+---
+
+<Layout title="About - David Martin | DJM Tech" description="Learn more about David Martin, a full-stack developer passionate about building scalable web experiences with modern technologies.">
+  <Header />
+  
+  <!-- Hero Section -->
+  <section class="relative hero-bg py-20 lg:py-32 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold hero-title mb-6">About Me</h1>
+          <p class="text-xl hero-subtitle mb-8">
+            I'm David Martin, a developer driven by curiosity and a passion for building 
+            better, faster, and smarter web experiences.
+          </p>
+          <div class="flex space-x-4">
+            <a href="/contact" class="primary-cta-button">
+              Get In Touch
+            </a>
+            <a href="/projects" class="secondary-cta-button">
+              View My Work
+            </a>
+          </div>
+        </div>
+        <div class="neon-card p-8">
+          <div class="aspect-square about-image-container rounded-lg mb-6 overflow-hidden">
+            <img 
+              src="/assets/about-me-photo.jpeg" 
+              alt="David Martin - Full Stack Developer"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="text-center">
+            <h3 class="text-xl font-semibold about-name mb-2">David Martin</h3>
+            <p class="about-title">Full Stack Developer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Background Elements -->
+    <div class="absolute inset-0 hero-bg-elements">
+      <div class="hero-bg-gradient"></div>
+      <div class="hero-bg-pattern"></div>
+    </div>
+  </section>
+
+  <!-- Story Section -->
+  <section class="py-20 section-bg">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">My Story</h2>
+        <p class="text-xl section-subtitle">How I became passionate about web development</p>
+      </div>
+      
+      <div class="prose prose-lg max-w-none">
+        <p class="text-lg story-text mb-6">
+          My journey into web development started with curiosity about how things work on the internet. 
+          What began as simple HTML experiments has evolved into a deep passion for building scalable, 
+          performant web applications that solve real-world problems.
+        </p>
+        
+        <p class="text-lg story-text mb-6">
+          I specialize in modern web technologies like Next.js, TypeScript, and React, but I'm always 
+          exploring new tools and frameworks that can help me build better solutions. Whether it's 
+          optimizing performance, improving user experience, or architecting scalable systems, 
+          I love the challenge of turning complex requirements into elegant solutions.
+        </p>
+        
+        <p class="text-lg story-text mb-6">
+          When I'm not coding, you'll find me exploring new technologies, contributing to open source 
+          projects, or sharing my learnings through blog posts and technical writing. I believe in 
+          continuous learning and staying up-to-date with the latest developments in web technology.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="py-20 skills-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Skills & Expertise</h2>
+        <p class="text-xl section-subtitle">Technologies and tools I work with</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Frontend -->
+        <div class="neon-card p-8">
+          <div class="text-center mb-6">
+            <Monitor class="h-12 w-12 mx-auto skill-icon mb-4" />
+            <h3 class="text-xl font-semibold skill-title">Frontend Development</h3>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-center">
+              <Check class="h-5 w-5 text-green-500 mr-3" />
+              <span class="skill-item">React</span>
+            </li>
+            <li class="flex items-center">
+              <Check class="h-5 w-5 text-green-500 mr-3" />
+              <span class="skill-item">Astro</span>
+            </li>
+            <li class="flex items-center">
+              <Check class="h-5 w-5 text-green-500 mr-3" />
+              <span class="skill-item">TypeScript</span>
+            </li>
+            <li class="flex items-center">
+              <Check class="h-5 w-5 text-green-500 mr-3" />
+              <span class="skill-item">Tailwind CSS</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Backend -->
+        <div class="neon-card p-8">
+          <div class="text-center mb-6">
+            <Server class="h-12 w-12 mx-auto skill-icon mb-4" />
+            <h3 class="text-xl font-semibold skill-title">Backend Development</h3>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-center">
+              <Check class="h-5 w-5 text-green-500 mr-3" />
+              <span class="skill-item">Node.js</span>
+            </li>
+            <li class="flex items-center">
+              <Check class="h-5 w-5 text-green-500 mr-3" />
+              <span class="skill-item">PostgreSQL</span>
+            </li>
+            <li class="flex items-center">
+              <Check class="h-5 w-5 text-green-500 mr-3" />
+              <span class="skill-item">Python</span>
+            </li>
+            <li class="flex items-center">
+              <Check class="h-5 w-5 text-green-500 mr-3" />
+              <span class="skill-item">API Design</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Tools & Platforms -->
+        <div class="neon-card p-8">
+          <div class="text-center mb-6">
+            <Wrench class="h-12 w-12 mx-auto skill-icon mb-4" />
+            <h3 class="text-xl font-semibold skill-title">Tools & Platforms</h3>
+          </div>
+          <ul class="space-y-3">
+            <li class="flex items-center">
+              <Check class="h-5 w-5 text-green-500 mr-3" />
+              <span class="skill-item">AWS</span>
+            </li>
+            <li class="flex items-center">
+              <Check class="h-5 w-5 text-green-500 mr-3" />
+              <span class="skill-item">Cloudflare</span>
+            </li>
+            <li class="flex items-center">
+              <Check class="h-5 w-5 text-green-500 mr-3" />
+              <span class="skill-item">Git & GitHub</span>
+            </li>
+            <li class="flex items-center">
+              <Check class="h-5 w-5 text-green-500 mr-3" />
+              <span class="skill-item">Docker</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="py-20 section-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">My Values</h2>
+        <p class="text-xl section-subtitle">What drives me as a developer</p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <Zap class="h-8 w-8 value-icon" />
+          </div>
+          <h3 class="text-lg font-semibold value-title mb-2">Performance</h3>
+          <p class="value-description">Building fast, efficient applications that provide excellent user experiences.</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <Shield class="h-8 w-8 value-icon" />
+          </div>
+          <h3 class="text-lg font-semibold value-title mb-2">Quality</h3>
+          <p class="value-description">Writing clean, maintainable code that stands the test of time.</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <Users class="h-8 w-8 value-icon" />
+          </div>
+          <h3 class="text-lg font-semibold value-title mb-2">Collaboration</h3>
+          <p class="value-description">Working closely with clients and teams to deliver the best solutions.</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <BookOpen class="h-8 w-8 value-icon" />
+          </div>
+          <h3 class="text-lg font-semibold value-title mb-2">Learning</h3>
+          <p class="value-description">Continuously improving and staying current with new technologies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 cta-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold cta-title mb-4">Let's Work Together</h2>
+      <p class="text-xl cta-subtitle mb-8 max-w-2xl mx-auto">
+        Have a project in mind? I'd love to hear about it and see how we can bring your ideas to life.
+      </p>
+      <a href="/contact" class="bg-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center">
+        <Mail class="h-5 w-5 mr-2" />
+        Get In Touch
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+
+  <style>
+    .hero-bg {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+      position: relative;
+    }
+
+    html.light .hero-bg {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-bg-elements {
+      pointer-events: none;
+    }
+
+    .hero-bg-gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 20%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(0, 212, 255, 0.03) 0%, transparent 50%);
+    }
+
+    .hero-bg-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 1px 1px, rgba(0, 212, 255, 0.08) 1px, transparent 0);
+      background-size: 20px 20px;
+      opacity: 0.2;
+    }
+
+    .hero-title {
+      color: var(--text-primary);
+    }
+
+    html.light .hero-title {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .hero-subtitle {
+      color: var(--text-secondary);
+    }
+
+    html.light .hero-subtitle {
+      color: #475569;
+      font-weight: 500;
+    }
+
+    .about-image-container {
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
+      border: 2px solid var(--border-color);
+    }
+
+    .about-name {
+      color: var(--text-primary);
+    }
+
+    .about-title {
+      color: var(--text-secondary);
+    }
+
+    .section-bg {
+      background-color: var(--bg-secondary);
+    }
+
+    .section-title {
+      color: var(--text-primary);
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+    }
+
+    .story-text {
+      color: var(--text-secondary);
+    }
+
+    .skills-bg {
+      background-color: var(--bg-primary);
+    }
+
+    .skill-icon {
+      color: var(--accent-color);
+    }
+
+    .skill-title {
+      color: var(--text-primary);
+    }
+
+    .skill-item {
+      color: var(--text-secondary);
+    }
+
+    .value-icon-container {
+      background-color: rgba(0, 212, 255, 0.2);
+      border: 2px solid var(--accent-color);
+    }
+
+    .value-icon {
+      color: var(--accent-color);
+    }
+
+    .value-title {
+      color: var(--text-primary);
+    }
+
+    .value-description {
+      color: var(--text-secondary);
+    }
+
+    .cta-bg {
+      background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-dark) 100%);
+    }
+
+    .cta-title {
+      color: var(--bg-primary);
+    }
+
+    .cta-subtitle {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* CTA Buttons */
+    .primary-cta-button {
+      background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+      color: #0a0a0a;
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 212, 255, 0.3), 0 0 15px rgba(0, 212, 255, 0.2);
+      border: none;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      pointer-events: auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .primary-cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 212, 255, 0.4), 0 0 20px rgba(0, 212, 255, 0.3);
+      background: linear-gradient(135deg, #33dfff 0%, #00d4ff 100%);
+    }
+
+    .secondary-cta-button {
+      background-color: transparent;
+      color: #00d4ff;
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      border: 2px solid #00d4ff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+      cursor: pointer;
+      pointer-events: auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .secondary-cta-button:hover {
+      background-color: #00d4ff;
+      color: #0a0a0a;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 212, 255, 0.3), 0 0 20px rgba(0, 212, 255, 0.2);
+    }
+
+    html.light .secondary-cta-button {
+      color: #00d4ff;
+      border-color: #00d4ff;
+    }
+
+    html.light .secondary-cta-button:hover {
+      background-color: #00d4ff;
+      color: #ffffff;
+    }
+  </style>
+</Layout>

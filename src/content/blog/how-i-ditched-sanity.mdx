@@ -1,0 +1,210 @@
+---
+title: "How I Ditched Sanity and Shipped a Git-Backed MDX Blog in Next 14"
+date: "2025-04-23"
+summary: "A step-by-step rundown of wiring @next/mdx + Contentlayer + Tailwind's prose classes to get a zero-overhead blog that deploys with Vercel."
+tags: ["nextjs", "mdx", "contentlayer", "vercel"]
+featured: true
+readTime: 5
+image: "/assets/og-default.png"
+---
+
+> **TL;DR**
+>
+> 1. `npm add @next/mdx contentlayer next-contentlayer rehype-prism-plus`
+> 2. Wire `next.config.mjs` with `nextMdx` + `withContentlayer`
+> 3. Drop posts into `content/posts/*.mdx` — _done._
+
+---
+
+## 🚪 Why I Bailed on a Headless CMS
+
+For a personal blog or portfolio site, spinning up a full-featured CMS like Sanity started to feel like way too much overhead. I didn't need real-time APIs or a fancy dashboard to push blog posts about things like setting up blog posts (the irony). I just wanted something fast, simple, version-controlled, and cheap.
+
+By moving to a Git-backed approach with Markdown with JSX (MDX), my content ships right alongside my code at build time. No latency, no external dependencies, and no surprise bills from yet another hosted service.
+
+Bonus: every post now lives in my repo. Every change is in the commit history. I can PR my own typos. Peak accountability.
+
+### 🔧 The Tiny Toolchain
+
+I used four main tools to wire this thing up:
+
+- `@next/mdx` for MDX support in Next.js 14.
+- `contentlayer` for fetching and transforming content from MDX files.
+- `next-contentlayer` for integrating Contentlayer with Next.js.
+- `rehype-prism-plus` for syntax highlighting inside code blocks.
+
+You can install them like this:
+
+```bash
+npm add @next/mdx contentlayer next-contentlayer rehype-prism-plus
+```
+
+## ⚙️ Setting Up `next.config.mjs`
+
+Here's the basic config setup to wire MDX and Contentlayer together:
+
+```js
+/**
+ * Import necessary tools:
+ * - withContentlayer: Integrates Contentlayer with your Next.js build.
+ * - nextMdx: Adds support for MDX (.mdx files).
+ * - rehypePrism: Enables syntax highlighting in your MDX code blocks.
+ */
+
+import { withContentlayer } from "next-contentlayer";
+import nextMdx from "@next/mdx";
+import rehypePrism from "rehype-prism-plus";
+import { fileURLToPath } from "url";
+import { dirname, resolve } from "path";
+
+/**
+ * ✅ Fix for ESM environments:
+ * __dirname and __filename don’t exist by default in ESM (which Next.js uses),
+ * so this polyfill recreates them.
+ */
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+/**
+ * 📝 Configure MDX support:
+ * - Enables MDX file loading.
+ * - Adds rehypePrism for syntax highlighting.
+ * - Allows MDX files to live alongside your pages and components.
+ */
+
+const withMDX = nextMdx({
+  extension: /\.mdx?$/, // Tells Next.js to handle .md and .mdx files
+  options: {
+    remarkPlugins: [], // You can add remark plugins here if needed (like remark-gfm for GitHub-flavored Markdown)
+    rehypePlugins: [rehypePrism], // Enables Prism.js syntax highlighting for code blocks
+  },
+});
+
+/**
+ * 🏗️ Base Next.js config:
+ * - Recognizes additional file extensions like .md and .mdx as valid page files.
+ * - Adds a handy alias `@` so you can import like "@/components/Button" instead of relative paths.
+ */
+
+const nextConfig = {
+  pageExtensions: ["ts", "tsx", "md", "mdx"], // Include these extensions when resolving pages
+  webpack(config) {
+    config.resolve.alias["@"] = resolve(__dirname, "src"); // Sets up the "@" alias for the "src" directory
+    return config;
+  },
+};
+
+/**
+ * 🧩 Glue it all together:
+ * - Wraps your Next.js config with MDX support.
+ * - Adds Contentlayer integration so your MDX content gets processed at build time.
+ */
+
+const config = withContentlayer(withMDX(nextConfig));
+
+/**
+ * 🎉 Export the final config:
+ * This config powers your Git-backed MDX blog with Contentlayer, MDX parsing, syntax highlighting, and Next.js routing.
+ */
+
+export default config;
+```
+
+## 📁 Folder Structure
+
+I keep my posts in `/content/posts`, each as an `.mdx` file. Something like:
+
+```bash
+/content
+└── posts
+    ├── firstpost.mdx
+    ├── secondpost.mdx
+    └── thirdpost.mdx
+```
+
+## 📋 Defining the Content Schema
+
+Here's my `contentlayer.config.ts` file to define the schema:
+
+```ts
+import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import rehypePrism from "rehype-prism-plus"; // Enables syntax highlighting in code blocks using Prism.js
+
+/**
+ * Define the "Post" document type.
+ * This tells Contentlayer how to handle your MDX blog posts.
+ * Every .mdx file in "content/posts" will be treated as a "Post" type.
+ */
+
+export const Post = defineDocumentType(() => ({
+  name: "Post", // This is the name of the document type you'll query (e.g., allPosts)
+  filePathPattern: `**/*.mdx`, // Matches all MDX files recursively within the contentDirPath
+  contentType: "mdx", // Specifies that these documents are MDX files
+
+  /**
+   * Define the required fields for each post.
+   * These will be available as frontmatter inside your MDX files.
+   */
+
+  fields: {
+    title: { type: "string", required: true }, // The title of your blog post
+    date: { type: "date", required: true }, // Publish date, helps with sorting posts
+    summary: { type: "string", required: true }, // Short description for index pages and previews
+    tags: { type: "list", of: { type: "string" } }, // Optional list of tags for categorizing posts
+  },
+
+  /**
+   * Computed fields generate additional data automatically.
+   * Here, "slug" is derived from the filename (without the .mdx extension).
+   * This makes it easier to link to your posts dynamically.
+   */
+
+  computedFields: {
+    slug: {
+      type: "string",
+      resolve: (doc) =>
+        doc._raw.sourceFileName
+          .replace(/\.mdx?$/, "") // Remove the .mdx or .md extension
+          .replace(/[^a-zA-Z0-9\-]/g, ""), // Strip out non-alphanumeric characters for clean URLs
+    },
+  },
+}));
+
+/**
+ * Configure Contentlayer's source behavior:
+ * - Looks for content in the "content/posts" folder.
+ * - Uses the "Post" schema for all matching MDX files.
+ * - Applies rehype-prism-plus for syntax highlighting in code blocks.
+ */
+
+export default makeSource({
+  contentDirPath: "content/posts", // Directory where your MDX posts live
+  documentTypes: [Post], // Register the "Post" document type
+  mdx: {
+    rehypePlugins: [rehypePrism], // Add syntax highlighting support for fenced code blocks
+  },
+});
+```
+
+This gives me typed access to my content at build time and makes fetching metadata in components super straightforward.
+
+## 🎨 Styling with Tailwind
+
+For basic typography, I'm using Tailwind's `prose` classes from `@tailwind/typography`. This gives readable defaults for things like headings, paragraphs, and code blocks, without me needing to micromanage every line of CSS.
+
+Example:
+
+```tsx
+<article className="prose prose-neutral dark:prose-invert mx-auto">
+  {children}
+</article>
+```
+
+## 🤔 Should You Do This Too?
+
+If you’re blogging casually or running a personal site, this setup is hard to beat. It’s fast, free, version-controlled, and doesn’t make me sign into yet another dashboard just to fix a typo.
+
+If you’re running a content team with non-technical editors? Probably not. But for solo devs who want the lowest-friction way to ship posts, it works great.
+
+**The takeaway:** don’t overthink your stack if the goal is just to share your thoughts. Get it online, then worry about fancy features later—if at all.
