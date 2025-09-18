@@ -39,11 +39,11 @@ No single piece here is groundbreaking on its own, but together they form a stac
 
 ## 🏗️ Architecture Overview
 
-Astro renders pages at build time and hydrates only the components that need it—think search bars, carousels, contact forms. This dramatically reduces JavaScript execution and avoids the kind of full-page hydration you still see in some Next.js projects stuck in 2020.
+Astro renders pages at build time and only hydrates the components that need interactivity—like search bars, carousels, or contact forms. This keeps JavaScript payloads small, speeds up performance, and avoids the heavy, full-page hydration patterns common in older React workflows.
 
-Contentful acts as the content API, which I query via server-side scripts at build time. This allows business owners or marketing teams to update content (hours, bios, promotions, etc.) without dev involvement, while I retain full control over design and component logic.
+Contentful serves as the content API, which I query at build time. This gives business owners and marketing teams full control to update content (hours, bios, promotions, etc.) without touching code, while I maintain complete flexibility over design and logic.
 
-Cloudflare handles build and deploy directly from GitHub. No nonsense CI/CD, and content updates can be pushed via webhook-triggered rebuilds for real-time deployment.
+Cloudflare Pages handles deployment and global edge caching directly from GitHub. It’s simple, cost-effective, and enables near-instant updates with webhook-triggered rebuilds.
 
 ## ⛪ Real Use: Church Website in Progress
 
@@ -51,11 +51,11 @@ I'm currently building out my church's new website with this stack, and so far, 
 
 ## 🎁 Free Starter Template
 
-If you're a developer or freelancer looking to offer high-performance, client-editable websites to SMBs—or you're just tired of slow monolithic CMS projects—I've open-sourced a starter template with this stack.
+If you’re a developer or freelancer building sites for SMBs — or just tired of wrestling with bloated CMS setups — I’ve open-sourced this starter template so you can hit the ground running.
 
 👉 **[GitHub Repo – Astro/Contentful Starter](https://github.com/djmartin2019/Astro-Contentful-Starter-Project)**
 
-The full starter template is open-sourced here. If you're curious about building high-performance client-editable sites, give it a try — or DM me if you'd like a walkthrough.
+Try it out, fork it, or DM me if you’d like a walkthrough of how to make it your own.
 
 ---
 
