@@ -16,6 +16,23 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "astrocontentfulstarter",
+    title: "Astro Contentful Starter Template",
+    description:
+      "A production-ready blog starter template built with Astro and Contentful CMS.",
+    longDescription:
+      "A production-ready blog starter template built with Astro and Contentful CMS. Features interactive multi-tag filtering, beautiful responsive design, and seamless Cloudflare Pages deployment.",
+    image: "/assets/websites/astro-contentful-home.png",
+    technologies: ["Astro", "TailwindCSS", "TypeScript", "Contentful"],
+    status: "completed",
+    liveUrl: "https://astro-contentful-starter-project.pages.dev/",
+    githubUrl:
+      "https://github.com/djmartin2019/Astro-Contentful-Starter-Project",
+    featured: true,
+    category: "Portfolio",
+    startDate: "2025-09",
+  },
+  {
     id: "daveypics",
     title: "DaveyPics",
     description:
@@ -32,6 +49,21 @@ export const projects: Project[] = [
     startDate: "2024-01",
   },
   {
+    id: "sp500-analytics",
+    title: "S&P 500 Analytics",
+    description:
+      "Comprehensive market-analysis dashboard using PostgreSQL, Python & Next.js.",
+    longDescription:
+      "A financial analytics platform providing comprehensive market analysis tools with real-time data visualization and historical trend analysis.",
+    image: "/assets/websites/stock-market-dashboard.png",
+    technologies: ["NextJS", "TailwindCSS", "TypeScript", "Vercel"],
+    status: "current",
+    githubUrl: "https://github.com/djmartin2019/stock-analysis-project",
+    featured: true,
+    category: "Finance",
+    startDate: "2025-03",
+  },
+  {
     id: "texas-frontstep",
     title: "Texas Frontstep Media",
     description:
@@ -46,21 +78,6 @@ export const projects: Project[] = [
     featured: true,
     category: "Business",
     startDate: "2025-08",
-  },
-  {
-    id: "sp500-analytics",
-    title: "S&P 500 Analytics",
-    description:
-      "Comprehensive market-analysis dashboard using PostgreSQL, Python & Next.js.",
-    longDescription:
-      "A financial analytics platform providing comprehensive market analysis tools with real-time data visualization and historical trend analysis.",
-    image: "/assets/websites/stock-market-dashboard.png",
-    technologies: ["NextJS", "TailwindCSS", "TypeScript", "Vercel"],
-    status: "current",
-    githubUrl: "https://github.com/djmartin2019/stock-analysis-project",
-    featured: true,
-    category: "Finance",
-    startDate: "2025-03",
   },
 ];
 

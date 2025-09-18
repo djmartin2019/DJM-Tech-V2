@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { Star, FileText } from 'lucide-astro';
+import { Image } from 'astro:assets';
 import { getAllBlogPosts, getAllTags } from '../data/blog';
 
 const blogPosts = await getAllBlogPosts();
@@ -54,8 +54,15 @@ const allTags = await getAllTags();
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogPosts.filter(post => post.featured).slice(0, 3).map((post) => (
           <article class="featured-post neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300">
-            <div class="h-48 blog-image-bg flex items-center justify-center">
-              <Star class="h-16 w-16 blog-icon" />
+            <div class="h-64 blog-image-bg flex items-center justify-center overflow-hidden">
+              <Image 
+                src={post.image || "/assets/og-default.png"} 
+                alt={post.title}
+                width={400}
+                height={300}
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
             </div>
             <div class="p-6">
               <div class="flex items-center text-sm blog-meta mb-3">
@@ -89,8 +96,15 @@ const allTags = await getAllTags();
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="posts-grid">
         {blogPosts.map((post) => (
           <article class={`blog-post neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300 ${post.tags.join(' ')}`}>
-            <div class="h-48 blog-image-bg flex items-center justify-center">
-              <FileText class="h-16 w-16 blog-icon" />
+            <div class="h-64 blog-image-bg flex items-center justify-center overflow-hidden">
+              <Image 
+                src={post.image || "/assets/og-default.png"} 
+                alt={post.title}
+                width={400}
+                height={300}
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
             </div>
             <div class="p-6">
               <div class="flex items-center text-sm blog-meta mb-3">

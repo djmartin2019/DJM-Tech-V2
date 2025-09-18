@@ -2,7 +2,8 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { ChevronRight, User, Twitter, Linkedin, Github, FileText, Mail } from 'lucide-astro';
+import { Image } from 'astro:assets';
+import { ChevronRight, User, Twitter, Linkedin, Github, Mail } from 'lucide-astro';
 import { getCollection } from 'astro:content';
 import { getAllBlogPosts } from '../../data/blog';
 
@@ -74,7 +75,7 @@ const blogPost = allBlogPosts.find((p: any) => p.slug === post.slug);
           <img 
             src={post.data.image} 
             alt={post.data.title}
-            class="w-full h-64 object-cover rounded-lg shadow-lg article-image"
+            class="w-full h-96 object-cover rounded-lg shadow-lg article-image"
           />
         </div>
       )}
@@ -135,8 +136,15 @@ const blogPost = allBlogPosts.find((p: any) => p.slug === post.slug);
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {relatedPosts.map((relatedPost: any) => (
                 <article class="related-post-card neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300">
-                  <div class="h-48 related-post-image-bg flex items-center justify-center">
-                    <FileText class="h-16 w-16 related-post-icon" />
+                  <div class="h-48 related-post-image-bg flex items-center justify-center overflow-hidden">
+                    <Image 
+                      src={relatedPost.image || "/assets/og-default.png"} 
+                      alt={relatedPost.title}
+                      width={400}
+                      height={192}
+                      class="w-full h-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
                   <div class="p-6">
                     <div class="flex items-center text-sm related-post-meta mb-3">

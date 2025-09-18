@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Image } from 'astro:assets';
-import { Code, Folder, FileText, Mail, Star, ExternalLink, Github } from 'lucide-astro';
+import { Code, Folder, Mail, Star, ExternalLink, Github } from 'lucide-astro';
 import { getFeaturedProjects } from '../data/projects';
 import { getRecentPosts } from '../data/blog';
 import { getAllSkills } from '../data/skills';
@@ -30,14 +30,13 @@ const allSkills = getAllSkills();
           
           <!-- Main Heading -->
           <h1 class="text-5xl md:text-6xl font-bold hero-title leading-tight">
-            Building Future-Proof
-            <span class="neon-glow"> Web Experiences</span>
+            I Build Scalable Apps <br />
+            <span class="neon-glow"> That Ship to Production</span>
           </h1>
           
           <!-- Description -->
           <p class="text-xl hero-subtitle max-w-2xl">
-            Hi, I'm David — a developer driven by curiosity, always exploring how to build better, 
-            faster, and smarter with Next.js, TypeScript, and Vercel.
+            Hi, I’m David — a full-stack developer focused on turning complex ideas into reliable, production-ready apps using Python, JavaScript, and TypeScript.
           </p>
           
           <!-- CTA Buttons -->
@@ -111,12 +110,12 @@ const allSkills = getAllSkills();
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {featuredProjects.slice(0, 3).map((project) => (
           <div class="neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300">
-            <div class="h-48 project-image-bg flex items-center justify-center overflow-hidden">
+            <div class="h-64 project-image-bg flex items-center justify-center overflow-hidden">
               <Image 
                 src={project.image} 
                 alt={`${project.title} project screenshot`}
                 width={400}
-                height={192}
+                height={300}
                 class="w-full h-full object-cover"
               />
             </div>
@@ -171,8 +170,15 @@ const allSkills = getAllSkills();
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {recentPosts.slice(0, 3).map((post) => (
           <article class="neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300">
-            <div class="h-48 blog-image-bg flex items-center justify-center">
-              <FileText class="h-16 w-16 blog-icon" />
+            <div class="h-48 blog-image-bg flex items-center justify-center overflow-hidden">
+              <Image 
+                src={post.image || "/assets/og-default.png"} 
+                alt={post.title}
+                width={400}
+                height={192}
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
             </div>
             <div class="p-6">
               <div class="flex items-center text-sm blog-meta mb-2">
