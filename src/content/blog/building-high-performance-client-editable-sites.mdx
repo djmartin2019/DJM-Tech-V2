@@ -37,6 +37,27 @@ So I built a stack that solves that.
 
 No single piece here is groundbreaking on its own, but together they form a stack that delivers what SMBs actually need—a site that's fast, editable, secure, and maintainable. Most importantly, it's affordable to build and painless to hand off.
 
+## 📊 Lighthouse Scores
+
+Performance isn't just theory — it's measurable. I ran the starter project through Google Lighthouse on desktop, and the results speak for themselves:
+
+**Performance: 99**  
+**Accessibility: 96**  
+**Best Practices: 100**  
+**SEO: 92**
+
+Key metrics like First Contentful Paint and Largest Contentful Paint clocked in at 0.8s, with 0 ms blocking time. That means pages render quickly, interactions feel snappy, and there's no hidden bloat slowing things down.
+
+<div style="text-align: center;">
+  <img
+    src="/assets/AstroDemoContent/AstroDemoLighthouse.png"
+    alt="Lighthouse desktop performance scores for the Astro/Contentful Starter"
+    style="max-width: 100%; height: auto;"
+  />
+</div> <br />
+
+Astro's "islands architecture" (hydrating only what's interactive) paired with Tailwind and Contentful delivers a site that's not just modern on paper, but proven fast, accessible, and search-friendly in practice.
+
 ## 🏗️ Architecture Overview
 
 Astro renders pages at build time and only hydrates the components that need interactivity—like search bars, carousels, or contact forms. This keeps JavaScript payloads small, speeds up performance, and avoids the heavy, full-page hydration patterns common in older React workflows.
