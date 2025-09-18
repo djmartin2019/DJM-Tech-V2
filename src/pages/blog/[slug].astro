@@ -25,8 +25,9 @@ const blogPost = allBlogPosts.find((p: any) => p.slug === post.slug);
 
 <Layout 
   title={`${post.data.title} - David Martin | DJM Tech`} 
-  description={post.data.summary || post.data.description}
+  description={post.data.description || post.data.summary}
   image={post.data.image || "/assets/og-default.png"}
+  canonical={post.data.canonicalURL}
 >
   <Header />
   
