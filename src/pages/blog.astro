@@ -53,7 +53,7 @@ const allTags = await getAllTags();
       <h2 class="text-2xl font-bold blog-title mb-8">Featured Posts</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogPosts.filter(post => post.featured).slice(0, 3).map((post) => (
-          <article class="featured-post neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300">
+          <article class="featured-post neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300 flex flex-col">
             <div class="h-64 blog-image-bg flex items-center justify-center overflow-hidden">
               <Image 
                 src={post.image || "/assets/og-default.png"} 
@@ -64,7 +64,7 @@ const allTags = await getAllTags();
                 loading="lazy"
               />
             </div>
-            <div class="p-6">
+            <div class="p-6 flex flex-col flex-grow">
               <div class="flex items-center text-sm blog-meta mb-3">
                 <span>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                 <span class="mx-2">•</span>
@@ -79,7 +79,7 @@ const allTags = await getAllTags();
                   <span class="px-2 py-1 blog-tag text-xs rounded">{tag}</span>
                 ))}
               </div>
-              <a href={`/blog/${post.slug}`} class="blog-link">
+              <a href={`/blog/${post.slug}`} class="blog-link mt-auto">
                 Read More →
               </a>
             </div>
@@ -95,7 +95,7 @@ const allTags = await getAllTags();
       <h2 class="text-2xl font-bold section-title mb-8">All Posts</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="posts-grid">
         {blogPosts.map((post) => (
-          <article class={`blog-post neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300 ${post.tags.join(' ')}`}>
+          <article class={`blog-post neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300 ${post.tags.join(' ')} flex flex-col`}>
             <div class="h-64 blog-image-bg flex items-center justify-center overflow-hidden">
               <Image 
                 src={post.image || "/assets/og-default.png"} 
@@ -106,7 +106,7 @@ const allTags = await getAllTags();
                 loading="lazy"
               />
             </div>
-            <div class="p-6">
+            <div class="p-6 flex flex-col flex-grow">
               <div class="flex items-center text-sm blog-meta mb-3">
                 <span>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                 <span class="mx-2">•</span>
@@ -125,7 +125,7 @@ const allTags = await getAllTags();
                   <span class="px-2 py-1 blog-tag text-xs rounded">{tag}</span>
                 ))}
               </div>
-              <a href={`/blog/${post.slug}`} class="blog-link">
+              <a href={`/blog/${post.slug}`} class="blog-link mt-auto">
                 Read More →
               </a>
             </div>

@@ -49,19 +49,20 @@ export const projects: Project[] = [
     startDate: "2024-01",
   },
   {
-    id: "sp500-analytics",
-    title: "S&P 500 Analytics",
+    id: "pyspark-stock-analysis-pipeline",
+    title: "Stock Analysis Dashboard",
     description:
-      "Comprehensive market-analysis dashboard using PostgreSQL, Python & Next.js.",
+      "A comprehensive stock market analysis platform built with Apache Spark, Delta Lake, and Dash.",
     longDescription:
-      "A financial analytics platform providing comprehensive market analysis tools with real-time data visualization and historical trend analysis.",
-    image: "/assets/websites/stock-market-dashboard.png",
-    technologies: ["NextJS", "TailwindCSS", "TypeScript", "Vercel"],
+      "This project implements a modern data engineering pipeline following the medallion architecture pattern to ingest, process, and visualize stock market data from Alpha Vantage API.",
+    image: "/assets/websites/AlphaVantageDashboard.png",
+    technologies: ["Plotly", "Python", "PySpark", "Delta Lake"],
     status: "current",
-    githubUrl: "https://github.com/djmartin2019/stock-analysis-project",
+    githubUrl:
+      "https://github.com/djmartin2019/pyspark-stock-analysis-pipeline",
     featured: true,
     category: "Finance",
-    startDate: "2025-03",
+    startDate: "2025-09",
   },
   {
     id: "texas-frontstep",
