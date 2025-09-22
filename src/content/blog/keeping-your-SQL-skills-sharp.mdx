@@ -1,0 +1,168 @@
+---
+title: "Keeping Your SQL Skills Sharp: How to Get Databases Fast"
+date: "2025-09-21"
+summary: "Want to practice SQL without wasting time on fake data? Here's how to spin up real sample databases in PostgreSQL and build your query-writing fluency."
+description: "Learn how to set up sample databases like Northwind, Pagila, and Chinook in PostgreSQL for SQL practice. Perfect for developers who want to sharpen their database skills with realistic datasets and relationships."
+tags: ["SQL", "PostgreSQL", "Database", "Development"]
+featured: true
+readTime: 6
+image: "/assets/practiceSQL.png"
+author: "David Martin"
+canonicalURL: "https://djmtech.dev/blog/keeping-your-SQL-skills-sharp"
+---
+
+Most of us know the feeling: you want to brush up on SQL — maybe try out a new join, test a reporting query, or just flex your window functions — but you don't want to waste half your Saturday cobbling together fake data. You want to jump into the fun part: **writing queries**.
+
+Whether you're preparing for a technical interview, learning new SQL features, or just want to stay sharp between projects, having realistic sample data makes all the difference.
+
+The good news is there are several tried-and-true sample databases floating around GitHub that are _perfect_ for practice. And with just a couple of terminal commands, you can spin them up in PostgreSQL and have your own personal SQL gym.
+
+---
+
+## 🏋️‍♀️ The Repos You’ll Want 🏋️‍♀️
+
+Here are three of the classics, all free and open source:
+
+### 1. **[Northwind](https://github.com/pthom/northwind_psql)** - 📊 Classic Business Database
+
+```bash
+git clone https://github.com/pthom/northwind_psql
+```
+
+The famous Microsoft sample database, ported to PostgreSQL. Perfect for practicing business queries with customers, orders, products, and suppliers.
+
+### 2. **[Pagila](https://github.com/devrimgunduz/pagila)** - 📀 DVD Rental System
+
+```bash
+git clone https://github.com/devrimgunduz/pagila
+```
+
+Based on the Sakila DVD rental schema. Great for learning about rental systems, inventory management, and customer analytics.
+
+### 3. **[Chinook](https://github.com/lerocha/chinook-database)** - 💾 Digital Media Store
+
+```bash
+git clone https://github.com/lerocha/chinook-database
+```
+
+A digital media store database with artists, albums, tracks, and customers. Excellent for practicing complex joins and music industry queries.
+
+Each database comes with a complete schema plus realistic data you can load directly into PostgreSQL. Between the three, you'll have customers, invoices, movies, music, orders, and more — plenty of tables to slice and dice.
+
+---
+
+## 🛝 Setting Up the Playground
+
+Here's the step-by-step process I use:
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/pthom/northwind_psql
+cd northwind_psql
+```
+
+### Step 2: Create a Database
+
+Connect to PostgreSQL and create a new database:
+
+```bash
+psql -U postgres
+```
+
+Inside psql:
+
+```sql
+CREATE DATABASE northwind;
+\q
+```
+
+### Step 3: Load the Schema and Data
+
+From your terminal (not inside psql):
+
+```bash
+psql -U postgres -d northwind -f northwind.sql
+```
+
+That's it! The Northwind database is now live in your PostgreSQL instance.
+
+### Step 4: Repeat for Other Databases
+
+You can follow the same process for Pagila or Chinook, just swap the repository URLs and database names:
+
+- For Pagila: `CREATE DATABASE pagila;`, `psql -U postgres -d pagila -f pagila-schema.sql` (for the pagila schema configuration) and `psql -U postgres -d pagila -f pagila.sql`
+- For Chinook: `CREATE DATABASE chinook;` and `psql -U postgres -d chinook -f Chinook_PostgreSQL.sql`
+
+---
+
+## 📈 Why This Beats CSVs
+
+Sure, you can grab a random CSV off Kaggle or mock up some rows yourself — but you miss out on **relationships**. These sample databases are full of foreign keys, joins, and normalized structures. They force you to think in _queries_, not spreadsheets.
+
+### What Makes These Databases Special
+
+- **Realistic Relationships**: Foreign keys, constraints, and proper normalization
+- **Diverse Data Types**: Dates, currencies, text, numbers, and more
+- **Business Logic**: These aren't just random data — they represent real business scenarios
+- **Query Complexity**: Perfect for practicing everything from simple SELECTs to complex analytical queries
+
+Want to practice grouping revenue by product category, joining customers to orders to regions, or analyzing customer lifetime value? These datasets already have that structure baked in.
+
+---
+
+## 💪 Your SQL Gym Routine
+
+Once you've got one (or all three) loaded up, here's a structured approach to build your SQL fluency:
+
+### 🥉 Beginner Level
+
+- **Basic Queries**: Simple `SELECT` statements with `WHERE` clauses
+- **Joins**: Start with `INNER JOIN`, then move to `LEFT JOIN` and `RIGHT JOIN`
+- **Aggregations**: `GROUP BY`, `COUNT()`, `SUM()`, `AVG()`, `MIN()`, `MAX()`
+
+### 🥈 Intermediate Level
+
+- **Complex Joins**: Multiple table joins and self-joins
+- **Subqueries**: Correlated and non-correlated subqueries
+- **Window Functions**: `ROW_NUMBER()`, `RANK()`, `LAG()`, `LEAD()`
+- **Common Table Expressions (CTEs)**: `WITH` clauses for cleaner, more readable queries
+
+### 🏅 Advanced Level
+
+- **Analytical Queries**: "Top 10 customers by lifetime value"
+- **Time Series Analysis**: "Most rented films per month"
+- **Complex Reporting**: "Artists with more than 10 albums"
+- **Performance Optimization**: Index usage and query execution plans
+
+### Pro Tips
+
+- **Time Yourself**: Can you write a query in 5 minutes without Googling?
+- **Experiment**: Try different approaches to solve the same problem
+- **Think in Reps**: SQL is like the gym — repetition builds fluency. The more queries you write, the stronger you get.
+
+Think of it like reps at the gym: the more you do, the more natural SQL feels.
+
+---
+
+## 🎁 Wrapping Up
+
+Keeping SQL sharp isn't just about memorizing syntax — it's about staying fluent. Having these databases on hand means you can drop in, write some queries, and build that fluency whenever you've got the itch (or an interview coming up).
+
+### 🪜 Next Steps
+
+1. **Pick one database** and start with the basics
+2. **Set a regular practice schedule** — even 15 minutes a day makes a difference
+3. **Challenge yourself** with increasingly complex queries
+4. **Document your learning** — keep a notebook of interesting queries and techniques
+
+Spin them up once, keep them around, and you'll never have to say "ugh, I don't have a dataset handy" again. Your future self (and your interviewers) will thank you.
+
+---
+
+### 💡 Would you be interested in a follow-up post? I’m thinking either:
+
+1. A set of structured exercises for each of these databases (a “SQL training plan”), or
+2. A guide on how to take the same data and visualize it in Plotly for more advanced analysis.
+
+Let me know what would be most useful — I’d love to dig deeper in the next article.
