@@ -1,0 +1,125 @@
+---
+title: "Why I Reached for DuckDB Instead of Spinning Up a Database"
+date: "2025-09-26"
+summary: "DuckDB flips the analytics workflow on its head. Instead of spinning up PostgreSQL instances and migrating data, you can query files directly and get insights in minutes — perfect for prototyping and side projects."
+description: "Learn how DuckDB eliminates the infrastructure overhead of traditional databases. Discover how to analyze millions of rows of NYC taxi data directly from Parquet files, build dashboards with Plotly, and get insights without the usual database setup friction."
+tags: ["SQL", "DuckDB", "Analytics", "Data Engineering"]
+featured: true
+readTime: 8
+image: "/assets/DuckDB.png"
+author: "David Martin"
+canonicalURL: "https://djmtech.dev/blog/why-i-reached-for-duckdb"
+---
+
+Building analytics dashboards has always felt heavier than it should. My usual process looked like this: spin up a PostgreSQL instance, migrate the data, and wire a dashboard on top. It works — but it’s slow, and even a small hosted database costs $10–$30/month on AWS RDS. For side projects or quick prototyping, that’s friction you don’t need.
+
+DuckDB flips that workflow on its head. Instead of setting up infrastructure, I can pull in files directly, run SQL immediately, and persist results — all from a lightweight CLI, with almost no overhead.
+
+In this post, I’ll walk through how DuckDB works, how easy it is to query files from the CLI, and how I tied it into a simple dashboard with Plotly Dash.
+
+---
+
+## What is DuckDB?
+
+DuckDB is often called "SQLite for analytics," which is a solid mental model. Like SQLite, it's lightweight, local, and serverless — no clusters, configs, or orchestration.
+
+Where it differs is under the hood: DuckDB uses a columnar storage format, which makes it ideal for OLAP-style queries (aggregations, filters, large scans). In practice, that means I can throw millions of rows at it and get results at speeds you'd normally expect from heavyweight engines like Postgres, Snowflake, or even Spark.
+
+Out of the box, DuckDB can query CSV and Parquet files directly. You don't need to import or migrate data first. For example, you can run a single query like:
+
+```sql
+SELECT * FROM 'data-*.parquet'
+```
+
+and DuckDB will automatically read every matching file. That makes it perfect for quick exploration, prototyping, or side projects where you don't want to wrestle with infrastructure.
+
+---
+
+## Where the Fun Begins: DuckDB's CLI
+
+One of DuckDB's superpowers is how little ceremony it takes to get started. No server setup, no configs, no Docker Compose files lurking in the background — just the CLI.
+
+With a single command, you can spin up a database file and start running SQL immediately:
+
+```bash
+duckdb taxi.duckdb
+```
+
+From there, you can ingest files directly into the database:
+
+```sql
+CREATE OR REPLACE TABLE taxi AS
+SELECT * FROM read_parquet('data/yellow_tripdata_2024-*.parquet')
+```
+
+That's it. You've got a database with millions of rows ready for analysis in seconds.
+
+Now you can run the same kind of queries you'd normally use in PostgreSQL or another RDBMS — except without the overhead of standing up infrastructure. For quick analysis projects, it feels almost unfair.
+
+---
+
+## My Project: Analyzing NYC Taxi Data with DuckDB
+
+To see how DuckDB handled real-world data, I turned to the NYC Taxi dataset. It's a massive public dataset that logs millions of yellow cab rides each year — pickup and drop-off times, locations, fares, and trip distances. For this project, I grabbed the 2024 yellow cab trip data and loaded it into DuckDB.
+
+The ingestion step was effortless: using a single glob pattern (`'data-*.parquet'`), I pulled multiple Parquet files directly into DuckDB. This acted as my raw-to-staging pipeline step, where I consolidated raw trip records into a structured dataset.
+
+Next, I enriched the data by joining it with the official taxi zone lookup table. This turned cryptic location IDs into human-readable zones — the kind of data modeling step that makes downstream analysis far more usable.
+
+What impressed me most was the speed to insight. Normally, analyzing data at this scale would mean spinning up Postgres or BigQuery, migrating data, and waiting around. With DuckDB, I was querying Parquet files directly in minutes.
+
+To make exploration smoother, I layered on a lightweight Plotly Dash dashboard. That way I could flip raw query results into charts and start spotting patterns faster.
+
+With everything wired up, I started asking some fun questions of the data…
+
+---
+
+## Data Quality in Action: Who Tips the Most?
+
+I was curious about tipping behavior. To find which pickup zones had the highest average tips, I joined the trip data with the taxi zones lookup table and averaged `tip_amount`.
+
+Before calculating averages, I added a basic data quality filter: removing extreme outliers and excluding zones with very few rides. This step is critical in data engineering — without it, the aggregated results would be skewed by anomalies.
+
+![Average tip amounts by pickup zone showing Newark Airport with highest tips](/assets/DuckDB/AvgTipAmount.png)
+
+The results were clear: Newark Airport topped the list, even beating out JFK. My theory? Travelers rushing to make flights are extra generous (or just don't want to argue about tips before boarding).
+
+## Route Analysis: Where are People Going?
+
+I also wanted to see which routes are most common — basically, where New Yorkers and tourists are shuttling back and forth every day.
+
+![Most popular taxi routes showing Upper East Side to Midtown as top route](/assets/DuckDB/MostPopularPickup.png)
+
+By joining the pickup and dropoff locations to their zone names, I could tally the busiest routes. The Upper East Side to Midtown commute came out on top, with JFK runs also making a strong showing.
+
+## Duration Analysis with a CTE: Which Rides Take the Longest?
+
+Finally, I wanted to know which trips stretched the longest. To do that, I created a CTE (`durations`) that calculated the time difference between pickup and dropoff in minutes, then averaged those durations by route.
+
+![Average travel duration by route showing outer boroughs with longest trips](/assets/DuckDB/AvgTravelDuration.png)
+
+The longest rides weren't in Manhattan at all — they came from the outer boroughs. Trips starting in places like Inwood and Flatlands regularly stretched past 90 minutes. These are exactly the kind of big, heavy aggregations that DuckDB handles without breaking a sweat.
+
+What impressed me wasn't just the insights — it was how quickly I could get to them. Normally this kind of work would require spinning up Postgres or BigQuery and migrating data. With DuckDB, I was querying Parquet files directly within minutes.
+
+The full project (including instructions to run it yourself) is available here:
+
+👉 **[NYC Taxi Analysis with DuckDB on GitHub](https://github.com/djmartin2019/NYC-Taxi-Analysis-with-DuckDB)**
+
+---
+
+## Closing Thoughts
+
+DuckDB really surprised me with how much data engineering workflow it compresses into a single tool. Instead of provisioning infrastructure and migrating data, I was able to:
+
+- **Ingest** millions of rows of Parquet files
+- **Transform & enrich** with joins and filters
+- **Serve insights** through a Plotly dashboard
+
+All within minutes, entirely from my laptop. For me, that's the 80/20 of data engineering: the bulk of value delivered without the usual infrastructure tax.
+
+Looking ahead, I see DuckDB not just as a prototyping tool, but as a building block for serverless pipelines (e.g., AWS Lambda + S3) that skip RDS entirely. This project was my first step in that direction — and I'll be sharing more experiments as I push it further.
+
+This project was just a first step, but it's clear that DuckDB has huge potential in the data engineering toolbox. I'll be sharing more as I experiment with serverless pipelines and other ways to put DuckDB into practice.
+
+👉 **If you're interested in following along with those experiments, [subscribe here](/) so you don't miss the next post.**
