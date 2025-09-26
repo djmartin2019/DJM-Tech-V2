@@ -88,17 +88,19 @@ The results were clear: Newark Airport topped the list, even beating out JFK. My
 
 I also wanted to see which routes are most common — basically, where New Yorkers and tourists are shuttling back and forth every day.
 
+The busiest flows are clustered in Manhattan, especially between the Upper East Side and Midtown, which dominate as the most traveled pickup-dropoff pairs. Airport runs (like JFK) show up too, but the real volume is in those daily commute corridors where locals and visitors alike move between residential neighborhoods and business districts.
+
 ![Most popular taxi routes showing Upper East Side to Midtown as top route](/assets/DuckDB/MostPopularPickup.png)
 
 By joining the pickup and dropoff locations to their zone names, I could tally the busiest routes. The Upper East Side to Midtown commute came out on top, with JFK runs also making a strong showing.
 
 ## Duration Analysis with a CTE: Which Rides Take the Longest?
 
-Finally, I wanted to know which trips stretched the longest. To do that, I created a CTE (`durations`) that calculated the time difference between pickup and dropoff in minutes, then averaged those durations by route.
+Finally, I wanted to know which trips stretched the longest. To do that, I created a CTE (Common Table Expression) that calculated the time difference between pickup and dropoff in minutes, then averaged those durations by route.
 
 ![Average travel duration by route showing outer boroughs with longest trips](/assets/DuckDB/AvgTravelDuration.png)
 
-The longest rides weren't in Manhattan at all — they came from the outer boroughs. Trips starting in places like Inwood and Flatlands regularly stretched past 90 minutes. These are exactly the kind of big, heavy aggregations that DuckDB handles without breaking a sweat.
+The longest average routes in my sample are cross-borough hauls. Several start in Manhattan (Kips Bay, Midtown East, Inwood) and head to outer-edge destinations like Rosedale and Bay Ridge. Others originate in Brooklyn (e.g., Flatlands/Canarsie). In short: it’s the distance and cross-borough travel driving long times—not simply “outer-borough pickups.
 
 What impressed me wasn't just the insights — it was how quickly I could get to them. Normally this kind of work would require spinning up Postgres or BigQuery and migrating data. With DuckDB, I was querying Parquet files directly within minutes.
 
