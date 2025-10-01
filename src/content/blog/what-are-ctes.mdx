@@ -1,0 +1,161 @@
+---
+title: "What Are CTEs (and When Not to Use Them)"
+date: "2025-10-01"
+summary: "CTEs: your best friend in complex queries… until they're not."
+description: "Learn when Common Table Expressions (CTEs) shine in SQL queries and when they're just unnecessary overhead. Master the art of clean, readable SQL with practical examples using the Chinook database."
+tags: ["SQL", "PostgreSQL", "Data Analytics", "Data Engineering"]
+featured: true
+readTime: 8
+image: "/assets/SQL-CTE.png"
+author: "David Martin"
+canonicalURL: "https://djmtech.dev/blog/what-are-ctes"
+---
+
+As I moved past the basics of SELECT \* FROM and simple joins, I realized something: queries can get messy fast. Nested subqueries stacked inside each other start to look like spaghetti, and debugging them feels like pulling apart tangled headphones.
+
+That’s when I discovered Common Table Expressions (CTEs).
+
+CTEs let you split a complex query into clean, named steps. Instead of cramming everything into one big block, you declare subqueries at the top with WITH, then reference them later as if they were tables. It makes your SQL readable, maintainable, and reusable.
+
+But like most tools, CTEs can be overused. Sometimes the cleanest query is still the simplest one. In this post, I’ll show you both sides: when CTEs shine, and when you’re better off skipping them.
+
+We'll use the Chinook sample database (digital media store schema) as our playground.
+
+---
+
+## When to Use CTEs
+
+CTEs shine when:
+
+- You’re breaking down multi-step logic (e.g. filter → aggregate → rank).
+- You need to reference intermediate results multiple times.
+- You want your SQL to read like a story instead of a puzzle.
+
+### Example 1: Which Customer Has Spent the Most?
+
+```sql
+WITH spend AS (
+  SELECT
+    c.customer_id,
+    c.first_name || ' ' || c.last_name AS customer_name,
+    SUM(i.total) AS total_spent
+  FROM customer c
+  JOIN invoice i ON i.customer_id = c.customer_id
+  GROUP BY c.customer_id, c.first_name, c.last_name
+)
+SELECT *
+FROM spend
+WHERE total_spent = (SELECT MAX(total_spent) FROM spend);
+```
+
+**Why use a CTE here?**
+
+- The spend subquery isolates the logic of "how much each customer spent."
+- The final query just says: "give me the biggest spender."
+- Without the CTE, you'd be nesting aggregations inside aggregations — harder to read and debug.
+
+### Example 2: Building Multi-Step Queries
+
+What if we wanted to find the top 5 customers in each country? That's a two-step job:
+
+1. Calculate spend per customer.
+2. Rank customers by spend within their country.
+
+```sql
+WITH spend AS (
+  SELECT
+    c.customer_id,
+    c.first_name || ' ' || c.last_name AS customer_name,
+    c.country,
+    SUM(i.total) AS total_spent
+  FROM customer c
+  JOIN invoice i ON i.customer_id = c.customer_id
+  GROUP BY c.customer_id, c.first_name, c.last_name, c.country
+),
+ranked AS (
+  SELECT
+    customer_id,
+    customer_name,
+    country,
+    total_spent,
+    RANK() OVER (PARTITION BY country ORDER BY total_spent DESC) AS rank
+  FROM spend
+)
+SELECT *
+FROM ranked
+WHERE rank <= 5;
+```
+
+Here, chaining CTEs makes the query flow logically: spend → ranked → filtered. Try writing this in one big query — it's a nightmare.
+
+---
+
+## When Not to Use CTEs
+
+Of course, not every query needs a CTE. Sometimes, they just add noise.
+
+CTEs aren’t free:
+
+- They can add overhead (though Postgres usually optimizes them).
+- They can obscure simple queries behind unnecessary names.
+- Overusing them can make your SQL feel like boilerplate.
+
+### Example 1: Top 10 Selling Artists by Revenue
+
+Here's a query that's already simple and expressive enough without a CTE:
+
+```sql
+SELECT
+  a.artist_id,
+  a.name AS artist_name,
+  SUM(il.unit_price * il.quantity) AS total_revenue
+FROM artist a
+JOIN album al ON al.artist_id = a.artist_id
+JOIN track t ON t.album_id = al.album_id
+JOIN invoice_line il ON il.track_id = t.track_id
+GROUP BY a.artist_id, a.name
+ORDER BY total_revenue DESC
+LIMIT 10;
+```
+
+Could we wrap the aggregation in a CTE? Sure. Would it help? Not really. It would just move the complexity around without making the query easier to read.
+
+### Example 2: Over-Nesting for No Reason
+
+I've seen queries like this in the wild:
+
+```sql
+WITH revenue AS (
+  SELECT
+    a.artist_id,
+    a.name AS artist_name,
+    SUM(il.unit_price * il.quantity) AS total_revenue
+  FROM artist a
+  JOIN album al ON al.artist_id = a.artist_id
+  JOIN track t ON t.album_id = al.album_id
+  JOIN invoice_line il ON il.track_id = t.track_id
+  GROUP BY a.artist_id, a.name
+)
+SELECT *
+FROM revenue
+ORDER BY total_revenue DESC
+LIMIT 10;
+```
+
+Looks tidy, but it didn't need a CTE — the main query is only one step. This is where restraint pays off.
+
+---
+
+## Key Takeaways
+
+- Use CTEs when your query has multiple logical steps or needs reusability.
+- Skip them when a single join/aggregation does the job cleanly.
+- Think of them like functions in code — you don’t need one for every console.log, but they make complex logic way easier to read.
+
+---
+
+## Wrapping Up
+
+CTEs are fantastic for breaking down messy SQL into readable steps, but they’re not always the cleanest tool for simple queries. Knowing when not to use them is just as important as knowing when to reach for them.
+
+How about you — what’s your go-to scenario for a CTE, and when do you steer clear?
