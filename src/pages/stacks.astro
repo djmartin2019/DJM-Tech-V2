@@ -1,0 +1,489 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { Rocket, Zap, Code, CheckCircle, Clock } from 'lucide-astro';
+---
+
+<Layout title="Stacks - DJM Tech" description="Explore our modular site-building stacks. Fast, real-world solutions built with modern technologies.">
+  <Header />
+  
+  <!-- Hero Section -->
+  <section class="relative hero-bg py-20 lg:py-32 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold hero-title mb-6 leading-tight">
+          Build faster. Host smarter. <br class="hidden md:block" />
+          <span class="neon-glow">Ditch the bloat.</span>
+        </h1>
+        <p class="text-xl md:text-2xl hero-subtitle max-w-3xl mx-auto mb-8 leading-relaxed">
+          Pick a preconfigured site stack built for speed and modularity — no hydration, no React, no startup fatigue.
+        </p>
+        <div class="flex items-center justify-center gap-2 text-[#00d4ff]">
+          <a href="#stacks" class="text-lg font-medium hover:underline transition-all">
+            Start with BareStack
+          </a>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Background Elements -->
+    <div class="absolute inset-0 hero-bg-elements">
+      <div class="hero-bg-gradient"></div>
+      <div class="hero-bg-pattern"></div>
+    </div>
+  </section>
+
+  <!-- Stacks Grid -->
+  <section id="stacks" class="py-20 lg:py-24 section-bg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+        <!-- BareStack -->
+        <div class="stack-card group">
+          <div class="p-8 lg:p-10 flex flex-col h-full">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 flex items-center justify-center text-3xl">⚡</div>
+              <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-green-500/20 text-green-400 border border-green-500/40">
+                LIVE
+              </span>
+            </div>
+            
+            <!-- Stack Name & Description -->
+            <div class="mb-8">
+              <h2 class="text-3xl font-bold stack-title mb-4">BareStack</h2>
+              <p class="stack-description leading-relaxed">
+                The fast, headless site stack with no extra baggage. Not even React.
+              </p>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="mb-8">
+              <div class="flex items-center mb-3">
+                <Code class="h-4 w-4 text-[#00d4ff] mr-2" />
+                <h3 class="text-sm font-semibold stack-title uppercase tracking-wide">Tech Stack</h3>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1.5 text-xs font-medium rounded-full tech-tag">Astro</span>
+                <span class="px-3 py-1.5 text-xs font-medium rounded-full tech-tag">Cloudflare</span>
+                <span class="px-3 py-1.5 text-xs font-medium rounded-full tech-tag">Contentful</span>
+                <span class="px-3 py-1.5 text-xs font-medium rounded-full tech-tag">Markdown</span>
+                <span class="px-3 py-1.5 text-xs font-medium rounded-full tech-tag">Resend</span>
+              </div>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="mb-8">
+              <div class="flex items-center mb-3">
+                <Rocket class="h-4 w-4 text-[#00d4ff] mr-2" />
+                <h3 class="text-sm font-semibold stack-title uppercase tracking-wide">Use Cases</h3>
+              </div>
+              <ul class="space-y-2.5">
+                <li class="flex items-start text-sm stack-description">
+                  <CheckCircle class="h-4 w-4 text-green-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Blogs & content sites</span>
+                </li>
+                <li class="flex items-start text-sm stack-description">
+                  <CheckCircle class="h-4 w-4 text-green-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Marketing pages</span>
+                </li>
+                <li class="flex items-start text-sm stack-description">
+                  <CheckCircle class="h-4 w-4 text-green-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Documentation sites</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Features -->
+            <div class="mb-8">
+              <div class="flex items-center mb-3">
+                <Zap class="h-4 w-4 text-[#00d4ff] mr-2" />
+                <h3 class="text-sm font-semibold stack-title uppercase tracking-wide">Features</h3>
+              </div>
+              <ul class="space-y-2.5">
+                <li class="flex items-start text-sm stack-description">
+                  <Zap class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Lightning-fast deploys</span>
+                </li>
+                <li class="flex items-start text-sm stack-description">
+                  <Zap class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>100 Lighthouse score</span>
+                </li>
+                <li class="flex items-start text-sm stack-description">
+                  <Zap class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Free hosting</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-auto pt-4 space-y-2">
+              <a href="https://github.com/djmartin2019/Astro-Contentful-Starter-Project" target="_blank" rel="noopener noreferrer" class="primary-cta-button w-full text-center block">
+                View Template
+              </a>
+              <div class="h-4"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- QwikStack -->
+        <div class="stack-card group opacity-90">
+          <div class="p-8 lg:p-10 flex flex-col h-full">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 flex items-center justify-center text-3xl">🚀</div>
+              <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-yellow-500/20 text-yellow-400 border border-yellow-500/40">
+                COMING SOON
+              </span>
+            </div>
+            
+            <!-- Stack Name & Description -->
+            <div class="mb-8">
+              <h2 class="text-3xl font-bold stack-title mb-4">QwikStack</h2>
+              <p class="stack-description leading-relaxed">
+                For interactive apps with instant-loading components. Zero hydration overhead. Maximum performance.
+              </p>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="mb-8">
+              <div class="flex items-center mb-3">
+                <Code class="h-4 w-4 text-[#00d4ff] mr-2" />
+                <h3 class="text-sm font-semibold stack-title uppercase tracking-wide">Tech Stack</h3>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1.5 text-xs font-medium rounded-full tech-tag">Qwik</span>
+                <span class="px-3 py-1.5 text-xs font-medium rounded-full tech-tag">Cloudflare</span>
+                <span class="px-3 py-1.5 text-xs font-medium rounded-full tech-tag">TypeScript</span>
+              </div>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="mb-8">
+              <div class="flex items-center mb-3">
+                <Rocket class="h-4 w-4 text-[#00d4ff] mr-2" />
+                <h3 class="text-sm font-semibold stack-title uppercase tracking-wide">Use Cases</h3>
+              </div>
+              <ul class="space-y-2.5">
+                <li class="flex items-start text-sm stack-description">
+                  <Clock class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Interactive web apps</span>
+                </li>
+                <li class="flex items-start text-sm stack-description">
+                  <Clock class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Real-time dashboards</span>
+                </li>
+                <li class="flex items-start text-sm stack-description">
+                  <Clock class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Dynamic content sites</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Features -->
+            <div class="mb-8">
+              <div class="flex items-center mb-3">
+                <Zap class="h-4 w-4 text-[#00d4ff] mr-2" />
+                <h3 class="text-sm font-semibold stack-title uppercase tracking-wide">Features</h3>
+              </div>
+              <ul class="space-y-2.5">
+                <li class="flex items-start text-sm stack-description">
+                  <Zap class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Instant-loading components</span>
+                </li>
+                <li class="flex items-start text-sm stack-description">
+                  <Zap class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Zero hydration</span>
+                </li>
+                <li class="flex items-start text-sm stack-description">
+                  <Zap class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Resumable execution</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-auto pt-4 space-y-2">
+              <a href="/contact" class="secondary-cta-button w-full text-center block">
+                Contact for Updates
+              </a>
+              <p class="text-xs text-center stack-description opacity-60">
+                Currently in development
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- HTMXStack -->
+        <div class="stack-card group opacity-90">
+          <div class="p-8 lg:p-10 flex flex-col h-full">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-6">
+              <div class="w-12 h-12 flex items-center justify-center text-3xl">⚙️</div>
+              <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-yellow-500/20 text-yellow-400 border border-yellow-500/40">
+                COMING SOON
+              </span>
+            </div>
+            
+            <!-- Stack Name & Description -->
+            <div class="mb-8">
+              <h2 class="text-3xl font-bold stack-title mb-4">HTMXStack</h2>
+              <p class="stack-description leading-relaxed">
+                For minimal-JS lovers who still want dynamic sites. HTML-first. Progressive enhancement. Zero bloat.
+              </p>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="mb-8">
+              <div class="flex items-center mb-3">
+                <Code class="h-4 w-4 text-[#00d4ff] mr-2" />
+                <h3 class="text-sm font-semibold stack-title uppercase tracking-wide">Tech Stack</h3>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1.5 text-xs font-medium rounded-full tech-tag">HTMX</span>
+                <span class="px-3 py-1.5 text-xs font-medium rounded-full tech-tag">Go/Python</span>
+                <span class="px-3 py-1.5 text-xs font-medium rounded-full tech-tag">HTML</span>
+              </div>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="mb-8">
+              <div class="flex items-center mb-3">
+                <Rocket class="h-4 w-4 text-[#00d4ff] mr-2" />
+                <h3 class="text-sm font-semibold stack-title uppercase tracking-wide">Use Cases</h3>
+              </div>
+              <ul class="space-y-2.5">
+                <li class="flex items-start text-sm stack-description">
+                  <Clock class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Server-rendered apps</span>
+                </li>
+                <li class="flex items-start text-sm stack-description">
+                  <Clock class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Form-heavy sites</span>
+                </li>
+                <li class="flex items-start text-sm stack-description">
+                  <Clock class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Minimal-JS requirements</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Features -->
+            <div class="mb-8">
+              <div class="flex items-center mb-3">
+                <Zap class="h-4 w-4 text-[#00d4ff] mr-2" />
+                <h3 class="text-sm font-semibold stack-title uppercase tracking-wide">Features</h3>
+              </div>
+              <ul class="space-y-2.5">
+                <li class="flex items-start text-sm stack-description">
+                  <Zap class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>HTML-first approach</span>
+                </li>
+                <li class="flex items-start text-sm stack-description">
+                  <Zap class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Progressive enhancement</span>
+                </li>
+                <li class="flex items-start text-sm stack-description">
+                  <Zap class="h-4 w-4 text-yellow-400 mr-2.5 mt-0.5 flex-shrink-0" />
+                  <span>Minimal JavaScript</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-auto pt-4 space-y-2">
+              <a href="/contact" class="secondary-cta-button w-full text-center block">
+                Contact for Updates
+              </a>
+              <p class="text-xs text-center stack-description opacity-60">
+                Currently in development
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .hero-bg {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    position: relative;
+  }
+
+  html.light .hero-bg {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 50%, rgba(240, 248, 255, 0.85) 100%);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  .hero-bg-elements {
+    pointer-events: none;
+  }
+
+  .hero-bg-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(0, 212, 255, 0.04) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(0, 212, 255, 0.03) 0%, transparent 50%);
+  }
+
+  .hero-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(0, 212, 255, 0.08) 1px, transparent 0);
+    background-size: 20px 20px;
+    opacity: 0.2;
+  }
+
+  .hero-title {
+    color: var(--text-primary);
+  }
+
+  html.light .hero-title {
+    color: rgba(15, 23, 42, 0.8);
+    font-weight: 700;
+  }
+
+  .hero-subtitle {
+    color: var(--text-secondary);
+  }
+
+  html.light .hero-subtitle {
+    color: rgba(71, 85, 105, 0.7);
+    font-weight: 500;
+  }
+
+  .section-bg {
+    background-color: var(--bg-secondary);
+  }
+
+  .stack-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .stack-card > div {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .stack-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 212, 255, 0.3) 50%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .stack-card:hover {
+    border-color: rgba(0, 212, 255, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(0, 212, 255, 0.1);
+    transform: translateY(-4px);
+  }
+
+  .stack-card:hover::before {
+    opacity: 1;
+  }
+
+  .stack-title {
+    color: var(--text-primary);
+  }
+
+  .stack-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .tech-tag {
+    background-color: rgba(0, 212, 255, 0.1);
+    color: var(--accent-color);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    transition: all 0.2s ease;
+  }
+
+  .stack-card:hover .tech-tag {
+    background-color: rgba(0, 212, 255, 0.15);
+    border-color: rgba(0, 212, 255, 0.3);
+  }
+
+  html.light .stack-card {
+    background: #ffffff;
+    border-color: #e2e8f0;
+  }
+
+  html.light .stack-card:hover {
+    border-color: rgba(0, 212, 255, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 212, 255, 0.1);
+  }
+
+  .primary-cta-button {
+    background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+    color: #0a0a0a;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 212, 255, 0.3), 0 0 15px rgba(0, 212, 255, 0.2);
+    border: none;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .primary-cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 212, 255, 0.4), 0 0 20px rgba(0, 212, 255, 0.3);
+    background: linear-gradient(135deg, #33dfff 0%, #00d4ff 100%);
+  }
+
+  .secondary-cta-button {
+    background-color: transparent;
+    color: #00d4ff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 2px solid #00d4ff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+  }
+
+  .secondary-cta-button:hover {
+    background-color: #00d4ff;
+    color: #0a0a0a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 212, 255, 0.3), 0 0 20px rgba(0, 212, 255, 0.2);
+  }
+</style>
+

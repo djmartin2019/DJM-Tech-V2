@@ -60,7 +60,7 @@ export const projects: Project[] = [
     status: "current",
     githubUrl:
       "https://github.com/djmartin2019/pyspark-stock-analysis-pipeline",
-    featured: true,
+    featured: false,
     category: "Finance",
     startDate: "2025-09",
   },
@@ -72,7 +72,7 @@ export const projects: Project[] = [
     longDescription:
       "A comprehensive service offering professional photography, one-page websites, and digital presence solutions for real estate listings, rentals, and small businesses in Texas.",
     image: "/assets/websites/TexasFrontstep.png",
-    technologies: ["NextJS", "TailwindCSS", "TypeScript", "Vercel"],
+    technologies: ["Astro", "TailwindCSS", "TypeScript", "Cloudflare"],
     status: "completed",
     liveUrl: "https://texasfrontstep.com/",
     githubUrl: "https://github.com/djmartin2019/texas-frontstep",

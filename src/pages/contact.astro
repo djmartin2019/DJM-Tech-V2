@@ -5,17 +5,16 @@ import Footer from '../components/Footer.astro';
 import { Mail, Github, Linkedin, Clock, Twitter } from 'lucide-astro';
 ---
 
-<Layout title="Contact - David Martin | DJM Tech" description="Get in touch with David Martin for web development projects, collaborations, or just to chat about technology and startups.">
+<Layout title="Contact - DJM Tech" description="Get in touch with DJM Tech. Need a site? Want a stack? Or just want to talk about how bloated React is?">
   <Header />
   
   <!-- Hero Section -->
   <section class="relative hero-bg py-20 lg:py-32 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
-        <h1 class="text-4xl md:text-5xl font-bold hero-title mb-6">Let's Connect</h1>
+        <h1 class="text-4xl md:text-5xl font-bold hero-title mb-6">Let's Build Something Fast</h1>
         <p class="text-xl hero-subtitle max-w-3xl mx-auto">
-          Have a project in mind or just want to talk tech, music, or startups? 
-          Drop a message and let's make something epic.
+          Need a site? Want a stack? Or just want to talk about how bloated React is?
         </p>
       </div>
     </div>
@@ -165,41 +164,122 @@ import { Mail, Github, Linkedin, Clock, Twitter } from 'lucide-astro';
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Frequently Asked Questions</h2>
-        <p class="text-xl section-subtitle">Common questions about working with me</p>
+        <p class="text-xl section-subtitle">Real answers about stacks, timelines, and how this works</p>
       </div>
       
-      <div class="space-y-8">
-        <div class="neon-card p-6">
-          <h3 class="text-lg font-semibold faq-title mb-3">What types of projects do you work on?</h3>
-          <p class="faq-description">
-            I specialize in web applications, from simple landing pages to complex full-stack applications. 
-            I work with modern technologies like React, Next.js, TypeScript, and Node.js to build scalable, 
-            performant solutions.
-          </p>
+      <div class="space-y-4">
+        <!-- FAQ Item 1 -->
+        <div class="faq-item">
+          <button class="faq-button w-full text-left" aria-expanded="false">
+            <div class="flex items-center justify-between p-6">
+              <h3 class="text-lg font-semibold faq-title pr-8">What's a "stack flavor"?</h3>
+              <svg class="faq-icon w-5 h-5 text-[#00d4ff] flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </button>
+          <div class="faq-content hidden">
+            <div class="px-6 pb-6">
+              <p class="faq-description">
+                Each stack is a pre-built set of technologies optimized for a certain kind of site — like content-first blogs or interactive dashboards. You choose a flavor, I deploy it, you win.
+              </p>
+            </div>
+          </div>
         </div>
-        
-        <div class="neon-card p-6">
-          <h3 class="text-lg font-semibold faq-title mb-3">What's your typical project timeline?</h3>
-          <p class="faq-description">
-            Project timelines vary depending on complexity and scope. Simple websites typically take 2-4 weeks, 
-            while complex applications can take 2-6 months. I'll provide a detailed timeline during our initial consultation.
-          </p>
+
+        <!-- FAQ Item 2 -->
+        <div class="faq-item">
+          <button class="faq-button w-full text-left" aria-expanded="false">
+            <div class="flex items-center justify-between p-6">
+              <h3 class="text-lg font-semibold faq-title pr-8">Do I need to know how to code?</h3>
+              <svg class="faq-icon w-5 h-5 text-[#00d4ff] flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </button>
+          <div class="faq-content hidden">
+            <div class="px-6 pb-6">
+              <p class="faq-description">
+                Nope. Once you pick a stack, I handle everything from setup to launch. You just provide the content (or vibes).
+              </p>
+            </div>
+          </div>
         </div>
-        
-        <div class="neon-card p-6">
-          <h3 class="text-lg font-semibold faq-title mb-3">Do you work with clients remotely?</h3>
-          <p class="faq-description">
-            Yes! I work with clients worldwide and have experience collaborating remotely. I use modern 
-            communication tools and maintain regular check-ins to keep projects on track.
-          </p>
+
+        <!-- FAQ Item 3 -->
+        <div class="faq-item">
+          <button class="faq-button w-full text-left" aria-expanded="false">
+            <div class="flex items-center justify-between p-6">
+              <h3 class="text-lg font-semibold faq-title pr-8">Can you customize a stack for me?</h3>
+              <svg class="faq-icon w-5 h-5 text-[#00d4ff] flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </button>
+          <div class="faq-content hidden">
+            <div class="px-6 pb-6">
+              <p class="faq-description">
+                Yes — each stack is modular and can be tailored to your specific needs, whether that's a contact form, CMS integration, or performance tweaks.
+              </p>
+            </div>
+          </div>
         </div>
-        
-        <div class="neon-card p-6">
-          <h3 class="text-lg font-semibold faq-title mb-3">What's included in your services?</h3>
-          <p class="faq-description">
-            My services include design, development, testing, deployment, and ongoing maintenance. 
-            I also provide documentation, training, and support to ensure your project's long-term success.
-          </p>
+
+        <!-- FAQ Item 4 -->
+        <div class="faq-item">
+          <button class="faq-button w-full text-left" aria-expanded="false">
+            <div class="flex items-center justify-between p-6">
+              <h3 class="text-lg font-semibold faq-title pr-8">What kind of sites are these stacks best for?</h3>
+              <svg class="faq-icon w-5 h-5 text-[#00d4ff] flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </button>
+          <div class="faq-content hidden">
+            <div class="px-6 pb-6">
+              <p class="faq-description">
+                BareStack is perfect for blogs, content sites, and marketing pages. QwikStack (coming soon) will handle interactive apps and dashboards. HTMXStack (coming soon) is ideal for server-rendered apps and form-heavy sites. Each stack is built for speed and simplicity.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 5 -->
+        <div class="faq-item">
+          <button class="faq-button w-full text-left" aria-expanded="false">
+            <div class="flex items-center justify-between p-6">
+              <h3 class="text-lg font-semibold faq-title pr-8">How fast can I launch something with DJM Tech?</h3>
+              <svg class="faq-icon w-5 h-5 text-[#00d4ff] flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </button>
+          <div class="faq-content hidden">
+            <div class="px-6 pb-6">
+              <p class="faq-description">
+                Depends on the stack and your content. A basic content site can be up in under 48 hours. Bigger stuff? 1–3 weeks.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Item 6 -->
+        <div class="faq-item">
+          <button class="faq-button w-full text-left" aria-expanded="false">
+            <div class="flex items-center justify-between p-6">
+              <h3 class="text-lg font-semibold faq-title pr-8">Do you only build sites, or do you offer ongoing support?</h3>
+              <svg class="faq-icon w-5 h-5 text-[#00d4ff] flex-shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </button>
+          <div class="faq-content hidden">
+            <div class="px-6 pb-6">
+              <p class="faq-description">
+                Yes. I offer optional support plans for updates, performance tuning, and adding new features later.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -259,6 +339,34 @@ import { Mail, Github, Linkedin, Clock, Twitter } from 'lucide-astro';
           });
         });
       }
+
+      // FAQ Accordion functionality
+      const faqButtons = document.querySelectorAll('.faq-button');
+      faqButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const isExpanded = this.getAttribute('aria-expanded') === 'true';
+          const content = this.nextElementSibling as HTMLElement;
+          
+          // Close all other FAQ items
+          faqButtons.forEach(otherButton => {
+            if (otherButton !== this) {
+              otherButton.setAttribute('aria-expanded', 'false');
+              const otherContent = otherButton.nextElementSibling as HTMLElement;
+              if (otherContent) {
+                otherContent.classList.add('hidden');
+              }
+            }
+          });
+          
+          // Toggle current item
+          this.setAttribute('aria-expanded', (!isExpanded).toString());
+          if (isExpanded) {
+            content.classList.add('hidden');
+          } else {
+            content.classList.remove('hidden');
+          }
+        });
+      });
     });
   </script>
 
@@ -424,12 +532,55 @@ import { Mail, Github, Linkedin, Clock, Twitter } from 'lucide-astro';
       background-color: var(--bg-primary);
     }
 
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(0, 212, 255, 0.3);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .faq-button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .faq-button:hover {
+      background-color: rgba(0, 212, 255, 0.05);
+    }
+
+    .faq-button[aria-expanded="true"] .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-button[aria-expanded="true"] {
+      background-color: rgba(0, 212, 255, 0.08);
+    }
+
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .faq-content:not(.hidden) {
+      max-height: 500px;
+    }
+
     .faq-title {
       color: var(--text-primary);
     }
 
     .faq-description {
       color: var(--text-secondary);
+      line-height: 1.6;
     }
 
     /* Enhanced contrast for light mode */
@@ -480,6 +631,24 @@ import { Mail, Github, Linkedin, Clock, Twitter } from 'lucide-astro';
 
     html.light .contact-description {
       color: #6b7280;
+    }
+
+    html.light .faq-item {
+      background: #ffffff;
+      border-color: #e2e8f0;
+    }
+
+    html.light .faq-item:hover {
+      border-color: rgba(0, 212, 255, 0.4);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    html.light .faq-button:hover {
+      background-color: rgba(0, 212, 255, 0.05);
+    }
+
+    html.light .faq-button[aria-expanded="true"] {
+      background-color: rgba(0, 212, 255, 0.1);
     }
 
     html.light .faq-title {

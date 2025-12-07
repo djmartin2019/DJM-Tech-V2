@@ -5,39 +5,25 @@ import Footer from '../components/Footer.astro';
 import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Check } from 'lucide-astro';
 ---
 
-<Layout title="About - David Martin | DJM Tech" description="Learn more about David Martin, a full-stack developer passionate about building scalable web experiences with modern technologies.">
+<Layout title="About - DJM Tech" description="Learn about DJM Tech's journey from personal portfolio to lean site-building platform focused on speed, simplicity, and dev sanity.">
   <Header />
   
   <!-- Hero Section -->
   <section class="relative hero-bg py-20 lg:py-32 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <h1 class="text-4xl md:text-5xl font-bold hero-title mb-6">About Me</h1>
-          <p class="text-xl hero-subtitle mb-8">
-            I’m David Martin, a builder at heart with a passion for creating web apps that are fast, scalable, and a joy to use. I work primarily with Python, Next.js, and TypeScript — but I’m always exploring new tools to ship smarter.
-          </p>
-          <div class="flex space-x-4">
-            <a href="/contact" class="primary-cta-button">
-              Get In Touch
-            </a>
-            <a href="/projects" class="secondary-cta-button">
-              View My Work
-            </a>
-          </div>
-        </div>
-        <div class="neon-card p-8">
-          <div class="aspect-square about-image-container rounded-lg mb-6 overflow-hidden">
-            <img 
-              src="/assets/about-me-photo.jpeg" 
-              alt="David Martin - Full Stack Developer"
-              class="w-full h-full object-cover"
-            />
-          </div>
-          <div class="text-center">
-            <h3 class="text-xl font-semibold about-name mb-2">David Martin</h3>
-            <p class="about-title">Full Stack Developer</p>
-          </div>
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-bold hero-title mb-6">About DJM Tech</h1>
+        <p class="text-xl hero-subtitle max-w-3xl mx-auto mb-8">
+          From personal dev portfolio to modular stack-based site builder. 
+          Built for speed, simplicity, and developer sanity.
+        </p>
+        <div class="flex justify-center space-x-4">
+          <a href="/stacks" class="primary-cta-button">
+            Explore Stacks
+          </a>
+          <a href="/contact" class="secondary-cta-button">
+            Get In Touch
+          </a>
         </div>
       </div>
     </div>
@@ -49,126 +35,79 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
     </div>
   </section>
 
-  <!-- Story Section -->
-  <section class="py-20 section-bg">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">My Story</h2>
-        <p class="text-xl section-subtitle">How I became passionate about web development</p>
-      </div>
-      
-      <div class="prose prose-lg max-w-none">
-        <p class="text-lg story-text mb-6">
-          I didn’t start out as a developer — I started as someone curious about how websites actually worked. My first experiments were scrappy HTML pages, but that curiosity grew into a full-on passion for building scalable, performant apps that solve real-world problems.
-        </p>
-        
-        <p class="text-lg story-text mb-6">
-          Today, I specialize in building with Next.js, React, and TypeScript, often paired with Python on the backend. I love the challenge of simplifying complexity: taking big ideas and making them fast, reliable, and intuitive.
-        </p>
-        
-        <p class="text-lg story-text mb-6">
-          When I’m not coding, you’ll find me playing guitar and bass in my church’s worship band, or out with my camera photographing wildlife. Whether it’s music, photography, or software, I’m driven by curiosity and creativity in everything I build.
-        </p>
+  <!-- Creator Section -->
+  <section class="py-20 lg:py-24 creator-bg relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Portrait -->
+        <div class="relative flex justify-center lg:justify-start">
+          <div class="relative portrait-container">
+            <div class="portrait-glow"></div>
+            <img 
+              src="/assets/about-me-photo.jpeg" 
+              alt="David Martin - Builder behind DJM Tech"
+              class="portrait-image"
+            />
+            <div class="absolute inset-0 portrait-border"></div>
+          </div>
+        </div>
+
+        <!-- Intro Text -->
+        <div class="space-y-6">
+          <div>
+            <h2 class="text-3xl md:text-4xl font-bold creator-title mb-4">
+              Hey, I'm David
+            </h2>
+            <p class="text-xl md:text-2xl creator-subtitle mb-6">
+              The builder behind DJM Tech. I ship fast stacks, avoid React, and believe in keeping things simple.
+            </p>
+          </div>
+          
+          <div class="space-y-4">
+            <p class="creator-text">
+              When I'm not shipping stacks, you'll find me playing guitar, taking photos, or venting about web development in the <a href="/blog" class="text-[#00d4ff] hover:underline font-medium">Build Logs</a>.
+            </p>
+            <p class="creator-text">
+              Honest, slightly sarcastic, indie-builder energy — that's the vibe here.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Skills Section -->
-  <section class="py-20 skills-bg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Skills & Expertise</h2>
-        <p class="text-xl section-subtitle">Technologies and tools I work with</p>
+  <!-- Story Section -->
+  <section class="py-20 lg:py-24 section-bg relative">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00d4ff]/30 to-transparent"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">The Story</h2>
+        <p class="text-lg section-subtitle">How DJM Tech evolved</p>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Frontend -->
-        <div class="neon-card p-8">
-          <div class="text-center mb-6">
-            <Monitor class="h-12 w-12 mx-auto skill-icon mb-4" />
-            <h3 class="text-xl font-semibold skill-title">Frontend Development</h3>
-          </div>
-          <ul class="space-y-3">
-            <li class="flex items-center">
-              <Check class="h-5 w-5 text-green-500 mr-3" />
-              <span class="skill-item">React</span>
-            </li>
-            <li class="flex items-center">
-              <Check class="h-5 w-5 text-green-500 mr-3" />
-              <span class="skill-item">Astro</span>
-            </li>
-            <li class="flex items-center">
-              <Check class="h-5 w-5 text-green-500 mr-3" />
-              <span class="skill-item">TypeScript</span>
-            </li>
-            <li class="flex items-center">
-              <Check class="h-5 w-5 text-green-500 mr-3" />
-              <span class="skill-item">Tailwind CSS</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Backend -->
-        <div class="neon-card p-8">
-          <div class="text-center mb-6">
-            <Server class="h-12 w-12 mx-auto skill-icon mb-4" />
-            <h3 class="text-xl font-semibold skill-title">Backend Development</h3>
-          </div>
-          <ul class="space-y-3">
-            <li class="flex items-center">
-              <Check class="h-5 w-5 text-green-500 mr-3" />
-              <span class="skill-item">Node.js</span>
-            </li>
-            <li class="flex items-center">
-              <Check class="h-5 w-5 text-green-500 mr-3" />
-              <span class="skill-item">PostgreSQL</span>
-            </li>
-            <li class="flex items-center">
-              <Check class="h-5 w-5 text-green-500 mr-3" />
-              <span class="skill-item">Python</span>
-            </li>
-            <li class="flex items-center">
-              <Check class="h-5 w-5 text-green-500 mr-3" />
-              <span class="skill-item">API Design</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Tools & Platforms -->
-        <div class="neon-card p-8">
-          <div class="text-center mb-6">
-            <Wrench class="h-12 w-12 mx-auto skill-icon mb-4" />
-            <h3 class="text-xl font-semibold skill-title">Tools & Platforms</h3>
-          </div>
-          <ul class="space-y-3">
-            <li class="flex items-center">
-              <Check class="h-5 w-5 text-green-500 mr-3" />
-              <span class="skill-item">AWS</span>
-            </li>
-            <li class="flex items-center">
-              <Check class="h-5 w-5 text-green-500 mr-3" />
-              <span class="skill-item">Cloudflare</span>
-            </li>
-            <li class="flex items-center">
-              <Check class="h-5 w-5 text-green-500 mr-3" />
-              <span class="skill-item">Git & GitHub</span>
-            </li>
-            <li class="flex items-center">
-              <Check class="h-5 w-5 text-green-500 mr-3" />
-              <span class="skill-item">Docker</span>
-            </li>
-          </ul>
-        </div>
+      <div class="space-y-6">
+        <p class="text-lg md:text-xl story-text leading-relaxed">
+          DJM Tech started as a personal portfolio. After building enough sites and wrestling with bloated frameworks, a pattern emerged: <strong>most projects didn't need the complexity they were saddled with.</strong>
+        </p>
+        
+        <p class="text-lg md:text-xl story-text leading-relaxed">
+          So I pivoted. DJM Tech became a platform for <strong class="text-[#00d4ff]">lean, stack-based site building</strong>. Real-world stacks that ship fast: Astro + Contentful + Cloudflare for content sites, with Qwik and HTMX stacks coming soon.
+        </p>
+        
+        <p class="text-lg md:text-xl story-text leading-relaxed">
+          The philosophy is simple: <strong>speed, simplicity, and dev sanity</strong>. No React worship. No unnecessary abstractions. Just fast sites that work.
+        </p>
       </div>
     </div>
   </section>
 
   <!-- Values Section -->
-  <section class="py-20 section-bg">
+  <section class="py-20 lg:py-24 skills-bg relative">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00d4ff]/30 to-transparent"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">My Values</h2>
-        <p class="text-xl section-subtitle">What drives me as a developer</p>
+        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Our Values</h2>
+        <p class="text-lg section-subtitle">What drives DJM Tech</p>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -176,43 +115,44 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
           <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
             <Zap class="h-8 w-8 value-icon" />
           </div>
-          <h3 class="text-lg font-semibold value-title mb-2">Performance</h3>
-          <p class="value-description">Building fast, efficient applications that provide excellent user experiences.</p>
+          <h3 class="text-lg font-semibold value-title mb-2">Speed</h3>
+          <p class="value-description">Fast sites that load instantly. No compromises.</p>
         </div>
         
         <div class="text-center">
           <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
             <Shield class="h-8 w-8 value-icon" />
           </div>
-          <h3 class="text-lg font-semibold value-title mb-2">Quality</h3>
-          <p class="value-description">Writing clean, maintainable code that stands the test of time.</p>
+          <h3 class="text-lg font-semibold value-title mb-2">Simplicity</h3>
+          <p class="value-description">No unnecessary abstractions. Just what works.</p>
         </div>
         
         <div class="text-center">
           <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
             <Users class="h-8 w-8 value-icon" />
           </div>
-          <h3 class="text-lg font-semibold value-title mb-2">Collaboration</h3>
-          <p class="value-description">Working closely with clients and teams to deliver the best solutions.</p>
+          <h3 class="text-lg font-semibold value-title mb-2">Dev Sanity</h3>
+          <p class="value-description">Stacks that make sense. No framework worship.</p>
         </div>
         
         <div class="text-center">
           <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
             <BookOpen class="h-8 w-8 value-icon" />
           </div>
-          <h3 class="text-lg font-semibold value-title mb-2">Learning</h3>
-          <p class="value-description">Continuously improving and staying current with new technologies.</p>
+          <h3 class="text-lg font-semibold value-title mb-2">No React</h3>
+          <p class="value-description">All stacks avoid React by design. Zero bloat.</p>
         </div>
       </div>
     </div>
   </section>
 
+
   <!-- CTA Section -->
   <section class="py-20 cta-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold cta-title mb-4">Let's Work Together</h2>
+      <h2 class="text-3xl md:text-4xl font-bold cta-title mb-4">Ready to Build Something Fast?</h2>
       <p class="text-xl cta-subtitle mb-8 max-w-2xl mx-auto">
-        Have a project in mind? I'd love to hear about it and see how we can bring your ideas to life.
+        Need a site? Want a stack? Or just want to talk about how bloated React is?
       </p>
       <a href="/contact" class="bg-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center">
         <Mail class="h-5 w-5 mr-2" />
@@ -278,21 +218,107 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
       font-weight: 500;
     }
 
-    .about-image-container {
-      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
-      border: 2px solid var(--border-color);
+    /* Creator Section */
+    .creator-bg {
+      background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+      position: relative;
     }
 
-    .about-name {
+    .creator-bg::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .portrait-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .portrait-glow {
+      position: absolute;
+      inset: -20px;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.4) 0%, rgba(0, 212, 255, 0.1) 40%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(30px);
+      animation: pulse-glow 3s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% {
+        opacity: 0.6;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+
+    .portrait-image {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-radius: 1rem;
+      border: 2px solid rgba(0, 212, 255, 0.3);
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.3), 0 0 80px rgba(0, 212, 255, 0.2);
+      z-index: 1;
+      transition: transform 0.3s ease;
+    }
+
+    .portrait-image:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 60px rgba(0, 212, 255, 0.4), 0 0 120px rgba(0, 212, 255, 0.3);
+    }
+
+    .portrait-border {
+      border-radius: 1rem;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .creator-title {
       color: var(--text-primary);
     }
 
-    .about-title {
+    .creator-subtitle {
       color: var(--text-secondary);
+    }
+
+    .creator-text {
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    html.light .creator-bg {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    }
+
+    html.light .portrait-glow {
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, rgba(0, 212, 255, 0.05) 40%, transparent 70%);
+    }
+
+    html.light .portrait-image {
+      border-color: rgba(0, 212, 255, 0.4);
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.2), 0 0 60px rgba(0, 212, 255, 0.1);
+    }
+
+    html.light .portrait-image:hover {
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.3), 0 0 80px rgba(0, 212, 255, 0.2);
     }
 
     .section-bg {
       background-color: var(--bg-secondary);
+      position: relative;
     }
 
     .section-title {
@@ -305,6 +331,19 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
 
     .story-text {
       color: var(--text-secondary);
+    }
+
+    .story-text strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    html.light .section-bg {
+      background-color: #f8fafc;
+    }
+
+    html.light .skills-bg {
+      background-color: #ffffff;
     }
 
     .skills-bg {

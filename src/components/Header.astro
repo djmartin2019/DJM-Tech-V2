@@ -22,8 +22,8 @@ const isActive = (path: string) => currentPath === path;
       <div class="hidden md:block">
         <div class="ml-10 flex items-baseline space-x-8">
           <a href="/" class={`px-3 py-2 text-sm font-medium transition-colors nav-link ${isActive('/') ? 'active' : ''}`}>Home</a>
-          <a href="/projects" class={`px-3 py-2 text-sm font-medium transition-colors nav-link ${isActive('/projects') ? 'active' : ''}`}>Projects</a>
-          <a href="/blog" class={`px-3 py-2 text-sm font-medium transition-colors nav-link ${isActive('/blog') ? 'active' : ''}`}>Blog</a>
+          <a href="/stacks" class={`px-3 py-2 text-sm font-medium transition-colors nav-link ${isActive('/stacks') ? 'active' : ''}`}>Stacks</a>
+          <a href="/blog" class={`px-3 py-2 text-sm font-medium transition-colors nav-link ${isActive('/blog') ? 'active' : ''}`}>Build Logs</a>
           <a href="/about" class={`px-3 py-2 text-sm font-medium transition-colors nav-link ${isActive('/about') ? 'active' : ''}`}>About</a>
           <a href="/contact" class={`px-3 py-2 text-sm font-medium transition-colors nav-link ${isActive('/contact') ? 'active' : ''}`}>Contact</a>
         </div>
@@ -48,8 +48,8 @@ const isActive = (path: string) => currentPath === path;
     <div class="md:hidden hidden mobile-menu" id="mobile-menu">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 transition-colors duration-300 mobile-menu">
         <a href="/" class={`block px-3 py-2 text-base font-medium nav-link ${isActive('/') ? 'active' : ''}`}>Home</a>
-        <a href="/projects" class={`block px-3 py-2 text-base font-medium transition-colors nav-link ${isActive('/projects') ? 'active' : ''}`}>Projects</a>
-        <a href="/blog" class={`block px-3 py-2 text-base font-medium transition-colors nav-link ${isActive('/blog') ? 'active' : ''}`}>Blog</a>
+        <a href="/stacks" class={`block px-3 py-2 text-base font-medium transition-colors nav-link ${isActive('/stacks') ? 'active' : ''}`}>Stacks</a>
+        <a href="/blog" class={`block px-3 py-2 text-base font-medium transition-colors nav-link ${isActive('/blog') ? 'active' : ''}`}>Build Logs</a>
         <a href="/about" class={`block px-3 py-2 text-base font-medium transition-colors nav-link ${isActive('/about') ? 'active' : ''}`}>About</a>
         <a href="/contact" class={`block px-3 py-2 text-base font-medium transition-colors nav-link ${isActive('/contact') ? 'active' : ''}`}>Contact</a>
       </div>
