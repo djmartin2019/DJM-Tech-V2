@@ -9,7 +9,7 @@ const isActive = (path: string) => currentPath === path;
 
 <header class="sticky top-0 z-50 backdrop-blur-md border-b transition-colors duration-300 header-bg">
   <nav class="max-w-7xl mx-auto nav-container">
-    <div class="flex justify-between items-center h-16">
+    <div class="flex justify-between items-center" style="height: var(--nav-height);">
       <!-- Logo -->
       <div class="flex-shrink-0">
         <a href="/" class="flex items-center space-x-2 text-xl font-bold transition-colors nav-link">
@@ -61,25 +61,26 @@ const isActive = (path: string) => currentPath === path;
   .header-bg {
     background-color: #000000; /* Pure black navbar */
     border-color: #2a2a2a;
-    padding-top: env(safe-area-inset-top);
+    padding-top: var(--safe-top);
+    min-height: calc(var(--nav-height) + var(--safe-top));
   }
   
   .nav-container {
-    padding-left: max(1rem, calc(env(safe-area-inset-left) + 1rem));
-    padding-right: max(1rem, calc(env(safe-area-inset-right) + 1rem));
+    padding-left: max(1rem, calc(var(--safe-left) + 1rem));
+    padding-right: max(1rem, calc(var(--safe-right) + 1rem));
   }
   
   @media (min-width: 640px) {
     .nav-container {
-      padding-left: max(1.5rem, calc(env(safe-area-inset-left) + 1.5rem));
-      padding-right: max(1.5rem, calc(env(safe-area-inset-right) + 1.5rem));
+      padding-left: max(1.5rem, calc(var(--safe-left) + 1.5rem));
+      padding-right: max(1.5rem, calc(var(--safe-right) + 1.5rem));
     }
   }
   
   @media (min-width: 1024px) {
     .nav-container {
-      padding-left: max(2rem, calc(env(safe-area-inset-left) + 2rem));
-      padding-right: max(2rem, calc(env(safe-area-inset-right) + 2rem));
+      padding-left: max(2rem, calc(var(--safe-left) + 2rem));
+      padding-right: max(2rem, calc(var(--safe-right) + 2rem));
     }
   }
   
