@@ -16,6 +16,50 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "foodly-map",
+    title: "Foodly Map",
+    description:
+      "A social, map-based food discovery app focused on personal taste and trusted recommendations.",
+    longDescription:
+      "Foodly Map is a social-first food discovery platform that lets users build a personal map of places they’ve actually eaten, organize them into custom lists, and discover new spots through friends they trust. Instead of algorithmic rankings and noisy star ratings, Foodly Map emphasizes real experiences, contextual discovery, and long-term usefulness. The product is being built as a progressive web app with a focus on performance, privacy, and a deliberate, human-centered UX.",
+    image: "/assets/websites/FoodlyMap.png",
+    technologies: [
+      "React",
+      "Vite",
+      "TanStack",
+      "Supabase",
+      "Mapbox",
+      "Cloudflare Pages"
+    ],
+    status: "current",
+    liveUrl: "https://foodlymap.com/",
+    githubUrl: "https://github.com/djmartin2019/FoodlyMap",
+    featured: true,
+    category: "Product / Social",
+    startDate: "2026-01",
+  },
+  {
+    id: "oblique-engine",
+    title: "Oblique",
+    description:
+      "A custom-built isometric CRPG engine in C focused on consequence-driven gameplay and systemic design.",
+    longDescription:
+      "Oblique is a ground-up isometric CRPG engine written in C, designed to make building consequence-driven RPGs practical instead of painful. The engine emphasizes systems over scripting: tile-based worlds with cost-aware pathfinding, AP-driven movement, deterministic AI state machines, and a global world-state model that enables meaningful player choice. Rather than converging dialogue and quests back into a single outcome, Oblique is being built to support branching consequences, persistent NPC memory, and world reactions that naturally emerge from shared state. The project serves both as a deep dive into low-level engine architecture and as a foundation for authoring classic-style RPGs where decisions genuinely matter.",
+    image: "/assets/websites/Oblique.png",
+    technologies: [
+      "C",
+      "SDL2",
+      "Custom Pathfinding (A*)",
+      "Isometric Rendering",
+      "State Machines"
+    ],
+    status: "current",
+    githubUrl: "https://github.com/djmartin2019/Oblique",
+    featured: true,
+    category: "Game Engine / Systems",
+    startDate: "2025-12",
+  },  
+  {
     id: "astrocontentfulstarter",
     title: "Astro Contentful Starter Template",
     description:
@@ -47,22 +91,6 @@ export const projects: Project[] = [
     featured: true,
     category: "Portfolio",
     startDate: "2024-01",
-  },
-  {
-    id: "pyspark-stock-analysis-pipeline",
-    title: "Stock Analysis Dashboard",
-    description:
-      "A comprehensive stock market analysis platform built with Apache Spark, Delta Lake, and Dash.",
-    longDescription:
-      "This project implements a modern data engineering pipeline following the medallion architecture pattern to ingest, process, and visualize stock market data from Alpha Vantage API.",
-    image: "/assets/websites/AlphaVantageDashboard.png",
-    technologies: ["Plotly", "Python", "PySpark", "Delta Lake"],
-    status: "current",
-    githubUrl:
-      "https://github.com/djmartin2019/pyspark-stock-analysis-pipeline",
-    featured: false,
-    category: "Finance",
-    startDate: "2025-09",
   },
   {
     id: "texas-frontstep",
