@@ -33,6 +33,11 @@ html.light {
 @layer base {
   html {
     scroll-behavior: smooth;
+    background-color: #000000; /* Pure black to match navbar and prevent white flash on scroll */
+  }
+
+  html.light {
+    background-color: #ffffff; /* White for light mode */
   }
 
   body {
@@ -41,6 +46,7 @@ html.light {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh; /* Ensure body covers viewport */
   }
 }
 
