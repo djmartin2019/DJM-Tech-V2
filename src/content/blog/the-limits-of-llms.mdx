@@ -1,0 +1,354 @@
+---
+title: "The Limits of LLMs: Shipping Software Without Outsourcing Judgment"
+date: "2026-02-09"
+summary: "LLMs are great at plausible solutions, but engineers still own assumptions, trade-offs, and failure modes."
+description: "Using place deduplication as a real example, this post explores what LLMs do well, what they miss, and how to ship responsibly without outsourcing judgment."
+tags: ["AI", "LLMs", "Development", "Systems Design", "MVP"]
+featured: false
+readTime: 12
+image: "/assets/og-default.png"
+author: "David Martin"
+canonicalURL: "https://djmtech.dev/blog/the-limits-of-llms"
+---
+
+# The Limits of LLMs: Shipping Software Without Outsourcing Judgment
+
+Large language models are very good at producing plausible solutions.
+They are not good at knowing whether a solution is appropriate for your constraints, scale, or failure modes.
+
+This post isn't about dunking on AI tools. I use them constantly. It's about understanding where their usefulness ends and where responsibility begins.
+
+I ran into this boundary while solving a very real problem: place deduplication in a map-based app.
+
+---
+
+## The Problem That Triggered the Lesson
+
+When users add places to a map, duplicates are inevitable.
+
+My original logic required an exact match on both name and coordinates. It was safe, but naive. In the real world:
+
+- People type "Starbucks" and "Starbucks Coffee"
+- GPS coordinates drift by a few meters
+- Different restaurants can exist at the exact same location
+
+The result was predictable: obvious duplicates slipping through, and frustrated users wondering why the app didn't "just know."
+
+So I asked Cursor for help.
+
+---
+
+## What LLMs Are Good At (And What Cursor Did Well)
+
+Cursor proposed a multi-stage deduplication strategy:
+
+1. Match on a deterministic external ID (Mapbox Place ID)
+2. Fall back to strict name + coordinate matching
+3. Finally, use fuzzy matching as a last resort
+
+The fuzzy step combined:
+
+- String similarity (substring checks and Levenshtein distance)
+- Physical proximity (Haversine distance)
+
+Candidates were scored using weighted heuristics:
+
+- 70% name similarity
+- 30% distance proximity
+
+On paper, this was a solid answer. In fact, it was too easy to accept.
+
+This is where LLMs shine: they can rapidly assemble a solution that looks reasonable, idiomatic, and complete.
+
+But that's also where the danger lives.
+
+---
+
+## The Temptation to Just Ship It
+
+At first glance, it would have been easy to shrug and merge the code.
+
+This is the failure mode I see constantly with AI-assisted development:
+
+> "It seems fine, and I'm tired, so whatever."
+
+If I had done that, I would have shipped behavior I didn't fully understand -- and that's where systems quietly rot.
+
+So I slowed down.
+
+---
+
+## What I Learned by Reviewing the Code
+
+By walking through the implementation carefully, a few things became clear.
+
+### What It Actually Does Well
+
+- Minor name variations resolve cleanly
+- Small coordinate drift no longer causes duplicates
+- Different restaurants at the same coordinates remain distinct
+
+### What It Quietly Assumes
+
+- The dataset per search is small
+- The client is allowed to make heuristic decisions
+- Occasional duplicates are acceptable
+- Concurrency is not yet a dominant problem
+
+None of these are wrong. But none of them are guarantees, either.
+
+LLMs don't flag these assumptions for you. They're implicit. It's your job to surface them.
+
+---
+
+## Why I Chose to Keep the Implementation (For Now)
+
+I ultimately shipped the solution. Not because it was "what Cursor suggested," but because I understood the trade-offs.
+
+This approach is acceptable today because:
+
+- Fuzzy matching only runs as a fallback
+- The search radius is tightly bounded (50 meters)
+- Duplicates are recoverable with admin tooling
+- Thresholds are tunable, not locked in forever
+
+Most importantly, the behavior aligns with user expectations, which is the actual goal of deduplication in an MVP.
+
+This wasn't blind trust in AI. It was conditional acceptance.
+
+---
+
+## The "Google Question": A Calibration Tool, Not a Goal
+
+When I'm evaluating a solution, I often ask myself a question I never intend to fully answer:
+
+> "How would Google build this?"
+
+Not because I want to build that.
+But because it gives me a sense of where my current logic sits on the spectrum between toy and planet-scale system.
+
+It's a way to surface hidden assumptions.
+
+So, purely as an exercise, I asked:
+
+**What would place deduplication look like if the constraint wasn't my MVP, but the entire world?**
+
+The answer is... a lot.
+
+---
+
+## A Rough Sketch of a Google-Scale Deduplication System
+
+At Google scale, you're not deduplicating places for a handful of users. You're reconciling billions of noisy, multilingual, user-contributed entities, all while maintaining low latency and avoiding catastrophic merges.
+
+That changes everything.
+
+### 1. Canonical Name Normalization
+
+Instead of lowercasing strings and calling it a day, you'd see:
+
+- Unicode normalization (NFKC)
+- Language-aware stemming and transliteration
+- Removal of common business suffixes ("Restaurant", "Ltd", "LLC")
+- Large, curated synonym dictionaries for global brands
+
+Some of this would be rules-based. Some would be learned over time. The point isn't elegance... it's coverage.
+
+### 2. Geospatial Indexing at Planet Scale
+
+Rather than radius-based Haversine queries, Google uses **S2 geometry**, which partitions the Earth into hierarchical cells.
+
+Every place is indexed into these cells, enabling:
+
+- Fast "nearby" queries
+- Consistent behavior near poles and datelines
+- Efficient spatial joins at massive scale
+
+Latitude/longitude math works. S2 works everywhere.
+
+### 3. Semantic Similarity, Not Just String Distance
+
+Instead of relying purely on edit distance:
+
+- Place names are embedded into semantic vectors
+- Similarity is computed using cosine distance
+- Context like categories, cuisine types, and metadata can be included
+
+This allows the system to understand that
+"Joe's Pizza" and "Joe's Famous NY Pizza" are probably related, even when strings differ significantly.
+
+### 4. Multi-Signal Confidence Scoring
+
+Deduplication decisions aren't binary. They're probabilistic.
+
+A real system would combine:
+
+- Name similarity (rules + ML)
+- Spatial proximity (S2-based)
+- Category overlap
+- Phone number or domain matches
+- Review patterns
+- Possibly even image similarity
+
+These signals feed an ensemble model that outputs a confidence score. Only merges above a carefully tuned threshold are allowed automatically.
+
+### 5. Humans Still Exist
+
+For ambiguous cases, humans step in:
+
+- Moderators
+- Trusted contributors
+- Regional experts
+
+At scale, human judgment becomes a scarce but necessary resource.
+
+### 6. Offline Reconciliation and Monitoring
+
+Finally, none of this is "set and forget."
+
+There are:
+
+- Batch jobs that reconcile place graphs nightly
+- Dashboards tracking false merges
+- A/B tests tuning thresholds
+- SREs watching metrics like hawks
+
+This system is expensive. It's complex. And it's justified because the cost of being wrong is enormous.
+
+---
+
+## Why This Matters (And Why I Didn't Build It)
+
+I don't ask "how would Google build this" because I want to imitate it.
+
+I ask it because it reveals:
+
+- Which problems I'm not solving yet
+- Which assumptions are safe at my scale
+- Which heuristics will eventually stop working
+
+My fuzzy matching approach is nowhere near this and that's fine.
+
+Google builds for billions of users, adversarial input, and permanent correctness.
+I'm building for an MVP where duplicates are recoverable and behavior needs to feel intuitive.
+
+Understanding the gap helps me ship responsibly now, without pretending my constraints don't exist.
+
+---
+
+## Where LLMs Actually Stop
+
+This experience reinforced something important:
+
+LLMs are excellent at proposing shapes.
+They are bad at owning consequences.
+
+They won't:
+
+- Tell you when a heuristic becomes dangerous
+- Warn you about race conditions
+- Decide which failure modes are acceptable
+- Notice when "good enough" quietly turns into technical debt
+
+That responsibility doesn't go away just because the code compiled.
+
+---
+
+## Conclusion
+
+This post isn't about fuzzy matching. It's about using AI without surrendering agency.
+
+Cursor helped me move faster.
+Reviewing the code helped me stay honest.
+
+I now know:
+
+- What my app is doing
+- Why it behaves the way it does
+- Where it will eventually break
+- What to watch as it grows
+
+That's the real line between assistance and abdication.
+
+AI can write code.
+Only engineers decide when it's safe to ship.
+
+---
+
+### Rule I'm Trying to Follow
+
+> Never ship AI-generated code I couldn't explain to a teammate or debug at 2am.
+
+---
+
+## References & Further Reading
+
+### Geospatial Distance & Matching
+
+- **Haversine Formula**
+  Movable Type Scripts - *Calculate distance, bearing and more between Latitude/Longitude points*
+  https://www.movable-type.co.uk/scripts/latlong.html
+
+- **Haversine Formula (Reference)**
+  Wikipedia - *Haversine formula*
+  https://en.wikipedia.org/wiki/Haversine_formula
+
+- **Levenshtein Distance (Edit Distance)**
+  Wikipedia - *Levenshtein distance*
+  https://en.wikipedia.org/wiki/Levenshtein_distance
+
+- **Original Levenshtein Paper (1966)**
+  Levenshtein, V. I. - *Binary codes capable of correcting deletions, insertions, and reversals*
+  https://nymity.ch/sybilhunting/pdf/Levenshtein1966a.pdf
+
+- **Wagner-Fischer Algorithm (1974)**
+  Wagner, R. A., & Fischer, M. J. - *The String-to-String Correction Problem*
+  https://par.cse.nsysu.edu.tw/resource/lab_relative/Wagn74.pdf
+
+---
+
+### Google-Scale Geospatial & Infrastructure References
+
+- **S2 Geometry Library (Open Source)**
+  Google - *S2 Geometry Library*
+  https://github.com/google/s2geometry
+
+- **S2 Geometry in Practice (Google Cloud)**
+  Google Cloud Blog - *Best practices for spatial clustering in BigQuery*
+  https://cloud.google.com/blog/products/data-analytics/best-practices-for-spatial-clustering-in-bigquery
+
+- **Spatial Indexing with S2 Cells**
+  Google Cloud Docs - *Grid systems for spatial analysis*
+  https://cloud.google.com/bigquery/docs/grid-systems-spatial-analysis
+
+---
+
+### Large-Scale Systems & Reliability
+
+- **Bigtable: A Distributed Storage System**
+  Chang et al. (Google Research, 2006)
+  https://research.google.com/archive/bigtable-osdi06.pdf
+
+- **Cloud Spanner**
+  Google Cloud - *Spanner: Globally distributed, strongly consistent database*
+  https://cloud.google.com/spanner
+
+- **Site Reliability Engineering**
+  Google - *Monitoring Distributed Systems*
+  https://sre.google/sre-book/monitoring-distributed-systems/
+
+---
+
+### Experimentation, Tuning, and Human-in-the-Loop
+
+- **Controlled Experiments at Scale**
+  Kohavi et al. - *Practical Guide to Controlled Experiments on the Web*
+  https://ai.stanford.edu/~ronnyk/2007GuideControlledExperiments.pdf
+
+- **Google Local Guides Program**
+  Google Transparency Center - *Local Guides Program Policies*
+  https://transparency.google/intl/en/our-policies/product-terms/local-guides/
+
+---
+
+*Note: The "Google-scale" architecture described in this post is an informed synthesis based on public documentation, research papers, and industry-standard patterns. It is intended as a conceptual calibration tool rather than a literal description of any single internal Google system.*
