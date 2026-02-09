@@ -11,12 +11,14 @@ author: "David Martin"
 canonicalURL: "https://djmtech.dev/blog/the-limits-of-llms"
 ---
 
+## The Limits of LLMs
+
 Large language models are very good at producing plausible solutions.
 They are not good at knowing whether a solution is appropriate for your constraints, scale, or failure modes.
 
 This post isn't about dunking on AI tools. I use them constantly. It's about understanding where their usefulness ends and where responsibility begins.
 
-I ran into this boundary while solving a very real problem: place deduplication in a map-based app.
+I ran into this boundary while solving a very real problem: place deduplication in **[Foodly Map](https://foodlymap.com/)**, my current project.
 
 ---
 
@@ -46,8 +48,8 @@ Cursor proposed a multi-stage deduplication strategy:
 
 The fuzzy step combined:
 
-- String similarity (substring checks and Levenshtein distance)
-- Physical proximity (Haversine distance)
+- String similarity (substring checks and [Levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance) distance)
+- Physical proximity ([Haversine](https://en.wikipedia.org/wiki/Haversine_formula) distance)
 
 Candidates were scored using weighted heuristics:
 
@@ -154,7 +156,7 @@ Some of this would be rules-based. Some would be learned over time. The point is
 
 ### 2. Geospatial Indexing at Planet Scale
 
-Rather than radius-based Haversine queries, Google uses **S2 geometry**, which partitions the Earth into hierarchical cells.
+Rather than radius-based Haversine queries, Google uses **[S2 geometry](https://cloud.google.com/blog/products/data-analytics/best-practices-for-spatial-clustering-in-bigquery)**, which partitions the Earth into hierarchical cells.
 
 Every place is indexed into these cells, enabling:
 
@@ -283,70 +285,35 @@ Only engineers decide when it's safe to ship.
 
 ### Geospatial Distance & Matching
 
-- **Haversine Formula**
-  Movable Type Scripts - *Calculate distance, bearing and more between Latitude/Longitude points*
-  https://www.movable-type.co.uk/scripts/latlong.html
-
-- **Haversine Formula (Reference)**
-  Wikipedia - *Haversine formula*
-  https://en.wikipedia.org/wiki/Haversine_formula
-
-- **Levenshtein Distance (Edit Distance)**
-  Wikipedia - *Levenshtein distance*
-  https://en.wikipedia.org/wiki/Levenshtein_distance
-
-- **Original Levenshtein Paper (1966)**
-  Levenshtein, V. I. - *Binary codes capable of correcting deletions, insertions, and reversals*
-  https://nymity.ch/sybilhunting/pdf/Levenshtein1966a.pdf
-
-- **Wagner-Fischer Algorithm (1974)**
-  Wagner, R. A., & Fischer, M. J. - *The String-to-String Correction Problem*
-  https://par.cse.nsysu.edu.tw/resource/lab_relative/Wagn74.pdf
+- **[Haversine Formula](https://www.movable-type.co.uk/scripts/latlong.html)**: Movable Type Scripts - *Calculate distance, bearing and more between Latitude/Longitude points*
+- **[Haversine Formula (Reference)](https://en.wikipedia.org/wiki/Haversine_formula)**: Wikipedia - *Haversine formula*
+- **[Levenshtein Distance (Edit Distance)](https://en.wikipedia.org/wiki/Levenshtein_distance)**: Wikipedia - *Levenshtein distance*
+- **[Original Levenshtein Paper (1966)](https://nymity.ch/sybilhunting/pdf/Levenshtein1966a.pdf)**: Levenshtein, V. I. - *Binary codes capable of correcting deletions, insertions, and reversals*
+- **[Wagner-Fischer Algorithm (1974)](https://par.cse.nsysu.edu.tw/resource/lab_relative/Wagn74.pdf)**: Wagner, R. A., & Fischer, M. J. - *The String-to-String Correction Problem*
 
 ---
 
 ### Google-Scale Geospatial & Infrastructure References
 
-- **S2 Geometry Library (Open Source)**
-  Google - *S2 Geometry Library*
-  https://github.com/google/s2geometry
-
-- **S2 Geometry in Practice (Google Cloud)**
-  Google Cloud Blog - *Best practices for spatial clustering in BigQuery*
-  https://cloud.google.com/blog/products/data-analytics/best-practices-for-spatial-clustering-in-bigquery
-
-- **Spatial Indexing with S2 Cells**
-  Google Cloud Docs - *Grid systems for spatial analysis*
-  https://cloud.google.com/bigquery/docs/grid-systems-spatial-analysis
+- **[S2 Geometry Library (Open Source)](https://github.com/google/s2geometry)**: Google - *S2 Geometry Library*
+- **[S2 Geometry in Practice (Google Cloud)](https://cloud.google.com/blog/products/data-analytics/best-practices-for-spatial-clustering-in-bigquery)**: Google Cloud Blog - *Best practices for spatial clustering in BigQuery*
+- **[Spatial Indexing with S2 Cells](https://cloud.google.com/bigquery/docs/grid-systems-spatial-analysis)**: Google Cloud Docs - *Grid systems for spatial analysis*
 
 ---
 
 ### Large-Scale Systems & Reliability
 
-- **Bigtable: A Distributed Storage System**
-  Chang et al. (Google Research, 2006)
-  https://research.google.com/archive/bigtable-osdi06.pdf
-
-- **Cloud Spanner**
-  Google Cloud - *Spanner: Globally distributed, strongly consistent database*
-  https://cloud.google.com/spanner
-
-- **Site Reliability Engineering**
-  Google - *Monitoring Distributed Systems*
-  https://sre.google/sre-book/monitoring-distributed-systems/
+- **[Bigtable: A Distributed Storage System](https://research.google.com/archive/bigtable-osdi06.pdf)**: Chang et al. (Google Research, 2006)
+- **[Cloud Spanner](https://cloud.google.com/spanner)**: Google Cloud - *Spanner: Globally distributed, strongly consistent database*
+- **[Site Reliability Engineering](https://sre.google/sre-book/monitoring-distributed-systems/)**: Google - *Monitoring Distributed Systems*
 
 ---
 
 ### Experimentation, Tuning, and Human-in-the-Loop
 
-- **Controlled Experiments at Scale**
-  Kohavi et al. - *Practical Guide to Controlled Experiments on the Web*
-  https://ai.stanford.edu/~ronnyk/2007GuideControlledExperiments.pdf
-
-- **Google Local Guides Program**
-  Google Transparency Center - *Local Guides Program Policies*
-  https://transparency.google/intl/en/our-policies/product-terms/local-guides/
+- **[Controlled Experiments at Scale](https://ai.stanford.edu/~ronnyk/2007GuideControlledExperiments.pdf)**: Kohavi et al. - *Practical Guide to Controlled Experiments on the Web*
+- **[Google Local Guides Program](https://transparency.google/intl/en/our-policies/product-terms/local-guides/)**: Google Transparency Center - *Local Guides Program Policies*
 
 ---
-
+\
 *Note: The "Google-scale" architecture described in this post is an informed synthesis based on public documentation, research papers, and industry-standard patterns. It is intended as a conceptual calibration tool rather than a literal description of any single internal Google system.*
