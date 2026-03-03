@@ -5,38 +5,11 @@ import Footer from '../components/Footer.astro';
 import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Check } from 'lucide-astro';
 ---
 
-<Layout title="About - DJM Tech" description="Learn about DJM Tech's journey from personal portfolio to lean site-building platform focused on speed, simplicity, and dev sanity.">
+<Layout title="About - DJM Tech" description="Learn about David Martin's shift into infrastructure and platform engineering, and how DJM Tech is becoming a practical environment for launching apps fast.">
   <Header />
-  
-  <!-- Hero Section -->
-  <section class="relative hero-bg py-20 lg:py-32 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center">
-        <h1 class="text-4xl md:text-5xl font-bold hero-title mb-6">About DJM Tech</h1>
-        <p class="text-xl hero-subtitle max-w-3xl mx-auto mb-8">
-          From personal dev portfolio to modular stack-based site builder. 
-          Built for speed, simplicity, and developer sanity.
-        </p>
-        <div class="flex justify-center space-x-4">
-          <a href="/projects" class="primary-cta-button">
-            View Projects
-          </a>
-          <a href="/contact" class="secondary-cta-button">
-            Get In Touch
-          </a>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Background Elements -->
-    <div class="absolute inset-0 hero-bg-elements">
-      <div class="hero-bg-gradient"></div>
-      <div class="hero-bg-pattern"></div>
-    </div>
-  </section>
 
   <!-- Creator Section -->
-  <section class="py-20 lg:py-24 creator-bg relative overflow-hidden">
+  <section class="pt-12 pb-20 lg:pt-16 lg:pb-24 creator-bg relative overflow-hidden">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <!-- Portrait -->
@@ -45,7 +18,7 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
             <div class="portrait-glow"></div>
             <img 
               src="/assets/about-me-photo.jpeg" 
-              alt="David Martin - Builder behind DJM Tech"
+              alt="David Martin - Platform and Infrastructure Engineer behind DJM Tech"
               class="portrait-image"
             />
             <div class="absolute inset-0 portrait-border"></div>
@@ -59,16 +32,16 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
               Hey, I'm David
             </h2>
             <p class="text-xl md:text-2xl creator-subtitle mb-6">
-              The builder behind DJM Tech. I ship fast stacks, avoid React, and believe in keeping things simple.
+              I build infrastructure and platform systems that help teams ship faster.
             </p>
           </div>
           
           <div class="space-y-4">
             <p class="creator-text">
-              When I'm not shipping stacks, you'll find me playing guitar, taking photos, or venting about web development in the <a href="/blog" class="text-[#00d4ff] hover:underline font-medium">Build Logs</a>.
+              I am deeply curious about how software is hosted, deployed, and operated in production. My VPS is my live lab for turning those ideas into repeatable, real workflows.
             </p>
             <p class="creator-text">
-              Honest, slightly sarcastic, indie-builder energy — that's the vibe here.
+              In a world full of builders, I want to be the engineer who helps other builders go live fast.
             </p>
           </div>
         </div>
@@ -82,20 +55,20 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">The Story</h2>
-        <p class="text-lg section-subtitle">How DJM Tech evolved</p>
+        <p class="text-lg section-subtitle">How my focus evolved</p>
       </div>
       
       <div class="space-y-6">
         <p class="text-lg md:text-xl story-text leading-relaxed">
-          DJM Tech started as a personal portfolio. After building enough sites and wrestling with bloated frameworks, a pattern emerged: <strong>most projects didn't need the complexity they were saddled with.</strong>
+          DJM Tech started as a personal portfolio, but the deeper interest quickly became infrastructure: <strong>what it takes to take software from code to live production.</strong>
         </p>
         
         <p class="text-lg md:text-xl story-text leading-relaxed">
-          So I pivoted. DJM Tech became a platform for <strong class="text-[#00d4ff]">lean, stack-based site building</strong>. Real-world stacks that ship fast: Astro + Contentful + Cloudflare for content sites, with Qwik and HTMX stacks coming soon.
+          I am now building DJM Tech into a practical platform engineering environment on my VPS. It already hosts PHP applications, and I am expanding to support multiple stacks with isolated Docker-based deployments.
         </p>
         
         <p class="text-lg md:text-xl story-text leading-relaxed">
-          The philosophy is simple: <strong>speed, simplicity, and dev sanity</strong>. No React worship. No unnecessary abstractions. Just fast sites that work.
+          The philosophy is simple: <strong>reliability, repeatability, and fast launch velocity.</strong> Build clean systems, remove deployment friction, and help ideas reach production faster.
         </p>
       </div>
     </div>
@@ -106,8 +79,8 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
     <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00d4ff]/30 to-transparent"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Our Values</h2>
-        <p class="text-lg section-subtitle">What drives DJM Tech</p>
+        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Platform Principles</h2>
+        <p class="text-lg section-subtitle">What guides my engineering decisions</p>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -115,32 +88,32 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
           <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
             <Zap class="h-8 w-8 value-icon" />
           </div>
-          <h3 class="text-lg font-semibold value-title mb-2">Speed</h3>
-          <p class="value-description">Fast sites that load instantly. No compromises.</p>
+          <h3 class="text-lg font-semibold value-title mb-2">Launch Velocity</h3>
+          <p class="value-description">Shorten the path from idea to production without sacrificing quality.</p>
         </div>
         
         <div class="text-center">
           <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
             <Shield class="h-8 w-8 value-icon" />
           </div>
-          <h3 class="text-lg font-semibold value-title mb-2">Simplicity</h3>
-          <p class="value-description">No unnecessary abstractions. Just what works.</p>
+          <h3 class="text-lg font-semibold value-title mb-2">Reliability</h3>
+          <p class="value-description">Stable deployments and predictable operations come before hype.</p>
         </div>
         
         <div class="text-center">
           <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
             <Users class="h-8 w-8 value-icon" />
           </div>
-          <h3 class="text-lg font-semibold value-title mb-2">Dev Sanity</h3>
-          <p class="value-description">Stacks that make sense. No framework worship.</p>
+          <h3 class="text-lg font-semibold value-title mb-2">Developer Enablement</h3>
+          <p class="value-description">Build platforms that make it easier for others to ship confidently.</p>
         </div>
         
         <div class="text-center">
           <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
             <BookOpen class="h-8 w-8 value-icon" />
           </div>
-          <h3 class="text-lg font-semibold value-title mb-2">No React</h3>
-          <p class="value-description">All stacks avoid React by design. Zero bloat.</p>
+          <h3 class="text-lg font-semibold value-title mb-2">Platform Thinking</h3>
+          <p class="value-description">Design infrastructure as a product, not a one-off setup.</p>
         </div>
       </div>
     </div>
@@ -150,9 +123,9 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
   <!-- CTA Section -->
   <section class="py-20 cta-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold cta-title mb-4">Ready to Build Something Fast?</h2>
+      <h2 class="text-3xl md:text-4xl font-bold cta-title mb-4">Need to Ship Faster?</h2>
       <p class="text-xl cta-subtitle mb-8 max-w-2xl mx-auto">
-        Need a site? Want a stack? Or just want to talk about how bloated React is?
+        If you are building products and want better hosting and deployment workflows, let's talk platform and infrastructure.
       </p>
       <a href="/contact" class="bg-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center">
         <Mail class="h-5 w-5 mr-2" />
