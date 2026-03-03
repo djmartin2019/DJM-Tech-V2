@@ -28,7 +28,7 @@ const recentPosts = await getRecentPosts(3);
           
           <!-- Description -->
           <p class="text-xl hero-subtitle max-w-2xl lg:max-w-none mx-auto lg:mx-0">
-            I build fast, production-ready websites and applications. This site showcases my projects and writing.
+            I am focused on more than building apps. I am building the infrastructure and platforms that run them.
           </p>
           
           <!-- CTA Buttons -->
@@ -66,68 +66,40 @@ const recentPosts = await getRecentPosts(3);
   <!-- Current Focus Section -->
   <section class="py-20 section-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Current Focus</h2>
-        <p class="text-xl section-subtitle">What I'm building and exploring right now</p>
+      <div class="text-center mb-10">
+        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Infrastructure & Platform Focus</h2>
+        <p class="text-xl section-subtitle max-w-3xl mx-auto">
+          I am shifting from app builder to infrastructure/platform engineer, building systems that run and scale many apps reliably.
+        </p>
       </div>
       
-      <div class="max-w-3xl mx-auto space-y-6">
-        <!-- TanStack Work -->
-        <div class="focus-item">
-          <div class="flex items-start space-x-3">
-            <div class="flex-shrink-0 w-5 h-5 rounded-full bg-[#00d4ff]/20 flex items-center justify-center mt-0.5">
-              <svg class="w-3 h-3 text-[#00d4ff]" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-              </svg>
-            </div>
-            <div class="flex-1">
-              <p class="section-subtitle text-base mb-2">Building reactive data layers with TanStack Query, Table, and Router</p>
-              <div class="flex flex-wrap gap-2">
-                <span class="focus-tag">TanStack Query</span>
-                <span class="focus-tag">TanStack Table</span>
-                <span class="focus-tag">TanStack Router</span>
-                <span class="focus-tag">TypeScript</span>
-              </div>
-            </div>
-          </div>
+      <div class="max-w-5xl mx-auto">
+        <div class="focus-pill mb-8">
+          <span class="focus-pill-dot" aria-hidden="true"></span>
+          <p>My goal is turning my VPS into a practical PaaS-style environment for multi-stack application hosting.</p>
         </div>
 
-        <!-- C-level Game Engine -->
-        <div class="focus-item">
-          <div class="flex items-start space-x-3">
-            <div class="flex-shrink-0 w-5 h-5 rounded-full bg-[#00d4ff]/20 flex items-center justify-center mt-0.5">
-              <svg class="w-3 h-3 text-[#00d4ff]" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-              </svg>
-            </div>
-            <div class="flex-1">
-              <p class="section-subtitle text-base mb-2">Developing a C-level game engine with performance-first architecture</p>
-              <div class="flex flex-wrap gap-2">
-                <span class="focus-tag">C</span>
-                <span class="focus-tag">Game Engine</span>
-                <span class="focus-tag">Systems Programming</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <article class="focus-card">
+            <h3 class="focus-card-title mb-2">Who I Am</h3>
+            <p class="focus-card-copy">
+              A full-stack developer evolving into an infrastructure/platform engineer focused on deployment architecture and operations.
+            </p>
+          </article>
 
-        <!-- Python + DuckDB -->
-        <div class="focus-item">
-          <div class="flex items-start space-x-3">
-            <div class="flex-shrink-0 w-5 h-5 rounded-full bg-[#00d4ff]/20 flex items-center justify-center mt-0.5">
-              <svg class="w-3 h-3 text-[#00d4ff]" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
-              </svg>
-            </div>
-            <div class="flex-1">
-              <p class="section-subtitle text-base mb-2">Building fast data pipelines with Python and DuckDB for analytical workloads</p>
-              <div class="flex flex-wrap gap-2">
-                <span class="focus-tag">Python</span>
-                <span class="focus-tag">DuckDB</span>
-                <span class="focus-tag">Data Pipelines</span>
-              </div>
-            </div>
-          </div>
+          <article class="focus-card">
+            <h3 class="focus-card-title mb-2">What I Build</h3>
+            <p class="focus-card-copy">
+              A VPS hosting layer that runs multiple applications today (including PHP), with additional stacks coming next.
+            </p>
+          </article>
+
+          <article class="focus-card">
+            <h3 class="focus-card-title mb-2">My Approach</h3>
+            <p class="focus-card-copy">
+              Isolated Docker containers per app, practical automation, and repeatable deployment workflows that grow into a platform.
+            </p>
+          </article>
         </div>
       </div>
 
@@ -142,6 +114,28 @@ const recentPosts = await getRecentPosts(3);
             <ExternalLink class="h-3 w-3 ml-1.5 opacity-60" />
           </a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VPS Platform Environment -->
+  <section class="vps-feature-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="vps-feature-card">
+        <div class="vps-feature-header">
+          <span class="vps-feature-label">
+            <Folder class="h-4 w-4 mr-2" />
+            Core Lab Environment
+          </span>
+          <h2 class="vps-feature-title">Building my VPS into a platform for multi-stack deployment</h2>
+        </div>
+        <p class="vps-feature-description">
+          This environment is where I build my infrastructure platform. I currently host PHP applications and I am expanding to support multiple stacks, each deployed in isolated Docker containers.
+        </p>
+        <a href="https://djm-apps.com/" target="_blank" rel="noopener noreferrer" class="vps-feature-link">
+          Open DJM Apps
+          <ExternalLink class="h-4 w-4 ml-2" />
+        </a>
       </div>
     </div>
   </section>
@@ -217,12 +211,12 @@ const recentPosts = await getRecentPosts(3);
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {recentPosts.slice(0, 3).map((post) => (
           <article class="neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300 flex flex-col">
-            <div class="h-48 blog-image-bg flex items-center justify-center overflow-hidden">
+            <div class="h-64 project-image-bg flex items-center justify-center overflow-hidden">
               <Image 
                 src={post.image || "/assets/og-default.png"} 
                 alt={post.title}
                 width={400}
-                height={192}
+                height={300}
                 class="w-full h-full object-cover"
                 loading="lazy"
               />
@@ -481,26 +475,67 @@ const recentPosts = await getRecentPosts(3);
   }
   
   /* Current Focus Styles */
-  .focus-item {
-    padding: 0.75rem 0;
-  }
-  
-  .focus-tag {
-    display: inline-flex;
+  .focus-pill {
+    display: flex;
     align-items: center;
-    padding: 0.25rem 0.75rem;
-    border-radius: 0.375rem;
-    font-size: 0.75rem;
-    font-weight: 500;
-    background-color: rgba(0, 212, 255, 0.1);
-    color: #00d4ff;
-    border: 1px solid rgba(0, 212, 255, 0.2);
-    transition: all 0.2s ease;
+    justify-content: center;
+    gap: 0.65rem;
+    background-color: rgba(0, 212, 255, 0.08);
+    border: 1px solid rgba(0, 212, 255, 0.24);
+    border-radius: 0.75rem;
+    padding: 0.85rem 1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: center;
   }
-  
-  .focus-tag:hover {
-    background-color: rgba(0, 212, 255, 0.15);
+
+  .focus-pill-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 999px;
+    background-color: #00d4ff;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+    flex-shrink: 0;
+  }
+
+  .focus-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 0.85rem;
+    padding: 1rem;
+    transition: all 0.25s ease;
+  }
+
+  .focus-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 212, 255, 0.35);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 212, 255, 0.12);
+  }
+
+  .focus-card-title {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .focus-card-copy {
+    color: var(--text-secondary);
+    font-size: 0.94rem;
+    line-height: 1.55;
+  }
+
+  html.light .focus-pill {
+    background-color: rgba(0, 212, 255, 0.1);
     border-color: rgba(0, 212, 255, 0.3);
+  }
+
+  html.light .focus-card {
+    background: #ffffff;
+    border-color: #dbe3ea;
+  }
+
+  html.light .focus-card:hover {
+    box-shadow: 0 8px 20px rgba(2, 8, 20, 0.08), 0 0 0 1px rgba(0, 212, 255, 0.16);
   }
   
   .build-log-link {
@@ -585,6 +620,100 @@ const recentPosts = await getRecentPosts(3);
   /* Featured Projects Styles */
   .projects-bg {
     background-color: var(--bg-primary);
+  }
+
+  .vps-feature-section {
+    background: linear-gradient(100deg, #00d4ff 0%, #34e7ff 45%, #6cf2ff 100%);
+    padding: 2.75rem 0;
+    box-shadow: 0 0 32px rgba(0, 212, 255, 0.35);
+  }
+
+  .vps-feature-card {
+    border: 1px solid rgba(4, 36, 48, 0.25);
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(6px);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 12px 28px rgba(3, 25, 35, 0.25), inset 0 0 24px rgba(255, 255, 255, 0.16);
+  }
+
+  .vps-feature-header {
+    margin-bottom: 0.85rem;
+  }
+
+  .vps-feature-label {
+    display: inline-flex;
+    align-items: center;
+    color: #062838;
+    background: rgba(255, 255, 255, 0.34);
+    border: 1px solid rgba(6, 40, 56, 0.28);
+    border-radius: 999px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.7rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .vps-feature-title {
+    color: #031923;
+    font-size: 1.55rem;
+    line-height: 1.25;
+    font-weight: 800;
+  }
+
+  .vps-feature-description {
+    color: #053047;
+    font-size: 1rem;
+    line-height: 1.65;
+    max-width: 70ch;
+    margin-bottom: 1.15rem;
+    font-weight: 600;
+  }
+
+  .vps-feature-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #7cefff;
+    background: #051118;
+    border: 1px solid rgba(124, 239, 255, 0.48);
+    border-radius: 0.6rem;
+    padding: 0.62rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 0 16px rgba(5, 17, 24, 0.45);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .vps-feature-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 20px rgba(5, 17, 24, 0.6);
+  }
+
+  html.light .vps-feature-section {
+    background: linear-gradient(100deg, #00d4ff 0%, #34e7ff 45%, #6cf2ff 100%);
+  }
+
+  @media (max-width: 640px) {
+    .vps-feature-section {
+      padding: 2rem 0;
+    }
+
+    .vps-feature-card {
+      padding: 1.1rem;
+    }
+
+    .vps-feature-title {
+      font-size: 1.25rem;
+    }
+
+    .vps-feature-description {
+      font-size: 0.93rem;
+      line-height: 1.55;
+    }
   }
   
   .projects-title {
