@@ -16,12 +16,28 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "texas-frontstep",
+    title: "Texas Frontstep Media",
+    description:
+      "Professional photography and web services for real estate and small businesses.",
+    longDescription:
+      "A comprehensive service offering professional photography, one-page websites, and digital presence solutions for real estate listings, rentals, and small businesses in Texas.",
+    image: "/assets/websites/TexasFrontstep.png",
+    technologies: ["Astro", "TailwindCSS", "TypeScript", "Cloudflare"],
+    status: "completed",
+    liveUrl: "https://texasfrontstep.com/",
+    githubUrl: "https://github.com/djmartin2019/texas-frontstep",
+    featured: true,
+    category: "Business",
+    startDate: "2025-08",
+  },
+  {
     id: "foodly-map",
     title: "Foodly Map",
     description:
       "A social, map-based food discovery app focused on personal taste and trusted recommendations.",
     longDescription:
-      "Foodly Map is a social-first food discovery platform that lets users build a personal map of places they’ve actually eaten, organize them into custom lists, and discover new spots through friends they trust. Instead of algorithmic rankings and noisy star ratings, Foodly Map emphasizes real experiences, contextual discovery, and long-term usefulness. The product is being built as a progressive web app with a focus on performance, privacy, and a deliberate, human-centered UX.",
+      "Foodly Map is a social-first food discovery platform that lets users build a personal map of places they've actually eaten, organize them into custom lists, and discover new spots through friends they trust. Instead of algorithmic rankings and noisy star ratings, Foodly Map emphasizes real experiences, contextual discovery, and long-term usefulness. The product is being built as a progressive web app with a focus on performance, privacy, and a deliberate, human-centered UX.",
     image: "/assets/websites/FoodlyMap.png",
     technologies: [
       "React",
@@ -38,27 +54,6 @@ export const projects: Project[] = [
     category: "Product / Social",
     startDate: "2026-01",
   },
-  {
-    id: "oblique-engine",
-    title: "Oblique",
-    description:
-      "A custom-built isometric CRPG engine in C focused on consequence-driven gameplay and systemic design.",
-    longDescription:
-      "Oblique is a ground-up isometric CRPG engine written in C, designed to make building consequence-driven RPGs practical instead of painful. The engine emphasizes systems over scripting: tile-based worlds with cost-aware pathfinding, AP-driven movement, deterministic AI state machines, and a global world-state model that enables meaningful player choice. Rather than converging dialogue and quests back into a single outcome, Oblique is being built to support branching consequences, persistent NPC memory, and world reactions that naturally emerge from shared state. The project serves both as a deep dive into low-level engine architecture and as a foundation for authoring classic-style RPGs where decisions genuinely matter.",
-    image: "/assets/websites/Oblique.png",
-    technologies: [
-      "C",
-      "SDL2",
-      "Custom Pathfinding (A*)",
-      "Isometric Rendering",
-      "State Machines"
-    ],
-    status: "current",
-    githubUrl: "https://github.com/djmartin2019/Oblique",
-    featured: true,
-    category: "Game Engine / Systems",
-    startDate: "2025-12",
-  },  
   {
     id: "astrocontentfulstarter",
     title: "Astro Contentful Starter Template",
@@ -93,20 +88,25 @@ export const projects: Project[] = [
     startDate: "2024-01",
   },
   {
-    id: "texas-frontstep",
-    title: "Texas Frontstep Media",
+    id: "oblique-engine",
+    title: "Oblique",
     description:
-      "Professional photography and web services for real estate and small businesses.",
+      "A custom-built isometric CRPG engine in C focused on consequence-driven gameplay and systemic design.",
     longDescription:
-      "A comprehensive service offering professional photography, one-page websites, and digital presence solutions for real estate listings, rentals, and small businesses in Texas.",
-    image: "/assets/websites/TexasFrontstep.png",
-    technologies: ["Astro", "TailwindCSS", "TypeScript", "Cloudflare"],
-    status: "completed",
-    liveUrl: "https://texasfrontstep.com/",
-    githubUrl: "https://github.com/djmartin2019/texas-frontstep",
-    featured: true,
-    category: "Business",
-    startDate: "2025-08",
+      "Oblique is a ground-up isometric CRPG engine written in C, designed to make building consequence-driven RPGs practical instead of painful. The engine emphasizes systems over scripting: tile-based worlds with cost-aware pathfinding, AP-driven movement, deterministic AI state machines, and a global world-state model that enables meaningful player choice. Rather than converging dialogue and quests back into a single outcome, Oblique is being built to support branching consequences, persistent NPC memory, and world reactions that naturally emerge from shared state. The project serves both as a deep dive into low-level engine architecture and as a foundation for authoring classic-style RPGs where decisions genuinely matter.",
+    image: "/assets/websites/Oblique.png",
+    technologies: [
+      "C",
+      "SDL2",
+      "Custom Pathfinding (A*)",
+      "Isometric Rendering",
+      "State Machines"
+    ],
+    status: "current",
+    githubUrl: "https://github.com/djmartin2019/Oblique",
+    featured: false,
+    category: "Game Engine / Systems",
+    startDate: "2025-12",
   },
 ];
 

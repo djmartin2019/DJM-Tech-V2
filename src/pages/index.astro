@@ -11,7 +11,7 @@ const featuredProjects = getFeaturedProjects();
 const recentPosts = await getRecentPosts(3);
 ---
 
-<Layout title="David Martin - Full-Stack Developer">
+<Layout title="David Martin - Web Developer & Freelance Engineer">
   <Header />
   
   <!-- Hero Section -->
@@ -23,12 +23,12 @@ const recentPosts = await getRecentPosts(3);
           <!-- Main Heading -->
           <h1 class="text-5xl md:text-6xl font-bold hero-title leading-tight">
             David Martin <br />
-            <span class="neon-glow">Infrastructure & Platform Engineer</span>
+            <span class="neon-glow">Web Developer & Freelance Engineer</span>
           </h1>
           
           <!-- Description -->
           <p class="text-xl hero-subtitle max-w-2xl lg:max-w-none mx-auto lg:mx-0">
-            I am focused on more than building apps. I am building the infrastructure and platforms that run them.
+            I build web applications, websites, and the backend systems that power them. From first commit to production.
           </p>
           
           <!-- CTA Buttons -->
@@ -40,6 +40,20 @@ const recentPosts = await getRecentPosts(3);
               Read Writing
             </a>
           </div>
+
+          <!-- Tech Stack Row -->
+          <div class="pt-2">
+            <p class="text-xs uppercase tracking-widest tech-stack-label mb-3">Tech Stack</p>
+            <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
+              <span class="tech-hero-badge">React</span>
+              <span class="tech-hero-badge">TypeScript</span>
+              <span class="tech-hero-badge">Node.js</span>
+              <span class="tech-hero-badge">PostgreSQL</span>
+              <span class="tech-hero-badge">Docker</span>
+              <span class="tech-hero-badge">Python</span>
+              <span class="tech-hero-badge">Cloudflare</span>
+            </div>
+          </div>
         </div>
         
         <!-- Right Content - Image -->
@@ -47,7 +61,7 @@ const recentPosts = await getRecentPosts(3);
           <div class="hero-image-container">
             <img 
               src="/assets/djm-image.png" 
-              alt="David Martin - Full-Stack Developer" 
+              alt="David Martin - Web Developer & Freelance Engineer" 
               class="hero-image"
             />
             <div class="hero-image-glow"></div>
@@ -67,37 +81,37 @@ const recentPosts = await getRecentPosts(3);
   <section class="py-20 section-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-10">
-        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Infrastructure & Platform Focus</h2>
+        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Engineering Focus</h2>
         <p class="text-xl section-subtitle max-w-3xl mx-auto">
-          I am shifting from app builder to infrastructure/platform engineer, building systems that run and scale many apps reliably.
+          I build full-stack web applications with a focus on clean architecture, reliable backends, and fast delivery.
         </p>
       </div>
       
       <div class="max-w-5xl mx-auto">
         <div class="focus-pill mb-8">
           <span class="focus-pill-dot" aria-hidden="true"></span>
-          <p>My goal is turning my VPS into a practical PaaS-style environment for multi-stack application hosting.</p>
+          <p>Currently taking on freelance projects: websites, web apps, and backend systems.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <article class="focus-card">
             <h3 class="focus-card-title mb-2">Who I Am</h3>
             <p class="focus-card-copy">
-              A full-stack developer evolving into an infrastructure/platform engineer focused on deployment architecture and operations.
+              A full-stack web developer who builds production applications and understands backend infrastructure deeply.
             </p>
           </article>
 
           <article class="focus-card">
             <h3 class="focus-card-title mb-2">What I Build</h3>
             <p class="focus-card-copy">
-              A VPS hosting layer that runs multiple applications today (including PHP), with additional stacks coming next.
+              Websites, web applications, APIs, and dashboards — deployed on modern, containerized infrastructure.
             </p>
           </article>
 
           <article class="focus-card">
             <h3 class="focus-card-title mb-2">My Approach</h3>
             <p class="focus-card-copy">
-              Isolated Docker containers per app, practical automation, and repeatable deployment workflows that grow into a platform.
+              Clean code, containerized deployments, and repeatable workflows. I hold my work to a high engineering standard.
             </p>
           </article>
         </div>
@@ -114,28 +128,6 @@ const recentPosts = await getRecentPosts(3);
             <ExternalLink class="h-3 w-3 ml-1.5 opacity-60" />
           </a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- VPS Platform Environment -->
-  <section class="vps-feature-section">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="vps-feature-card">
-        <div class="vps-feature-header">
-          <span class="vps-feature-label">
-            <Folder class="h-4 w-4 mr-2" />
-            Core Lab Environment
-          </span>
-          <h2 class="vps-feature-title">Building my VPS into a platform for multi-stack deployment</h2>
-        </div>
-        <p class="vps-feature-description">
-          This environment is where I build my infrastructure platform. I currently host PHP applications and I am expanding to support multiple stacks, each deployed in isolated Docker containers.
-        </p>
-        <a href="https://djm-apps.com/" target="_blank" rel="noopener noreferrer" class="vps-feature-link">
-          Open DJM Apps
-          <ExternalLink class="h-4 w-4 ml-2" />
-        </a>
       </div>
     </div>
   </section>
@@ -200,16 +192,65 @@ const recentPosts = await getRecentPosts(3);
     </div>
   </section>
 
+  <!-- Hosting & Deployment Section -->
+  <section class="hosting-section py-20">
+    <div class="absolute top-0 left-0 right-0 h-px hosting-divider-top"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="hosting-eyebrow">
+          <Folder class="h-4 w-4 mr-2" />
+          Hosting & Deployment
+        </span>
+        <h2 class="text-3xl md:text-4xl font-bold hosting-title mt-4 mb-4">
+          I Handle Hosting Too
+        </h2>
+        <p class="text-xl hosting-subtitle max-w-2xl mx-auto">
+          I manage my own production server. For freelance clients, that means I can deploy and host your project directly — no third-party friction, no extra setup for you.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <article class="focus-card">
+          <h3 class="focus-card-title mb-2">Docker Isolation</h3>
+          <p class="focus-card-copy">
+            Each application runs in its own container. No cross-app interference, clean dependency management, and easy rollbacks.
+          </p>
+        </article>
+
+        <article class="focus-card">
+          <h3 class="focus-card-title mb-2">Multi-Stack Support</h3>
+          <p class="focus-card-copy">
+            PHP, Node.js, Python, and more — all running on the same server, cleanly isolated. I can host whatever stack your project needs.
+          </p>
+        </article>
+
+        <article class="focus-card">
+          <h3 class="focus-card-title mb-2">Domains, SSL & Deploys</h3>
+          <p class="focus-card-copy">
+            Full domain configuration, HTTPS certificates, and repeatable deployment workflows — handled end-to-end so you don't have to think about it.
+          </p>
+        </article>
+      </div>
+
+      <div class="text-center">
+        <a href="https://djm-apps.com/" target="_blank" rel="noopener noreferrer" class="hosting-link">
+          View Live Hosting Environment
+          <ExternalLink class="h-4 w-4 ml-2" />
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Recent Writing -->
   <section class="py-20 blog-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold blog-title mb-4">Recent Writing</h2>
-        <p class="text-xl blog-subtitle">Notes on web development, data engineering, and building things</p>
+        <p class="text-xl blog-subtitle">Notes on web development, engineering, and lessons from building real projects</p>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {recentPosts.slice(0, 3).map((post) => (
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {recentPosts.slice(0, 2).map((post) => (
           <article class="neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300 flex flex-col">
             <div class="h-64 project-image-bg flex items-center justify-center overflow-hidden">
               <Image 
@@ -250,10 +291,62 @@ const recentPosts = await getRecentPosts(3);
     </div>
   </section>
 
+  <!-- Closing CTA -->
+  <section class="closing-cta-bg py-24">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold closing-cta-title mb-4">
+        Ready to build something?
+      </h2>
+      <p class="text-xl closing-cta-subtitle mb-10 max-w-xl mx-auto">
+        I'm available for freelance web development work. If you have a project in mind, let's talk about it.
+      </p>
+      <a href="/contact" class="primary-cta-button text-lg px-8 py-4">
+        Get In Touch
+      </a>
+    </div>
+  </section>
+
   <Footer />
 </Layout>
 
 <style>
+  .tech-stack-label {
+    color: var(--text-secondary);
+    opacity: 0.6;
+  }
+
+  .tech-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background: rgba(0, 212, 255, 0.06);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    color: var(--text-secondary);
+    letter-spacing: 0.01em;
+    transition: all 0.2s ease;
+  }
+
+  .tech-hero-badge:hover {
+    background: rgba(0, 212, 255, 0.12);
+    border-color: rgba(0, 212, 255, 0.4);
+    color: #00d4ff;
+  }
+
+  html.light .tech-hero-badge {
+    background: rgba(0, 212, 255, 0.08);
+    border-color: rgba(0, 212, 255, 0.25);
+    color: #334155;
+  }
+
+  html.light .tech-hero-badge:hover {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: rgba(0, 212, 255, 0.45);
+    color: #0099cc;
+  }
+
   .hero-bg {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
     position: relative;
@@ -622,98 +715,101 @@ const recentPosts = await getRecentPosts(3);
     background-color: var(--bg-primary);
   }
 
-  .vps-feature-section {
-    background: linear-gradient(100deg, #00d4ff 0%, #34e7ff 45%, #6cf2ff 100%);
-    padding: 2.75rem 0;
-    box-shadow: 0 0 32px rgba(0, 212, 255, 0.35);
+  /* Hosting Section */
+  .hosting-section {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    position: relative;
+    border-top: 1px solid #2a2a2a;
   }
 
-  .vps-feature-card {
-    border: 1px solid rgba(4, 36, 48, 0.25);
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(6px);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    box-shadow: 0 12px 28px rgba(3, 25, 35, 0.25), inset 0 0 24px rgba(255, 255, 255, 0.16);
+  .hosting-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 30%, rgba(0, 212, 255, 0.05) 0%, transparent 60%);
+    pointer-events: none;
   }
 
-  .vps-feature-header {
-    margin-bottom: 0.85rem;
+  .hosting-divider-top {
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 212, 255, 0.3) 50%, transparent 100%);
   }
 
-  .vps-feature-label {
+  .hosting-eyebrow {
     display: inline-flex;
     align-items: center;
-    color: #062838;
-    background: rgba(255, 255, 255, 0.34);
-    border: 1px solid rgba(6, 40, 56, 0.28);
+    color: #00d4ff;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.25);
     border-radius: 999px;
     font-size: 0.76rem;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    padding: 0.35rem 0.7rem;
-    margin-bottom: 0.75rem;
+    padding: 0.35rem 0.85rem;
   }
 
-  .vps-feature-title {
-    color: #031923;
-    font-size: 1.55rem;
-    line-height: 1.25;
-    font-weight: 800;
+  .hosting-title {
+    color: var(--text-primary);
   }
 
-  .vps-feature-description {
-    color: #053047;
-    font-size: 1rem;
-    line-height: 1.65;
-    max-width: 70ch;
-    margin-bottom: 1.15rem;
-    font-weight: 600;
+  .hosting-subtitle {
+    color: var(--text-secondary);
   }
 
-  .vps-feature-link {
+  .hosting-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: #7cefff;
-    background: #051118;
-    border: 1px solid rgba(124, 239, 255, 0.48);
+    color: #00d4ff;
+    background: rgba(0, 212, 255, 0.08);
+    border: 1px solid rgba(0, 212, 255, 0.3);
     border-radius: 0.6rem;
-    padding: 0.62rem 1rem;
-    font-size: 0.9rem;
-    font-weight: 700;
+    padding: 0.7rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 600;
     text-decoration: none;
-    box-shadow: 0 0 16px rgba(5, 17, 24, 0.45);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.2s ease;
   }
 
-  .vps-feature-link:hover {
+  .hosting-link:hover {
+    background: rgba(0, 212, 255, 0.14);
+    border-color: rgba(0, 212, 255, 0.55);
     transform: translateY(-1px);
-    box-shadow: 0 0 20px rgba(5, 17, 24, 0.6);
+    box-shadow: 0 0 16px rgba(0, 212, 255, 0.2);
   }
 
-  html.light .vps-feature-section {
-    background: linear-gradient(100deg, #00d4ff 0%, #34e7ff 45%, #6cf2ff 100%);
+  html.light .hosting-section {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e8f4fd 100%);
+    border-top: 1px solid #dbe8f0;
+  }
+
+  html.light .hosting-section::before {
+    background: radial-gradient(circle at 50% 30%, rgba(0, 212, 255, 0.04) 0%, transparent 60%);
+  }
+
+  html.light .hosting-title {
+    color: #0f172a;
+  }
+
+  html.light .hosting-subtitle {
+    color: #475569;
+  }
+
+  html.light .hosting-link {
+    color: #0099cc;
+    background: rgba(0, 212, 255, 0.08);
+    border-color: rgba(0, 212, 255, 0.3);
+  }
+
+  html.light .hosting-link:hover {
+    background: rgba(0, 212, 255, 0.14);
+    color: #007aaa;
   }
 
   @media (max-width: 640px) {
-    .vps-feature-section {
-      padding: 2rem 0;
-    }
-
-    .vps-feature-card {
-      padding: 1.1rem;
-    }
-
-    .vps-feature-title {
-      font-size: 1.25rem;
-    }
-
-    .vps-feature-description {
-      font-size: 0.93rem;
-      line-height: 1.55;
-    }
   }
   
   .projects-title {
@@ -1028,5 +1124,49 @@ const recentPosts = await getRecentPosts(3);
   html.light .secondary-cta-button:hover {
     background-color: #00d4ff;
     color: #ffffff;
+  }
+
+  /* Closing CTA Section */
+  .closing-cta-bg {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    position: relative;
+    border-top: 1px solid #2a2a2a;
+  }
+
+  .closing-cta-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .closing-cta-title {
+    color: var(--text-primary);
+    text-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+  }
+
+  .closing-cta-subtitle {
+    color: var(--text-secondary);
+  }
+
+  html.light .closing-cta-bg {
+    background: linear-gradient(135deg, #f8fafc 0%, #f0f8ff 100%);
+    border-top: 1px solid #e2e8f0;
+  }
+
+  html.light .closing-cta-bg::before {
+    background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.04) 0%, transparent 70%);
+  }
+
+  html.light .closing-cta-title {
+    color: #0f172a;
+  }
+
+  html.light .closing-cta-subtitle {
+    color: #475569;
   }
 </style>
