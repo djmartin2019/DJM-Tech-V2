@@ -51,7 +51,7 @@ WHERE total_spent = (SELECT MAX(total_spent) FROM spend);
 
 - The spend subquery isolates the logic of "how much each customer spent."
 - The final query just says: "give me the biggest spender."
-- Without the CTE, you'd be nesting aggregations inside aggregations — harder to read and debug.
+- Without the CTE, you'd be nesting aggregations inside aggregations, which is harder to read and debug.
 
 ### Example 2: Building Multi-Step Queries
 
@@ -85,7 +85,7 @@ FROM ranked
 WHERE rank <= 5;
 ```
 
-Here, chaining CTEs makes the query flow logically: spend → ranked → filtered. Try writing this in one big query — it's a nightmare.
+Here, chaining CTEs makes the query flow logically: spend → ranked → filtered. Try writing this as one big query and it's a nightmare.
 
 ---
 
@@ -141,7 +141,7 @@ ORDER BY total_revenue DESC
 LIMIT 10;
 ```
 
-Looks tidy, but it didn't need a CTE — the main query is only one step. This is where restraint pays off.
+Looks tidy, but it didn't need a CTE since the main query is only one step. This is where restraint pays off.
 
 ---
 
@@ -149,7 +149,7 @@ Looks tidy, but it didn't need a CTE — the main query is only one step. This i
 
 - Use CTEs when your query has multiple logical steps or needs reusability.
 - Skip them when a single join/aggregation does the job cleanly.
-- Think of them like functions in code — you don’t need one for every console.log, but they make complex logic way easier to read.
+- Think of them like functions in code. You don’t need one for every console.log, but they make complex logic way easier to read.
 
 ---
 
@@ -157,4 +157,4 @@ Looks tidy, but it didn't need a CTE — the main query is only one step. This i
 
 CTEs are fantastic for breaking down messy SQL into readable steps, but they’re not always the cleanest tool for simple queries. Knowing when not to use them is just as important as knowing when to reach for them.
 
-How about you — what’s your go-to scenario for a CTE, and when do you steer clear?
+How about you: what’s your go-to scenario for a CTE, and when do you steer clear?
