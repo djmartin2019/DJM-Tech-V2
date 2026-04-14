@@ -139,6 +139,37 @@ import { Mail, Github, Linkedin, Clock, Twitter } from 'lucide-astro';
     </div>
   </section>
 
+  <!-- What Happens Next -->
+  <section class="py-16 next-steps-section">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold next-steps-title mb-4">What Happens After You Reach Out</h2>
+      <p class="next-steps-sub mb-10">No pressure, no pitch decks. Here's the process:</p>
+      <ol class="space-y-6 text-left">
+        <li class="next-step-item">
+          <span class="next-step-num">1</span>
+          <div>
+            <strong class="next-step-label">Quick call</strong>
+            <p class="next-step-desc">Most projects start with a 20 to 30 minute call. Tell me what you're trying to build and what's not working. I'll ask the right questions.</p>
+          </div>
+        </li>
+        <li class="next-step-item">
+          <span class="next-step-num">2</span>
+          <div>
+            <strong class="next-step-label">I follow up within 24 hours</strong>
+            <p class="next-step-desc">After the call, I'll send you a clear summary of next steps or any questions I still have. No ghosting, no waiting around.</p>
+          </div>
+        </li>
+        <li class="next-step-item">
+          <span class="next-step-num">3</span>
+          <div>
+            <strong class="next-step-label">Simple plan and timeline</strong>
+            <p class="next-step-desc">If it's a good fit, I'll put together a straightforward plan: what gets built, when it's done, and what it costs. Projects are scoped individually. I'm happy to give you a quick estimate after we talk.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
   <Footer />
 
   <script>
@@ -340,6 +371,74 @@ import { Mail, Github, Linkedin, Clock, Twitter } from 'lucide-astro';
 
     html.light .contact-description {
       color: #6b7280;
+    }
+
+    /* What Happens Next */
+    .next-steps-section {
+      background-color: var(--bg-primary);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .next-steps-title {
+      color: var(--text-primary);
+    }
+
+    .next-steps-sub {
+      color: var(--text-secondary);
+    }
+
+    .next-step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .next-step-num {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: rgba(0, 212, 255, 0.15);
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+
+    .next-step-label {
+      display: block;
+      color: var(--text-primary);
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .next-step-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    html.light .next-steps-title {
+      color: #0f172a;
+    }
+
+    html.light .next-steps-sub {
+      color: #475569;
+    }
+
+    html.light .next-step-label {
+      color: #0f172a;
+    }
+
+    html.light .next-step-desc {
+      color: #475569;
+    }
+
+    html.light .next-step-num {
+      background: rgba(0, 212, 255, 0.1);
     }
 
   </style>

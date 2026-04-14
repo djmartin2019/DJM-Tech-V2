@@ -11,7 +11,7 @@ const featuredProjects = getFeaturedProjects();
 const recentPosts = await getRecentPosts(3);
 ---
 
-<Layout title="David Martin - Web Developer & Freelance Engineer">
+<Layout title="David Martin - Full Stack Developer & Freelance Engineer">
   <Header />
   
   <!-- Hero Section -->
@@ -23,35 +23,42 @@ const recentPosts = await getRecentPosts(3);
           <!-- Main Heading -->
           <h1 class="text-5xl md:text-6xl font-bold hero-title leading-tight">
             David Martin <br />
-            <span class="neon-glow">Web Developer & Freelance Engineer</span>
+            <span class="neon-glow">I Build Websites That Work</span>
           </h1>
           
           <!-- Description -->
           <p class="text-xl hero-subtitle max-w-2xl lg:max-w-none mx-auto lg:mx-0">
-            I build websites and web apps that actually work. The infrastructure too, since most people forget about that part. Let's build something great together.
+            Websites and web apps that keep working after launch. No broken handoffs, no mystery technical debt. I handle everything so you don't have to.
           </p>
           
           <!-- CTA Buttons -->
           <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <a href="/projects" class="primary-cta-button">
-              View Projects
+            <a href="/contact" class="primary-cta-button">
+              Work With Me
             </a>
-            <a href="/blog" class="secondary-cta-button">
-              See My Writing
+            <a href="/projects" class="secondary-cta-button">
+              View Projects
             </a>
           </div>
 
-          <!-- Tech Stack Row -->
-          <div class="pt-2">
-            <p class="text-xs uppercase tracking-widest tech-stack-label mb-3">Tech Stack</p>
-            <div class="flex flex-wrap gap-2 justify-center lg:justify-start">
+          <!-- Capability Stack -->
+          <div class="pt-2 space-y-3">
+            <div class="flex flex-wrap items-center gap-2 justify-center lg:justify-start">
+              <span class="tech-stack-label">Web Apps</span>
               <span class="tech-hero-badge">React</span>
               <span class="tech-hero-badge">TypeScript</span>
               <span class="tech-hero-badge">Node.js</span>
-              <span class="tech-hero-badge">PostgreSQL</span>
-              <span class="tech-hero-badge">Docker</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 justify-center lg:justify-start">
+              <span class="tech-stack-label">Backend & Data</span>
               <span class="tech-hero-badge">Python</span>
+              <span class="tech-hero-badge">PostgreSQL</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 justify-center lg:justify-start">
+              <span class="tech-stack-label">Deploy & Infra</span>
+              <span class="tech-hero-badge">Docker</span>
               <span class="tech-hero-badge">Cloudflare</span>
+              <span class="tech-hero-badge">VPS</span>
             </div>
           </div>
         </div>
@@ -61,7 +68,7 @@ const recentPosts = await getRecentPosts(3);
           <div class="hero-image-container">
             <img 
               src="/assets/djm-image.png" 
-              alt="David Martin - Web Developer & Freelance Engineer" 
+              alt="David Martin - Full Stack Developer & Freelance Engineer" 
               class="hero-image"
             />
             <div class="hero-image-glow"></div>
@@ -77,41 +84,158 @@ const recentPosts = await getRecentPosts(3);
     </div>
   </section>
 
+  <!-- Bridge: What This Actually Means -->
+  <section class="py-20 bridge-section">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="bridge-eyebrow">What this actually means</span>
+        <h2 class="text-3xl md:text-4xl font-bold bridge-title mt-3 mb-4">More Than Just a Website</h2>
+        <p class="text-lg bridge-subtitle max-w-2xl mx-auto">
+          A lot of developers build something, hand it over, and disappear. Here's what you actually get when you work with me.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="bridge-item">
+          <span class="bridge-item-icon">&#x2714;</span>
+          <div>
+            <strong class="bridge-item-title">It works after launch</strong>
+            <p class="bridge-item-desc">Not just in the demo. I test against real conditions so you're not discovering problems after you go live.</p>
+          </div>
+        </div>
+        <div class="bridge-item">
+          <span class="bridge-item-icon">&#x2714;</span>
+          <div>
+            <strong class="bridge-item-title">You can update it yourself</strong>
+            <p class="bridge-item-desc">I build sites so the people who own them can make changes without calling a developer every time.</p>
+          </div>
+        </div>
+        <div class="bridge-item">
+          <span class="bridge-item-icon">&#x2714;</span>
+          <div>
+            <strong class="bridge-item-title">Domain, security, and hosting sorted</strong>
+            <p class="bridge-item-desc">If you need it, I handle the technical setup so your site is live, secure, and stays that way.</p>
+          </div>
+        </div>
+        <div class="bridge-item">
+          <span class="bridge-item-icon">&#x2714;</span>
+          <div>
+            <strong class="bridge-item-title">One person, start to finish</strong>
+            <p class="bridge-item-desc">No handoffs between a designer, a developer, and a third person you've never met. I own the whole thing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mid-page CTA -->
+  <section class="py-10 mid-cta-section">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-xl font-semibold mid-cta-title mb-2">Have something you need built?</p>
+      <p class="text-sm mid-cta-sub mb-6">Let's talk about what you're trying to build.</p>
+      <a href="/contact" class="primary-cta-button">Work With Me</a>
+    </div>
+  </section>
+
+  <!-- Who I Work With -->
+  <section class="py-16 who-section">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="bridge-eyebrow">Is this for you?</span>
+      <h2 class="text-2xl md:text-3xl font-bold who-title mt-3 mb-3">Who I Work With</h2>
+      <p class="who-subtitle mb-10">If any of these sound like you, we should talk.</p>
+      <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+        <li class="who-item">
+          <span class="who-check">&#x2713;</span>
+          <span>Small businesses that need a custom website or internal tool built right</span>
+        </li>
+        <li class="who-item">
+          <span class="who-check">&#x2713;</span>
+          <span>Founders building a product who need a developer who can actually get it done</span>
+        </li>
+        <li class="who-item">
+          <span class="who-check">&#x2713;</span>
+          <span>Teams that need backend help, faster load times, or a site that stops breaking</span>
+        </li>
+        <li class="who-item">
+          <span class="who-check">&#x2713;</span>
+          <span>Anyone who has been burned by vague timelines and half-finished work before</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Why Me -->
+  <section class="py-12 personal-intro-section">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="why-me-inner">
+        <!-- Left: headline + paragraph -->
+        <div class="why-me-left">
+          <span class="bridge-eyebrow">Why work with me</span>
+          <p class="text-2xl md:text-3xl font-semibold personal-intro-text leading-snug mt-3">
+            You won't be chasing me for updates.
+          </p>
+          <p class="mt-4 text-base personal-intro-sub">
+            I keep a small client load on purpose. Every project gets a real timeline, regular check-ins, and someone who actually sees it through.
+          </p>
+        </div>
+        <!-- Right: bullets -->
+        <ul class="why-me-bullets">
+          <li class="why-me-item">
+            <span class="why-me-check">&#x2714;</span>
+            <span>Clear timelines and expectations from day one</span>
+          </li>
+          <li class="why-me-item">
+            <span class="why-me-check">&#x2714;</span>
+            <span>Regular updates — you'll always know where things stand</span>
+          </li>
+          <li class="why-me-item">
+            <span class="why-me-check">&#x2714;</span>
+            <span>Organized builds, not frantic last-minute scrambles</span>
+          </li>
+          <li class="why-me-item">
+            <span class="why-me-check">&#x2714;</span>
+            <span>Projects get finished and launched, not handed off half-done</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <!-- Current Focus Section -->
   <section class="py-20 section-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-10">
-        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">How I Work</h2>
+        <span class="bridge-eyebrow">My approach</span>
+        <h2 class="text-3xl md:text-4xl font-bold section-title mt-3 mb-4">How I Work</h2>
         <p class="text-xl section-subtitle max-w-3xl mx-auto">
-          Ruthless prioritization, no fluff. I focus on what ships and skip everything that doesn't.
+          I take care of everything technical so you don't have to. Most clients just want something that works and stays working. That's what I build.
         </p>
       </div>
       
       <div class="max-w-5xl mx-auto">
         <div class="focus-pill mb-8">
           <span class="focus-pill-dot" aria-hidden="true"></span>
-          <p>Open for freelance work. I love working with businesses, startups, and developers who want to ship something real. I won't ghost you or miss your deadline.</p>
+          <p>Open for freelance work. I take projects seriously, communicate clearly, and actually finish them.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <article class="focus-card">
-            <h3 class="focus-card-title mb-2">You Get Someone Who Ships</h3>
+            <h3 class="focus-card-title mb-2">I Build. I Launch. Done.</h3>
             <p class="focus-card-copy">
-              I genuinely enjoy taking a project from idea to live. You get a developer who builds the thing, deploys it, and hands you something that works. No planning doc theater.
+              I genuinely enjoy taking a project from idea to live. You get something that works, not a prototype that still needs three more people to finish it.
             </p>
           </article>
 
           <article class="focus-card">
-            <h3 class="focus-card-title mb-2">Full Stack, No Excuses</h3>
+            <h3 class="focus-card-title mb-2">One Person, All of It</h3>
             <p class="focus-card-copy">
-              Websites, web apps, APIs, dashboards. If it touches a browser or a server, I can handle it. I like the full picture and I'm happiest when I own it end to end.
+              Websites, web apps, booking tools, dashboards. I handle the technical side from front to back. No passing the buck to someone else halfway through.
             </p>
           </article>
 
           <article class="focus-card">
             <h3 class="focus-card-title mb-2">No Fluff, Just Results</h3>
             <p class="focus-card-copy">
-              I cut through the noise and focus on what actually matters for your project. High standards, no ceremony. Your deadline is my deadline.
+              I focus on what your project actually needs, not what looks impressive on a proposal. High standards, straight communication. Your deadline is my deadline.
             </p>
           </article>
         </div>
@@ -136,8 +260,9 @@ const recentPosts = await getRecentPosts(3);
   <section class="py-20 projects-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold projects-title mb-4">Things I've Built</h2>
-        <p class="text-xl projects-subtitle">Real projects, shipped to production. Not just sitting in a GitHub repo collecting dust.</p>
+        <span class="bridge-eyebrow">Proof of work</span>
+        <h2 class="text-3xl md:text-4xl font-bold projects-title mt-3 mb-4">Things I've Built</h2>
+        <p class="text-xl projects-subtitle">Real projects, in production. Not just sitting in a GitHub repo collecting dust.</p>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -205,38 +330,39 @@ const recentPosts = await getRecentPosts(3);
           I Handle Hosting Too
         </h2>
         <p class="text-xl hosting-subtitle max-w-2xl mx-auto">
-          I run my own production server and I genuinely enjoy this part. Most developers hand you a Vercel link and call it a day. I can host your project, configure your domain, and keep it running. Real infrastructure, not just a deploy button.
+          Most developers hand you a finished website and disappear. I can also host your project, set up your domain, and keep it running. No mystery bills from third-party platforms, no "that's not my problem." If you need it, I've got it covered.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <article class="focus-card">
-          <h3 class="focus-card-title mb-2">Docker Isolation</h3>
+          <h3 class="focus-card-title mb-2">Apps Stay Separate</h3>
           <p class="focus-card-copy">
-            Each application runs in its own container. No cross-app interference, clean dependency management, and easy rollbacks.
+            Each project runs in its own environment. One site going down doesn't affect another, and updates happen cleanly without breaking anything else.
           </p>
         </article>
 
         <article class="focus-card">
-          <h3 class="focus-card-title mb-2">Multi-Stack Support</h3>
+          <h3 class="focus-card-title mb-2">Works With Your Tech</h3>
           <p class="focus-card-copy">
-            PHP, Node.js, Python, and more, all running on the same server and cleanly isolated. I can host whatever stack your project needs.
+            Whatever your project is built on, I can host it. I'm not locked into one platform or one way of doing things. It runs on what makes sense for your project.
           </p>
         </article>
 
         <article class="focus-card">
-          <h3 class="focus-card-title mb-2">Domains, SSL & Deploys</h3>
+          <h3 class="focus-card-title mb-2">Domain, Security & Uptime</h3>
           <p class="focus-card-copy">
-            Full domain config, HTTPS, and repeatable deployment workflows, all handled end-to-end. You focus on the product, I'll handle keeping it live.
+            I handle domain setup, security certificates, and keeping things live. You don't need to know what any of that means. That's the point.
           </p>
         </article>
       </div>
 
-      <div class="text-center">
+      <div class="text-center space-y-4">
         <a href="https://djm-apps.com/" target="_blank" rel="noopener noreferrer" class="hosting-link">
           View Live Hosting Environment
           <ExternalLink class="h-4 w-4 ml-2" />
         </a>
+        <p class="text-sm hosting-subtitle">Curious about the technical details behind the scenes? I write about it on the <a href="/blog" class="underline opacity-80 hover:opacity-100">Build Log</a>.</p>
       </div>
     </div>
   </section>
@@ -245,7 +371,8 @@ const recentPosts = await getRecentPosts(3);
   <section class="py-20 blog-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold blog-title mb-4">Build Log</h2>
+        <span class="bridge-eyebrow">Writing</span>
+        <h2 class="text-3xl md:text-4xl font-bold blog-title mt-3 mb-4">Build Log</h2>
         <p class="text-xl blog-subtitle">What I'm thinking about, building, and occasionally complaining about</p>
       </div>
       
@@ -312,7 +439,13 @@ const recentPosts = await getRecentPosts(3);
 <style>
   .tech-stack-label {
     color: var(--text-secondary);
-    opacity: 0.6;
+    opacity: 0.65;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    min-width: 5.5rem;
   }
 
   .tech-hero-badge {
@@ -710,6 +843,300 @@ const recentPosts = await getRecentPosts(3);
     filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.4)) drop-shadow(0 0 25px rgba(0, 212, 255, 0.2));
   }
   
+  /* Shared eyebrow label */
+  .bridge-eyebrow {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #00d4ff;
+    opacity: 0.85;
+  }
+
+  html.light .bridge-eyebrow {
+    color: #0077a8;
+    opacity: 1;
+  }
+
+  /* Bridge Section */
+  .bridge-section {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .bridge-title {
+    color: var(--text-primary);
+  }
+
+  .bridge-subtitle {
+    color: var(--text-secondary);
+  }
+
+  .bridge-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.2s ease;
+  }
+
+  .bridge-item:hover {
+    border-color: rgba(0, 212, 255, 0.3);
+  }
+
+  .bridge-item-icon {
+    flex-shrink: 0;
+    color: #00d4ff;
+    font-size: 1rem;
+    margin-top: 0.15rem;
+    font-weight: 700;
+  }
+
+  .bridge-item-title {
+    display: block;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .bridge-item-desc {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  html.light .bridge-section {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  html.light .bridge-title {
+    color: #0f172a;
+  }
+
+  html.light .bridge-subtitle {
+    color: #475569;
+  }
+
+  html.light .bridge-item {
+    background: #ffffff;
+    border-color: #e2e8f0;
+  }
+
+  html.light .bridge-item:hover {
+    border-color: rgba(0, 153, 204, 0.45);
+  }
+
+  html.light .bridge-item-icon {
+    color: #0077a8;
+  }
+
+  html.light .bridge-item-title {
+    color: #0f172a;
+  }
+
+  html.light .bridge-item-desc {
+    color: #475569;
+  }
+
+  /* Personal Intro */
+  .personal-intro-section {
+    background: linear-gradient(135deg, #001a2e 0%, #00253d 50%, #002f4e 100%);
+    border-top: 1px solid rgba(0, 212, 255, 0.25);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.25);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .personal-intro-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .personal-intro-text {
+    color: #ffffff;
+    line-height: 1.4;
+    position: relative;
+  }
+
+  .personal-intro-sub {
+    color: rgba(255, 255, 255, 0.72);
+    position: relative;
+  }
+
+  html.light .personal-intro-section {
+    background: linear-gradient(135deg, #003a5c 0%, #004d78 50%, #005c8a 100%);
+    border-top: 1px solid rgba(0, 153, 204, 0.4);
+    border-bottom: 1px solid rgba(0, 153, 204, 0.4);
+  }
+
+  html.light .personal-intro-section::before {
+    background: radial-gradient(ellipse at 50% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+  }
+
+  html.light .personal-intro-text {
+    color: #ffffff;
+  }
+
+  html.light .personal-intro-sub {
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .why-me-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+  }
+
+  .why-me-check {
+    flex-shrink: 0;
+    color: #00d4ff;
+    font-weight: 700;
+    margin-top: 0.05rem;
+  }
+
+  html.light .why-me-item {
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  html.light .why-me-check {
+    color: #7ee8fa;
+  }
+
+  /* Why Me — 2-col desktop layout */
+  .why-me-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .why-me-inner {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 3rem;
+    }
+
+    .why-me-left {
+      flex: 1 1 55%;
+    }
+
+    .why-me-bullets {
+      flex: 1 1 45%;
+      margin-top: 0;
+    }
+  }
+
+  .why-me-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  /* Mid-page CTA */
+  .mid-cta-section {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid #1e1e1e;
+    border-bottom: 1px solid #1e1e1e;
+  }
+
+  .mid-cta-title {
+    color: var(--text-primary);
+  }
+
+  .mid-cta-sub {
+    color: var(--text-secondary);
+  }
+
+  html.light .mid-cta-section {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  html.light .mid-cta-title {
+    color: #0f172a;
+  }
+
+  html.light .mid-cta-sub {
+    color: #475569;
+  }
+
+  /* Who I Work With */
+  .who-section {
+    background-color: var(--bg-primary);
+    border-top: 1px solid #2a2a2a;
+    border-bottom: 1px solid #2a2a2a;
+  }
+
+  .who-title {
+    color: var(--text-primary);
+  }
+
+  .who-subtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+  }
+
+  .who-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1rem 1.1rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    transition: border-color 0.2s ease;
+  }
+
+  .who-item:hover {
+    border-color: rgba(0, 212, 255, 0.3);
+  }
+
+  .who-check {
+    color: #00d4ff;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  html.light .who-section {
+    background-color: #f8fafc;
+    border-color: #e2e8f0;
+  }
+
+  html.light .who-item {
+    background: #ffffff;
+    border-color: #e2e8f0;
+    color: #475569;
+  }
+
+  html.light .who-title {
+    color: #0f172a;
+  }
+
+  html.light .who-subtitle {
+    color: #64748b;
+  }
+
   /* Featured Projects Styles */
   .projects-bg {
     background-color: var(--bg-primary);
