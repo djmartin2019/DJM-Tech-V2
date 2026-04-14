@@ -4,7 +4,6 @@ date: "2025-09-17"
 summary: "Most small business sites are either slow WordPress installs or rigid headless CMS builds. I wanted something fast, editable, and modern — so I built it with Astro + Contentful."
 description: "Learn how to build lightning-fast, client-editable websites with Astro + Contentful. Get 99 Lighthouse performance scores, 0ms blocking time, and a complete starter template. Perfect for SMBs who need speed without sacrificing content control."
 tags: ["Astro", "Performance", "CMS", "Web Development", "SMB", "Contentful"]
-featured: false
 readTime: 8
 image: "/assets/HighPerformance.png"
 author: "David Martin"
@@ -57,7 +56,8 @@ Key metrics like First Contentful Paint and Largest Contentful Paint clocked in 
     alt="Lighthouse desktop performance scores for the Astro/Contentful Starter"
     style="max-width: 100%; height: auto;"
   />
-</div> <br />
+</div>
+<br />
 
 Astro's "islands architecture" (hydrating only what's interactive) paired with Tailwind and Contentful delivers a site that's not just modern on paper, but proven fast, accessible, and search-friendly in practice.
 
@@ -69,9 +69,9 @@ Contentful serves as the content API, which I query at build time. This gives bu
 
 Cloudflare Pages handles deployment and global edge caching directly from GitHub. It’s simple, cost-effective, and enables near-instant updates with webhook-triggered rebuilds.
 
-## ⛪ Real Use: Church Website in Progress
+## ⛪ Real Use: A Site That Runs Itself
 
-I'm currently building out my church's new website with this stack, and so far, development has been smooth and efficient. Non-technical staff are already uploading and managing content—event updates, sermon archives, etc.—without needing to touch code. Even in this early phase, we're seeing clear performance improvements over their old WordPress setup. I'm excited to see the full launch come together soon.
+I used this stack to build [howgodspeakstous.com](https://howgodspeakstous.com) — a content platform for a non-technical user to publish and schedule Bible studies independently. Non-technical users manage all content through Contentful without touching code, and the site has been live for months with zero downtime and no maintenance involvement from me. Performance improvements over the previous WordPress setup were immediate and measurable.
 
 ## 🎁 Free Starter Template
 
@@ -84,6 +84,6 @@ Try it out, fork it, or DM me if you’d like a walkthrough of how to make it yo
 ---
 
 <br />
-This isn't about selling a trend—it's about delivering performance and control to
-the businesses that need it most. No compromises, no bloated backends, no unnecessary
-client dependencies. Just clean, modern web architecture that works.
+This isn't about selling a trend—it's about delivering performance and control
+to the businesses that need it most. No compromises, no bloated backends, no
+unnecessary client dependencies. Just clean, modern web architecture that works.

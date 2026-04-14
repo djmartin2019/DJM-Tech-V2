@@ -1,0 +1,145 @@
+---
+title: "How I Built a Zero-Maintenance Content Platform for a Non-Technical User"
+date: "2026-04-14"
+summary: "When my dad asked me to build a site where he could publish Bible studies and schedule content himself, the hard part wasn't the design — it was building something that would keep working without me."
+description: "Learn how to build a zero-maintenance content platform using Astro, Contentful, and Cloudflare Pages. A real-world case study of a production site running for months with zero downtime, no emergency fixes, and no developer involvement."
+tags: ["Astro", "Contentful", "Cloudflare", "CMS", "Web Development"]
+readTime: 6
+image: "/assets/HowIBuiltAZeroMaint.png"
+author: "David Martin"
+canonicalURL: "https://djmtech.dev/blog/how-i-built-a-zero-maintenance-platform"
+---
+
+When my dad asked me to build a site where he could publish Bible studies and schedule content himself, the design wasn't the hard part. The hard part was building something that would keep working without me.
+
+That constraint — **it has to work without me** — shaped every decision. What I built has been running in production for months with zero downtime, zero emergency fixes, and no involvement from me.
+
+Here's how the system works, and why I'd build it the same way again.
+
+**Live site:** [howgodspeakstous.com](https://howgodspeakstous.com)  
+**Template repo:** [Astro-Contentful-Starter-Project](https://github.com/djmartin2019/Astro-Contentful-Starter-Project)
+
+---
+
+## The Problem
+
+This was not a design challenge. It was a systems problem.
+
+**He needed:**
+
+- A way to write and publish content
+- The ability to schedule posts ahead of time
+- A site that just works without thinking about it
+
+**I needed:**
+
+- A setup that does not break randomly
+- A workflow that does not require constant oversight
+- Something I could reuse for future projects
+
+Most traditional solutions solve one side of this well but not both. WordPress gives flexibility, but introduces updates, plugins, and long-term maintenance risk. A fully custom app gives control, but requires ongoing development effort.
+
+I wanted something that felt closer to infrastructure than an app.
+
+---
+
+## The Approach
+
+Instead of building a one-off site, I built a repeatable system.
+
+The core idea was simple:
+
+- **Contentful** handles content editing
+- **Astro** handles rendering
+- **Cloudflare** handles delivery
+
+This split responsibilities cleanly. Contentful is the editing interface. Astro builds the site. Cloudflare serves it globally. The result is a content platform — not just a website.
+
+---
+
+## The Workflow
+
+This is the part that matters most.
+
+From my dad's perspective:
+
+1. He logs into Contentful
+2. Writes or edits a post
+3. Schedules or publishes it
+4. The site updates automatically
+
+There are no deployments to think about. No code to touch. No technical decisions to make.
+
+That simplicity is intentional. It is a direct result of how the system is designed.
+
+---
+
+## Under the Hood
+
+This template is designed for a low-maintenance Astro, Contentful, and Cloudflare workflow.
+
+Content is fetched using a Cloudflare-compatible fetch client instead of a Node-specific SDK — meaning it runs cleanly in a modern edge environment without workarounds.
+
+Routes are generated dynamically from Contentful content models. Blog posts and pages are created using slug-based paths like `/blog/[slug]` and `/[slug]`. There is no manual routing.
+
+Linked assets are resolved in a single query using Contentful's `includes` parameter, which avoids extra API calls. Images are transformed directly through Contentful's CDN for size and cropping. Pages use lazy loading, async decoding, and fixed dimensions to reduce layout shift.
+
+Astro pre-builds all pages at build time. Cloudflare Pages then serves the static output globally. This removes the need for a traditional backend and keeps runtime complexity extremely low.
+
+There is also a lightweight Cloudflare Pages Function that handles contact form submissions at the edge.
+
+The result is a fast, globally cached site that continues to work even if the CMS is temporarily unavailable.
+
+---
+
+## Why This Works
+
+The key decision was to optimize for **stability and simplicity**.
+
+By pre-rendering everything at build time, the production environment becomes very predictable. By using a headless CMS, content editing is separated from the codebase. By deploying to Cloudflare Pages, the site benefits from global caching and edge delivery without additional infrastructure.
+
+None of these choices are new on their own. The value comes from combining them into a system that is easy to reuse.
+
+---
+
+## The Real Outcome
+
+This site has been live for months. No downtime. No emergency fixes. No messages asking me what went wrong.
+
+Content gets published on schedule without any involvement from me. That's not a happy accident — it's the standard I set from the start.
+
+I consider a system unfinished if it requires constant attention to keep running. This one doesn't. That's the bar, and this project cleared it.
+
+---
+
+## The Template
+
+The most important part of this project is not the site itself. It is the system behind it.
+
+I created a starter template that:
+
+- Connects to Contentful out of the box
+- Generates routes automatically from content
+- Handles assets and images efficiently
+- Deploys cleanly to Cloudflare Pages
+
+It also includes setup scripts that initialize content models and seed example data, which makes onboarding much easier for new projects.
+
+👉 **[GitHub Repo – Astro/Contentful Starter](https://github.com/djmartin2019/Astro-Contentful-Starter-Project)**
+
+This turns what used to be a slow setup process into something I can spin up quickly and reliably.
+
+---
+
+## Final Thoughts
+
+This project changed how I think about building websites.
+
+Instead of asking "how do I build this page," the better question is **"how do I build a system that keeps working over time."**
+
+That shift is what made this project successful. Not the design. Not the features. The system behind it.
+
+If you are building content-driven sites for non-technical users — or you are tired of maintaining fragile setups — this kind of architecture is worth considering.
+
+**Live site:** [howgodspeakstous.com](https://howgodspeakstous.com)  
+**Template repo:** [Astro-Contentful-Starter-Project](https://github.com/djmartin2019/Astro-Contentful-Starter-Project)
