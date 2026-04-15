@@ -33,14 +33,15 @@ html.light {
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #000000; /* Pure black to match navbar and prevent white flash on scroll */
-    /* Extend background into safe area on iOS - this makes the browser chrome area black */
+    background-color: #000000;
+    color-scheme: dark;
     min-height: 100vh;
-    min-height: -webkit-fill-available; /* iOS Safari fix */
+    min-height: -webkit-fill-available;
   }
 
   html.light {
-    background-color: #ffffff; /* White for light mode */
+    background-color: #ffffff;
+    color-scheme: light;
   }
 
   body {

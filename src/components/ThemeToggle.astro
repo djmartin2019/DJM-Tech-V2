@@ -82,11 +82,12 @@ import { Sun, Moon } from 'lucide-astro';
     themeToggle.addEventListener('click', function() {
       html.classList.toggle('light');
       
-      // Save theme preference
       const currentTheme = html.classList.contains('light') ? 'light' : 'dark';
       localStorage.setItem('theme', currentTheme);
       
-      // Add a subtle animation effect
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', currentTheme === 'light' ? '#ffffff' : '#000000');
+      
       themeToggle.style.transform = 'scale(0.95)';
       setTimeout(() => {
         themeToggle.style.transform = 'scale(1)';
