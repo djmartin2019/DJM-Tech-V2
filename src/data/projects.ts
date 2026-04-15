@@ -19,7 +19,7 @@ export const projects: Project[] = [
     id: "texas-frontstep",
     title: "Texas Frontstep Media",
     description:
-      "A website and photography service built for Texas real estate agents and small businesses who needed a professional online presence fast.",
+      "Website and photography system for a Texas real estate media business.",
     longDescription:
       "Texas Frontstep Media helps real estate agents and small business owners in Texas get online quickly with professional photography and clean, fast websites. The site itself is built for speed and reliability, and the service is designed to be simple: you get a professional result without the back-and-forth.",
     image: "/assets/websites/TexasFrontstep.png",
@@ -35,7 +35,7 @@ export const projects: Project[] = [
     id: "how-god-speaks-to-us",
     title: "How God Speaks to Us",
     description:
-      "A content-driven website built for a Bible study group, allowing daily verses, blogs, and sermons to be published and scheduled ahead of time.",
+      "Content platform for a Bible study group: verses, sermons, and posts scheduled ahead of time.",
     longDescription:
       "Built a full content-managed website for a Bible study group that needed a simple way to share daily verses, blogs, sermons, and documents with their community. The platform integrates with a CMS so new content can be added and scheduled ahead of time without touching code. Designed for reliability, ease of use, and consistent daily engagement.",
     image: "/assets/websites/HowGodSpeaks.png", // update if needed
@@ -51,7 +51,7 @@ export const projects: Project[] = [
     id: "foodly-map",
     title: "Foodly Map",
     description:
-      "A food discovery app that shows you where your friends actually eat, not just what an algorithm thinks you'll like.",
+      "Social food discovery app. Find places through people you trust, not trending algorithms.",
     longDescription:
       "Foodly Map is built around a simple frustration: most food apps push you toward whatever is trending, not what you'd actually enjoy. This app lets you save places you've eaten, organize them into lists, and discover new spots through people you trust. It works on any device, loads fast, and respects your privacy. Currently in active development.",
     image: "/assets/websites/FoodlyMap.png",

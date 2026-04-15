@@ -1,5 +1,5 @@
 ---
-import { Code, Menu } from 'lucide-astro';
+import { Code, Menu, Github } from 'lucide-astro';
 import ThemeToggle from './ThemeToggle.astro';
 
 // Get current page from Astro.url
@@ -31,6 +31,9 @@ const isActive = (path: string) => currentPath === path;
 
       <!-- Theme Toggle and Mobile Menu Button -->
       <div class="flex items-center space-x-4">
+        <a href="https://github.com/djmartin2019" target="_blank" rel="noopener noreferrer" class="nav-link hidden md:flex items-center" aria-label="GitHub profile">
+          <Github class="h-5 w-5" />
+        </a>
         <ThemeToggle />
         
         <!-- Mobile menu button -->

@@ -38,12 +38,41 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
           
           <div class="space-y-4">
             <p class="creator-text">
-              I work across the full stack: from frontend interfaces to APIs, databases, and deployment infrastructure. I hold my work to a high engineering standard and I handle the entire lifecycle from architecture to production.
+              I work across the full stack: frontend interfaces, APIs, databases, and deployment. I hold my work to a high engineering standard and own the entire lifecycle from architecture to launch.
             </p>
             <p class="creator-text">
-              I'm available for freelance projects and I deliver working software to real clients.
+              I'm available for freelance projects and deliver working software to real clients. I'm also open to full-time engineering roles. If you're hiring, take a look at my <a href="https://github.com/djmartin2019" target="_blank" rel="noopener noreferrer" class="creator-link">GitHub</a> and <a href="/projects" class="creator-link">projects</a>.
             </p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack -->
+  <section class="py-10 tech-stack-section">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-xs font-semibold uppercase tracking-widest tech-stack-eyebrow mb-6">Tech I work with</p>
+      <div class="space-y-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="about-stack-label">Websites & Apps</span>
+          <span class="about-stack-badge">React</span>
+          <span class="about-stack-badge">TypeScript</span>
+          <span class="about-stack-badge">Node.js</span>
+          <span class="about-stack-badge">Astro</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="about-stack-label">Backend Systems</span>
+          <span class="about-stack-badge">Python</span>
+          <span class="about-stack-badge">PostgreSQL</span>
+          <span class="about-stack-badge">REST APIs</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="about-stack-label">Hosting & Deployment</span>
+          <span class="about-stack-badge">Docker</span>
+          <span class="about-stack-badge">Cloudflare</span>
+          <span class="about-stack-badge">VPS</span>
+          <span class="about-stack-badge">GitHub Actions</span>
         </div>
       </div>
     </div>
@@ -104,8 +133,8 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
           <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
             <Users class="h-8 w-8 value-icon" />
           </div>
-          <h3 class="text-lg font-semibold value-title mb-2">Developer Enablement</h3>
-          <p class="value-description">Build platforms that make it easier for others to ship confidently.</p>
+          <h3 class="text-lg font-semibold value-title mb-2">Ownership</h3>
+          <p class="value-description">Take the whole problem, not just your piece of it. Don't hand off half-finished work.</p>
         </div>
         
         <div class="text-center">
@@ -123,9 +152,9 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
   <!-- CTA Section -->
   <section class="py-20 cta-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold cta-title mb-4">Have a Project in Mind?</h2>
+      <h2 class="text-3xl md:text-4xl font-bold cta-title mb-4">Let's Work Together</h2>
       <p class="text-xl cta-subtitle mb-8 max-w-2xl mx-auto">
-        Whether you need a website, a web application, or backend development work, I'd like to hear about it.
+        Whether you need a website built, a broken project rescued, or you're looking to bring on an engineer, I'd like to hear about it.
       </p>
       <a href="/contact" class="bg-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center">
         <Mail class="h-5 w-5 mr-2" />
@@ -270,6 +299,95 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
     .creator-text {
       color: var(--text-secondary);
       line-height: 1.7;
+    }
+
+    /* Tech Stack Section */
+    .tech-stack-section {
+      background-color: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .tech-stack-eyebrow {
+      color: #00d4ff;
+      opacity: 0.8;
+    }
+
+    .about-stack-label {
+      color: var(--text-secondary);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      min-width: 9rem;
+      opacity: 0.65;
+    }
+
+    .about-stack-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: rgba(0, 212, 255, 0.06);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      color: var(--text-secondary);
+      letter-spacing: 0.01em;
+      transition: all 0.2s ease;
+    }
+
+    .about-stack-badge:hover {
+      background: rgba(0, 212, 255, 0.12);
+      border-color: rgba(0, 212, 255, 0.4);
+      color: #00d4ff;
+    }
+
+    html.light .tech-stack-section {
+      background-color: var(--bg-secondary);
+      border-color: #e2e8f0;
+    }
+
+    html.light .tech-stack-eyebrow {
+      color: #0077a8;
+      opacity: 1;
+    }
+
+    html.light .about-stack-label {
+      color: #475569;
+    }
+
+    html.light .about-stack-badge {
+      background: rgba(0, 212, 255, 0.07);
+      border-color: rgba(0, 212, 255, 0.22);
+      color: #334155;
+    }
+
+    html.light .about-stack-badge:hover {
+      background: rgba(0, 212, 255, 0.14);
+      border-color: rgba(0, 212, 255, 0.4);
+      color: #0077a8;
+    }
+
+    .creator-link {
+      color: #00d4ff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0, 212, 255, 0.35);
+      transition: border-color 0.2s ease;
+    }
+
+    .creator-link:hover {
+      border-color: #00d4ff;
+    }
+
+    html.light .creator-link {
+      color: #0077a8;
+      border-bottom-color: rgba(0, 119, 168, 0.35);
+    }
+
+    html.light .creator-link:hover {
+      border-bottom-color: #0077a8;
     }
 
     html.light .creator-bg {
