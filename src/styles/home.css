@@ -104,6 +104,45 @@ html.light .home-hero-role {
   max-width: 36rem;
 }
 
+.home-hero-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.home-hero-portrait {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .home-hero-portrait {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-hero-layout {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2.5rem;
+    align-items: stretch;
+  }
+
+  .home-hero-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+  }
+
+  .home-hero-portrait {
+    justify-content: flex-end;
+    align-items: center;
+  }
+}
+
 html.light .home-hero-heading {
   color: #0f172a;
 }
@@ -565,6 +604,8 @@ html.light .home-infra-layer-row {
 }
 
 .home-portrait-ring {
+  display: inline-block;
+  width: fit-content;
   border-radius: 50%;
   padding: 2px;
   background: linear-gradient(
@@ -576,9 +617,14 @@ html.light .home-infra-layer-row {
   box-shadow: 0 0 24px rgba(0, 212, 255, 0.12);
 }
 
+.home-portrait-ring > .rx-image-wrap {
+  width: 200px;
+  height: 200px;
+}
+
 .home-portrait {
-  width: 280px;
-  height: 280px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   object-fit: cover;
   object-position: center top;
@@ -586,8 +632,31 @@ html.light .home-infra-layer-row {
 }
 
 @media (min-width: 1024px) {
-  .home-portrait {
-    width: 320px;
-    height: 320px;
+  .home-portrait-ring {
+    height: 75%;
+    width: auto;
+    aspect-ratio: 1 / 1;
   }
+
+  .home-portrait-ring > .rx-image-wrap {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.home-portrait-credit {
+  font-size: 0.75rem;
+  color: var(--text-muted, #a3a3a3);
+  text-align: center;
+}
+
+.home-portrait-credit a {
+  color: var(--accent, #00d4ff);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.home-portrait-credit a:hover {
+  opacity: 0.85;
+  text-decoration: underline;
 }

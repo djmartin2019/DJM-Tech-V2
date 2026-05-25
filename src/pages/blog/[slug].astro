@@ -8,6 +8,7 @@ import { ChevronRight, Twitter, Linkedin, Github, Mail } from 'lucide-astro';
 import { getCollection } from 'astro:content';
 import { getAllBlogPosts } from '../../data/blog';
 import { imageUrl } from '../../lib/rendorix-images';
+import RendorixImage from '../../components/RendorixImage.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -92,9 +93,10 @@ const relatedPosts = allBlogPosts
         <figure class="blog-lead">
           <div class="blog-lead-frame">
             <div class="blog-card-image">
-              <img
+              <RendorixImage
                 src={leadImageUrl}
                 alt={post.data.title}
+                wrapClass="rx-image-wrap--fill"
                 width={600}
                 height={600}
                 loading="eager"

@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { Zap, Shield, Users, BookOpen, Mail, Layers } from 'lucide-astro';
 import { rx } from '../lib/rendorix';
+import RendorixImage from '../components/RendorixImage.astro';
 
 const headshotUrl = rx.img('about-me-photo.jpeg', { preset: 'headshotAbout' });
 
@@ -38,10 +39,11 @@ const stackGroups = [
           <div class="portrait-container">
             <div class="portrait-glow" aria-hidden="true"></div>
             <div class="portrait-ring">
-              <img
+              <RendorixImage
                 src={headshotUrl}
                 alt="David Martin"
                 class="portrait-image"
+                wrapClass="rx-image-wrap--fill"
                 width={960}
                 height={960}
                 loading="eager"

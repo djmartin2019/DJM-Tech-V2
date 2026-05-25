@@ -34,7 +34,7 @@ export const homepageProjects: HomepageProject[] = [
     id: "rendorix",
     title: "Rendorix",
     description:
-      "AWS-powered image optimization and transformation pipeline using CloudFront, Lambda, Sharp, Terraform, and S3.",
+      "AWS-powered image optimization and transformation pipeline using CloudFront, Lambda, Sharp, Terraform, and S3. Rendorix actively powers the image delivery pipeline for this site’s homepage and blog assets, handling production image transformation, caching, and optimization at the edge.",
     focus: [
       "CDN architecture",
       "Signed URLs",
@@ -65,16 +65,16 @@ export const homepageProjects: HomepageProject[] = [
   },
   {
     id: "edge-cache",
-    title: "Edge Cache / Gateway",
+    title: "HTTP Edge Cache (lab)",
     description:
-      "GH Resolver edge cache lab: a custom edge/origin gateway exploring rate limiting, proxy architecture, and response caching with Node.js and Docker.",
+      "A small HTTP caching edge in front of a GitHub API origin, with a React UI for public profile lookup. Experiments with cache hits, TTL, and stale-while-refresh using in-memory edge cache.",
     focus: [
-      "Middleware pipelines",
-      "Proxy systems",
-      "Caching strategies",
-      "Operational infrastructure",
+      "In-memory edge caching",
+      "Stale-while-refresh",
+      "Edge/origin proxy architecture",
+      "GitHub API integration",
     ],
-    technologies: ["Node.js", "Docker", "Redis", "HTTP"],
+    technologies: ["Node.js", "Docker", "React", "HTTP"],
     href: "https://githublookup.djm-apps.com/",
     icon: "server",
   },

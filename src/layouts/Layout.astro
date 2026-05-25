@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/rendorix-image.css';
 
 export interface Props {
   title: string;
@@ -105,5 +106,8 @@ const imageURL = image.startsWith('http') ? image : new URL(image, Astro.site).h
   </head>
   <body class="antialiased">
     <slot />
+    <script>
+      import '../scripts/init-rendorix-images.ts';
+    </script>
   </body>
 </html>

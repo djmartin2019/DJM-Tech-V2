@@ -1,0 +1,43 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  wrapClass?: string;
+  loading?: 'lazy' | 'eager';
+  decoding?: 'async' | 'sync' | 'auto';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  rounded?: 'none' | 'full';
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  class: imgClass = '',
+  wrapClass = '',
+  loading = 'lazy',
+  decoding = 'async',
+  fetchpriority,
+  rounded = 'none',
+} = Astro.props;
+
+const roundedClass = rounded === 'full' ? 'rx-rounded-full' : '';
+---
+
+<div class:list={['rx-image-wrap', wrapClass, roundedClass]} data-rx-image-wrap>
+  <div class="rx-image-shimmer" aria-hidden="true"></div>
+  <img
+    class:list={['rx-image', imgClass]}
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    decoding={decoding}
+    fetchpriority={fetchpriority}
+  />
+</div>
