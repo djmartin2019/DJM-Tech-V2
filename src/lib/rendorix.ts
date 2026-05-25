@@ -21,5 +21,7 @@ export const rx = createRendorix({
     headshot: { w: 720, h: 720, q: 86, f: "webp" },
     /** About page portrait: larger square, up to ~480px display. */
     headshotAbout: { w: 960, h: 960, q: 86, f: "webp" },
+    /** Open Graph / social link previews (1.91:1). */
+    og: { w: 1200, h: 630, q: 85, f: "jpeg" },
   },
 });

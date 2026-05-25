@@ -28,6 +28,10 @@ const leadImageUrl = post.data.image
   ? imageUrl(post.data.image, { preset: 'cardSquare' })
   : undefined;
 
+const ogImageUrl = post.data.image
+  ? imageUrl(post.data.image, { preset: 'og' })
+  : '/assets/og-default.png';
+
 const relatedPosts = allBlogPosts
   .filter(
     (p) =>
@@ -40,7 +44,7 @@ const relatedPosts = allBlogPosts
 <Layout 
   title={`${post.data.title} - David Martin | DJM Tech`} 
   description={post.data.description || post.data.summary}
-  image={post.data.image || "/assets/og-default.png"}
+  image={ogImageUrl}
   canonical={post.data.canonicalURL}
 >
   <Header />

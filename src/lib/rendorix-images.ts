@@ -8,7 +8,7 @@ const IMG_FALLBACK = "/assets/android-chrome-512x512.png";
 export function imageUrl(
   keyOrPath: string | undefined,
   opts: {
-    preset: "card" | "cardSquare" | "hero" | "headshot" | "headshotAbout";
+    preset: "card" | "cardSquare" | "hero" | "headshot" | "headshotAbout" | "og";
   } = { preset: "card" },
 ): string {
   if (!keyOrPath?.trim()) {
