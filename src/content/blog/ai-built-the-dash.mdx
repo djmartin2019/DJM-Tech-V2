@@ -12,15 +12,13 @@ tags:
     "AI",
     "Systems Engineering",
   ]
-readTime: 14
+readTime: 8
 image: "AIBuiltTheDash.png"
 author: "David Martin"
 canonicalURL: "https://djmtech.dev/blog/ai-built-the-dash"
 ---
 
-I used Cursor to generate most of Sentinel's initial dashboard UI. Within a few minutes, I had a professional-looking Next.js app with uptime tables, latency charts, incident feeds, and typed Prisma integrations. It worked. It looked polished. And then the data started growing.
-
-Sentinel is an observability platform that continuously writes infrastructure telemetry into PostgreSQL. Every monitored target generates a new `HealthCheck` row every 30 seconds. The AI-generated code was perfectly reasonable for version one. It was not built for what happened next.
+I used Cursor to generate most of Sentinel's initial dashboard UI. Within a few minutes, I had a professional-looking Next.js app with uptime tables, latency charts, incident feeds, and typed Prisma integrations. It worked, it looked polished... and then the data started growing.
 
 **Live dashboard:** [Sentinel](https://sentinel.djm-apps.com/)  
 **Source:** [GitHub](https://github.com/djmartin2019/Sentinel)
@@ -31,84 +29,39 @@ Sentinel is an observability platform that continuously writes infrastructure te
 
 Honestly, the AI did an incredible job. If I had built all of this manually, it would have taken significantly longer. UI work has never been my primary interest, and AI let me skip a lot of the friction involved in scaffolding an application from scratch.
 
-Within a few minutes, I had:
+Within a few minutes, I had uptime tables, latency charts, incident feeds, summary cards, responsive layouts, dark mode styling, loading states, and typed Prisma integrations.
 
-- Uptime tables
-- Latency charts
-- Incident feeds
-- Summary cards
-- Responsive layouts
-- Dark mode styling
-- Loading states
-- Typed Prisma integrations
+That's where modern AI tools genuinely shine: boilerplate, component generation, layout structure, and wiring together standard application flows. For getting from "blank repository" to "working product," the productivity jump is hard to overstate.
 
-That's where modern AI tools genuinely shine. They're excellent at boilerplate, component generation, layout structure, repetitive patterns, and wiring together standard application flows. For getting from "blank repository" to "working product," the productivity jump is hard to overstate.
-
-Importantly, the generated code wasn't bad. The dashboard looked polished. The components were organized reasonably well. The Prisma queries were syntactically correct. The app worked.
+The generated code wasn't bad. The dashboard looked polished. The Prisma queries were syntactically correct. The app worked.
 
 At first.
-
-But Sentinel isn't a static marketing site or a CRUD demo. The platform continuously writes infrastructure telemetry and uptime data into PostgreSQL. Even with only a handful of targets, the table started growing quickly.
-
-That's when the difference between **working code** and **scalable code** started becoming obvious.
-
-The UI was AI-generated. The performance problems were very real.
 
 ---
 
 ## Sentinel Became a Real Systems Problem
 
-Sentinel started as a straightforward observability project. At a high level, the architecture is simple:
+Sentinel started as a straightforward observability project:
 
 - A checker service performs scheduled HTTP health checks
 - Results are written into PostgreSQL through Prisma
 - A Next.js dashboard visualizes uptime, incidents, and latency trends
 
-Each monitored target generates a new `HealthCheck` row every 30 seconds. That doesn't sound like much at first. But observability systems have a very different growth pattern than traditional CRUD applications. The data is append-only, time-series oriented, and constantly accumulating. Even with only seven monitored targets, Sentinel was already generating roughly **20,000 new rows per day**.
+Observability systems have a very different growth pattern than traditional CRUD applications. The data is append-only, time-series oriented, and constantly accumulating. Even with only seven monitored targets, Sentinel was already generating roughly **20,000 new rows per day**.
 
-The dashboard was also intentionally dynamic. Every page load fetched fresh operational data directly from Postgres:
+Every page load fetched fresh operational data directly from Postgres — current status, latency trends, uptime percentages, active incidents, and historical charts. The application wasn't just rendering UI anymore. It was continuously aggregating operational history across growing time windows.
 
-- Current service status
-- Latency trends
-- Uptime percentages
-- Active incidents
-- Historical charts
-
-That meant the application wasn't just rendering UI anymore. It was continuously aggregating operational history across growing time windows.
-
-This is where the project stopped feeling like "just a Next.js app" and started behaving more like an actual systems problem.
-
-The interesting part is that nothing initially looked broken. The queries worked. The charts rendered. The UI felt fast enough during early development.
-
-But underneath the surface, the architecture was doing a huge amount of unnecessary work:
-
-- Repeatedly scanning the same 30-day windows
-- Loading large result sets into Node.js
-- Aggregating data in application code instead of SQL
-- Duplicating queries across dashboard widgets
-
-That's one of the dangerous things about AI-generated application code: it often optimizes for correctness and readability, not operational efficiency.
-
-To be fair, that's usually the right tradeoff for getting to version one quickly. The problem is that infrastructure dashboards are effectively real-time analytics systems. Once data starts accumulating, inefficient query patterns compound very quickly.
-
-Sentinel became the first project where I really felt the distinction between **building an application** and **engineering a system that could continue scaling as the workload changed**.
+Nothing initially looked broken. The queries worked. The charts rendered. The UI felt fast enough during early development. But Sentinel became the first project where I really felt the distinction between **building an application** and **engineering a system that could keep scaling as the workload changed**.
 
 ---
 
-## The Dashboard Worked… But the Queries Didn't
+## The Dashboard Worked, But the Queries Didn't Scale
 
-The first version of the Sentinel dashboard was functionally correct. That's important to say because this wasn't a case of AI generating nonsense code or completely broken logic. The application worked exactly the way it was supposed to:
+The first version was functionally correct. Uptime charts rendered, incidents appeared, latency graphs updated, and service status cards reflected real data. From the outside, it looked production-ready.
 
-- The uptime charts rendered
-- Incidents appeared correctly
-- Latency graphs updated
-- Service status cards reflected real data
+This wasn't broken AI code. It was plausible code doing the wrong kind of work.
 
-From the outside, it looked production-ready. However, underneath the surface, the data layer was doing far more work than it needed to.
-
-One of the first warning signs was how the dashboard loaded "latest status" information for monitored services. The original implementation fetched thousands of recent `HealthCheck` rows from Prisma, sorted them in descending order, then walked through the results in JavaScript to manually deduplicate targets.
-
-It looked roughly like this:
+The original pattern was consistent everywhere: fetch data with Prisma, load rows into Node.js, aggregate in TypeScript, render charts. One of the clearest examples was how the dashboard loaded "latest status" for monitored services:
 
 ```typescript
 const checks = await prisma.healthCheck.findMany({
@@ -120,101 +73,44 @@ const latestByTarget = new Map();
 // ... walk rows in JS to keep newest per target
 ```
 
-Technically correct. Architecturally expensive.
+Technically correct. Architecturally expensive. The database returned thousands of rows so Node.js could throw most of them away to find the newest record per target.
 
-The database was returning thousands of rows so Node.js could throw most of them away just to determine the newest record per target.
+The same pattern showed up across uptime calculations, daily chart bucketing, and latency percentiles — all aggregated in application code after large result sets had already left Postgres. Individually, none of these queries looked alarming. That's what makes this kind of problem tricky. AI tends to generate code that is locally reasonable, but systems performance problems are usually **global**, not local.
 
-The same pattern showed up throughout the dashboard. For uptime calculations, the application loaded every check in a 30-day window into memory and aggregated percentages in TypeScript. The uptime charts did daily bucketing in application code. Latency charts grouped rows in JavaScript and calculated percentiles after the data had already been transferred from Postgres into Node.
+The overview page was the clearest example. Multiple widgets fetched overlapping 30-day datasets simultaneously. Some loaders even called other loaders internally, meaning the same time window could be scanned multiple times during a single page render.
 
-Individually, none of these queries looked especially alarming. That's what makes this kind of problem tricky.
+The core issue wasn't a single bad query. It was the cumulative effect of reasonable decisions stacking together — and an unanswered systems design question: **where should the computation actually happen?**
 
-AI tends to generate code that is locally reasonable: readable, maintainable, logically correct, easy to follow. But systems performance problems are usually **global**, not local.
+PostgreSQL is optimized for aggregation, grouping, and time-series rollups. Node.js is not. But the original implementation treated Postgres mostly as storage while application code handled the analytical work.
 
-The real issue wasn't a single bad query. It was the cumulative effect of multiple "reasonable" decisions stacking together:
+The biggest realization was that most dashboard components didn't need raw rows. They needed **summaries**:
 
-- Repeated full-window scans
-- Duplicated data loading
-- Aggregation outside the database
-- Transferring far more rows than necessary
-- Multiple dashboard widgets independently querying the same datasets
+- The uptime chart needed daily percentages and time buckets, not hundreds of thousands of individual checks
+- The services table needed one latest row per target, not thousands of recent rows
+- The summary cards needed averages, counts, and rollups
 
-The overview page was the clearest example. Several dashboard widgets were fetching overlapping 30-day datasets simultaneously. Some loaders even called other loaders internally, meaning the same time window could be scanned multiple times during a single page render.
-
-At small scale, you barely notice this. But observability systems don't stay small for very long. The checker continuously appends new rows into PostgreSQL every 30 seconds per monitored target. Over time, query patterns that seem harmless during development quietly become operational liabilities.
-
-That was the moment I started realizing something important about AI-assisted development:
+That distinction changed how I approached the data layer. Instead of querying large windows and deriving summaries in Node.js, the optimized architecture pushed aggregation into Postgres and returned only the minimal datasets the UI actually needed.
 
 **AI is very good at generating applications that work. It is not automatically good at generating systems that scale.**
 
 ---
 
-## The Real Problem: Node.js Was Handling Too Much Data
-
-The more I analyzed the dashboard, the more I realized the issue wasn't that the AI-generated code was "wrong." It was plausible. That's what makes modern AI tooling both powerful and dangerous.
-
-The generated implementation was perfectly reasonable for an early-stage application:
-
-1. Fetch data with Prisma
-2. Load rows into Node.js
-3. Aggregate in TypeScript
-4. Render charts
-
-If the dataset stayed small forever, the dashboard probably would have continued working fine. But Sentinel isn't a static CRUD application. It's an observability system continuously generating operational data. Every monitored target writes a new `HealthCheck` row every 30 seconds. The workload naturally grows over time whether you think about scaling or not.
-
-That's where the architecture started breaking down.
-
-The dashboard was repeatedly pulling large datasets out of PostgreSQL and moving them into Node.js to perform operations like deduplication, uptime calculations, daily bucketing, grouping, and latency aggregation.
-
-The implementation was logically correct, but it ignored an important systems design question: **where should the computation actually happen?**
-
-PostgreSQL is specifically optimized for aggregation, grouping, sorting, filtering, and time-series rollups. Node.js is not. But the original implementation treated Postgres mostly as a storage layer while application code handled the analytical work.
-
-That meant the system was paying several unnecessary costs simultaneously:
-
-- Large result sets transferred from the database
-- Repeated scans across the same time windows
-- Duplicated aggregation logic
-- Unnecessary memory usage in Node.js
-- Redundant processing per dashboard widget
-
-The biggest realization was that most dashboard components didn't actually need raw rows. They needed **summaries**.
-
-The uptime chart didn't need hundreds of thousands of individual health checks. It needed daily uptime percentages, grouped counts, and time buckets.
-
-The services table didn't need thousands of recent checks. It needed one latest row per target.
-
-The summary cards didn't need raw history. They needed averages, counts, and rollups.
-
-That distinction completely changed how I approached the data layer. Instead of querying large windows, processing them in Node.js, and then deriving summaries, the optimized architecture pushed aggregation into Postgres and returned only the minimal datasets the UI actually needed.
-
-That was the point where the dashboard stopped behaving like an AI-generated prototype and started behaving like an engineered system.
-
----
-
 ## The Optimizations That Changed Everything
 
-Once I understood the actual problem, the optimization work became much more straightforward. The goal wasn't to "make Prisma faster." The goal was to fundamentally reduce how much work the system was doing.
-
-That led to five architectural shifts that dramatically changed the behavior of the dashboard.
+Once I understood the actual problem, the fixes became straightforward. The goal wasn't to "make Prisma faster." It was to reduce how much work the system was doing.
 
 ### 1. Matching Indexes to Read Patterns
 
-Before touching query logic, I started with indexes. Sentinel's workload is heavily time-oriented: recent health checks, latest status lookups, rolling uptime windows, and latency history.
-
-That meant the database needed indexes aligned with how the dashboard actually reads data, not just how the tables were structured. I added indexes for:
+Sentinel's workload is heavily time-oriented. I added indexes aligned with how the dashboard actually reads data:
 
 - `checkedAt`
 - `(targetId, checkedAt DESC)`
 
-The second index became especially important because so much of the UI depends on answering a very specific question efficiently: _"What is the latest check for this target?"_
-
-Without the proper index, Postgres has to work much harder as the table grows. This was also the first moment where the optimization process stopped feeling like "frontend work" and started feeling like real infrastructure engineering.
+The second index mattered most. So much of the UI depends on answering one question efficiently: _"What is the latest check for this target?"_
 
 ### 2. Replacing 5,000-Row Fetches with `DISTINCT ON`
 
-One of the biggest inefficiencies in the original dashboard was how it loaded current service status. The first implementation fetched thousands of recent rows from Prisma and deduplicated them in JavaScript to determine the newest check per target.
-
-That worked functionally, but it was backwards architecturally. Postgres already has a native solution for this pattern: `DISTINCT ON`.
+Postgres already has a native solution for latest-per-group lookups:
 
 ```sql
 SELECT DISTINCT ON ("targetId")
@@ -226,23 +122,11 @@ FROM "HealthCheck"
 ORDER BY "targetId", "checkedAt" DESC;
 ```
 
-Instead of returning thousands of rows and filtering them in Node.js, the database now returns exactly what the UI needs: one row per target, specifically the newest row.
-
-At seven targets, the query dropped from thousands of rows returned to roughly seven. That single change alone massively reduced unnecessary processing.
+At seven targets, the query dropped from thousands of rows returned to roughly seven.
 
 ### 3. Moving Aggregation into PostgreSQL
 
-This ended up being the biggest architectural improvement.
-
-Originally, uptime calculations worked like this:
-
-1. Load every health check in a 30-day window
-2. Move all rows into Node.js
-3. Aggregate percentages in TypeScript
-
-Again, perfectly plausible. But not scalable.
-
-Instead, I switched to database-level aggregation using Prisma `groupBy()` and raw SQL aggregation queries. Uptime percentages became grouped count queries instead of full row scans:
+Uptime percentages became grouped count queries instead of full row scans:
 
 ```typescript
 await prisma.healthCheck.groupBy({
@@ -251,13 +135,11 @@ await prisma.healthCheck.groupBy({
 });
 ```
 
-The dashboard stopped processing huge raw datasets and started consuming compact analytical summaries instead. That distinction matters enormously in observability systems where row counts continuously grow over time.
+The dashboard stopped processing huge raw datasets and started consuming compact analytical summaries instead.
 
 ### 4. Using `date_trunc` for Time-Series Rollups
 
-The uptime and latency charts exposed another major inefficiency. The original implementation loaded large windows of raw data and bucketed timestamps manually in JavaScript. But time-series aggregation is something Postgres is already extremely good at.
-
-Instead of grouping timestamps in application code, the optimized queries used `date_trunc()` directly in SQL:
+Chart bucketing moved into SQL:
 
 ```sql
 SELECT
@@ -268,120 +150,35 @@ FROM "HealthCheck"
 GROUP BY 1;
 ```
 
-This shifted the expensive bucketing work into the database and reduced chart datasets from massive raw result sets down to roughly:
+Chart datasets dropped from massive raw result sets to roughly 30 rows for 30-day uptime and 60 buckets for 60-minute latency. The dashboard no longer scaled based on total historical row count. It scaled based on chart resolution.
 
-- 30 rows for 30-day uptime
-- 60 buckets for 60-minute latency
+### 5. Consolidating the Overview Page
 
-That's a completely different scaling profile. The dashboard no longer scaled based on total historical row count. It scaled based on chart resolution. That's a much healthier architecture.
+The final fix was architectural. I replaced independent widget loaders with a single coordinated overview loader that fetched shared datasets once, ran aggregate queries in parallel, derived view models centrally, and reused results across widgets.
 
-### 5. Consolidating the Entire Overview Page
-
-The final optimization was architectural rather than query-specific.
-
-Originally, multiple dashboard widgets independently queried overlapping datasets: uptime summaries, service tables, charts, and stats cards. Some loaders even triggered other loaders internally, meaning the same 30-day window could be scanned multiple times during a single request.
-
-The fix was introducing a single coordinated overview loader that:
-
-- Fetched shared datasets once
-- Ran aggregate queries in parallel
-- Derived view models centrally
-- Reused results across widgets
-
-That eliminated redundant scans entirely. More importantly, it changed the mental model of the dashboard from "a collection of independent widgets" to "a composed analytical system." That architectural shift mattered just as much as the SQL optimizations themselves.
-
-By the end of the refactor, the difference was dramatic. The dashboard stopped repeatedly loading raw operational history, processing massive datasets in Node.js, and duplicating scans across components.
-
-Instead, it became a thin analytical layer on top of PostgreSQL:
-
-- Aggregate in SQL
-- Return minimal datasets
-- Compose lightweight view models
-- Render efficiently
-
-That was the point where the project genuinely started feeling like production engineering instead of scaffolding.
+By the end of the refactor, the dashboard became a thin analytical layer on top of PostgreSQL: aggregate in SQL, return minimal datasets, compose lightweight view models, render efficiently.
 
 ---
 
-## What AI Still Doesn't Understand
+## What AI Accelerates — and What It Doesn't
 
-Working on Sentinel changed how I think about AI-assisted development. I don't think the takeaway is "AI-generated code is bad." Honestly, most of the generated code was pretty good. The UI looked polished. The components were structured reasonably well. The Prisma queries were readable. The application worked.
+Working on Sentinel reinforced something I think a lot of AI-assisted projects are running into.
 
-That's what makes modern AI tooling so powerful. The problem is that AI currently optimizes for **plausibility**, not operational understanding.
+AI optimizes for **plausibility**, not operational understanding. It can generate code that looks architecturally correct because it has seen thousands of similar implementations. But it doesn't reason about workload growth, query cost, memory pressure, or how overlapping dashboard widgets compound under real data volume.
 
-It can generate code that looks architecturally correct because it has seen thousands of similar implementations across public repositories. But that doesn't mean the generated solution truly understands:
+That's usually fine for version one. It's not fine for observability systems where data continuously accumulates and charts repeatedly aggregate historical windows.
 
-- Workload growth
-- Query cost
-- Infrastructure constraints
-- Data access patterns
-- Memory pressure
-- Scaling characteristics
-- Operational tradeoffs
+The bottleneck in software development is shifting. Writing syntax matters less. What matters more is identifying architectural problems, understanding where computation belongs, recognizing inefficient data flow, and making tradeoff decisions as workloads evolve.
 
-Those are systems problems. And systems problems are contextual.
+AI helped me scaffold the dashboard, generate layouts, wire components, and accelerate iteration. Without Cursor, Sentinel would have taken significantly longer to get off the ground. That acceleration is real.
 
-The original Sentinel dashboard is a perfect example. The generated implementation was completely reasonable for a small dataset, a prototype, an MVP, or a low-volume CRUD application. But observability systems are fundamentally different workloads. The data continuously accumulates. Time windows constantly expand. Charts repeatedly aggregate historical data. Operational dashboards query overlapping datasets over and over again.
-
-Nothing about the generated code accounted for that growth pattern because AI doesn't actually "understand" the future behavior of the system it's generating. It predicts likely implementations. It does not reason about operational cost the way an experienced engineer does.
-
-That distinction matters a lot.
-
-One thing I've started noticing across modern AI workflows is that the bottleneck in software development is shifting. Writing syntax matters less than it used to. What matters more is:
-
-- Identifying architectural problems
-- Understanding where computation belongs
-- Reasoning about system boundaries
-- Recognizing inefficient data flow
-- Making tradeoff decisions as workloads evolve
-
-In other words, the value is moving higher up the abstraction stack.
-
-AI dramatically accelerates implementation. But implementation is only one layer of engineering. The harder part is still designing systems, understanding infrastructure behavior, diagnosing scaling problems, optimizing the right bottlenecks, and deciding which abstractions are appropriate for a workload.
-
-That's the part AI still struggles with. And honestly, I think that's why backend engineering, platform engineering, observability, and systems thinking are becoming even more valuable in the AI era, not less.
-
-Because once AI can generate version one instantly, the real differentiator becomes: **who understands how version one breaks under real conditions.**
-
----
-
-## The Future Isn't AI vs Engineers
-
-I don't think software development is heading toward a future where AI replaces engineers. I think it's heading toward a future where engineers who understand systems move dramatically faster than before.
-
-That's the biggest thing Sentinel reinforced for me.
-
-AI helped me scaffold the dashboard, generate layouts, wire together components, structure data loaders, and accelerate iteration. Without Cursor, the project would have taken significantly longer to get off the ground. That acceleration is real.
-
-But the moment the application started behaving like an actual observability system instead of a prototype, the bottlenecks changed completely.
-
-The important questions stopped being:
-
-- "How quickly can I build this?"
-- "How do I write this component?"
-- "What Prisma syntax should I use?"
-
-And became:
+But once the application started behaving like an actual observability system instead of a prototype, the important questions changed:
 
 - "Why is this query scanning so much data?"
 - "Why are multiple widgets loading the same window?"
 - "Why is Node.js doing analytical work instead of Postgres?"
 - "How does this architecture behave six months from now?"
 
-Those are engineering questions. And I think that's where the industry is heading overall.
+Those are engineering questions. And I think that's the future: not AI versus engineers, but engineers who understand systems — and use AI as leverage to move faster through version one while still doing the work that makes version one survive real conditions.
 
-AI is making implementation cheaper. That means architectural judgment becomes more valuable. The differentiator is increasingly not "Can you write code from scratch without assistance?" It's:
-
-- Can you identify the real bottleneck?
-- Can you reason about systems under growth?
-- Can you design around operational constraints?
-- Can you recognize when an abstraction stops fitting the workload?
-- Can you guide AI toward the correct solution instead of just accepting the first plausible one?
-
-That's a very different skill set than memorizing syntax.
-
-In a strange way, I think AI is pushing engineering back toward fundamentals: systems thinking, architecture, infrastructure, performance, operational awareness, and understanding how data actually moves through software.
-
-Sentinel ended up becoming a great reminder of that for me. AI built the dashboard faster than I could have manually. Understanding Postgres, query design, and systems architecture is what made the dashboard viable as the data started growing.
-
-And honestly, I think that's the future: not AI versus engineers, but engineers who know how to think at the systems level using AI as leverage.
+AI built the dashboard faster than I could have manually. Understanding Postgres, query design, and systems architecture is what made it viable as the data started growing.
