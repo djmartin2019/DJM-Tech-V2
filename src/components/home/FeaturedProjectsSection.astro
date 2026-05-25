@@ -1,0 +1,28 @@
+---
+import PlatformProjectCard from './PlatformProjectCard.astro';
+import { homepageProjects } from '../../data/homepage';
+---
+
+<section class="py-16 lg:py-20" aria-labelledby="projects-heading">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-12 max-w-2xl">
+      <span class="home-eyebrow">Featured work</span>
+      <h2 id="projects-heading" class="home-section-title text-3xl md:text-4xl mt-3 mb-4">
+        Systems I've built and operated
+      </h2>
+      <p class="home-section-subtitle">
+        Backend services, observability tooling, edge pipelines, and infrastructure experiments, focused on how they behave under real operational load.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {homepageProjects.map((project) => (
+        <PlatformProjectCard project={project} />
+      ))}
+    </div>
+
+    <div class="text-center mt-10">
+      <a href="/projects" class="home-btn-secondary">View all projects</a>
+    </div>
+  </div>
+</section>

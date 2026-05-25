@@ -1,11 +1,13 @@
 ---
+import '../../styles/blog-card.css';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { Image } from 'astro:assets';
-import { ChevronRight, User, Twitter, Linkedin, Github, Mail } from 'lucide-astro';
+import BlogPostCard from '../../components/BlogPostCard.astro';
+import { ChevronRight, Twitter, Linkedin, Github, Mail } from 'lucide-astro';
 import { getCollection } from 'astro:content';
 import { getAllBlogPosts } from '../../data/blog';
+import { imageUrl } from '../../lib/rendorix-images';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -21,6 +23,18 @@ const { Content } = await post.render();
 // Find the corresponding blog post data
 const allBlogPosts = await getAllBlogPosts();
 const blogPost = allBlogPosts.find((p: any) => p.slug === post.slug);
+
+const leadImageUrl = post.data.image
+  ? imageUrl(post.data.image, { preset: 'cardSquare' })
+  : undefined;
+
+const relatedPosts = allBlogPosts
+  .filter(
+    (p) =>
+      p.slug !== post.slug &&
+      p.tags.some((tag: string) => post.data.tags.includes(tag)),
+  )
+  .slice(0, 3);
 ---
 
 <Layout 
@@ -70,15 +84,21 @@ const blogPost = allBlogPosts.find((p: any) => p.slug === post.slug);
         </div>
       </div>
 
-      <!-- Article Image -->
-      {post.data.image && (
-        <div class="mb-12">
-          <img 
-            src={post.data.image} 
-            alt={post.data.title}
-            class="w-full h-full object-cover rounded-lg shadow-lg article-image"
-          />
-        </div>
+      {leadImageUrl && (
+        <figure class="blog-lead">
+          <div class="blog-lead-frame">
+            <div class="blog-card-image">
+              <img
+                src={leadImageUrl}
+                alt={post.data.title}
+                width={600}
+                height={600}
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </figure>
       )}
 
       <!-- Article Content -->
@@ -124,55 +144,20 @@ const blogPost = allBlogPosts.find((p: any) => p.slug === post.slug);
     </div>
   </article>
 
-  <!-- Related Posts -->
-  {(() => {
-    const relatedPosts = allBlogPosts.filter((p: any) => p.slug !== post.slug && p.tags.some((tag: string) => post.data.tags.includes(tag))).slice(0, 3);
-    
-    if (relatedPosts.length > 0) {
-      return (
-        <section class="py-20 related-posts-bg">
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold related-posts-title mb-8 text-center">Related Posts</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {relatedPosts.map((relatedPost: any) => (
-                <article class="related-post-card neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300">
-                  <div class="h-48 related-post-image-bg flex items-center justify-center overflow-hidden">
-                    <Image 
-                      src={relatedPost.image || "/assets/og-default.png"} 
-                      alt={relatedPost.title}
-                      width={400}
-                      height={192}
-                      class="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div class="p-6">
-                    <div class="flex items-center text-sm related-post-meta mb-3">
-                      <span>{new Date(relatedPost.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                      <span class="mx-2">•</span>
-                      <span>{relatedPost.readTime} min read</span>
-                    </div>
-                    <h3 class="text-xl font-semibold related-post-title mb-3">{relatedPost.title}</h3>
-                    <p class="related-post-description mb-4">{relatedPost.description}</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                      {relatedPost.tags.slice(0, 3).map((tag: string) => (
-                        <span class="px-2 py-1 related-post-tag text-xs rounded">{tag}</span>
-                      ))}
-                    </div>
-                    <a href={`/blog/${relatedPost.slug}`} class="related-post-link">
-                      Read More →
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      );
-    }
-    return null;
-  })()}
+  {relatedPosts.length > 0 && (
+    <section class="py-16 lg:py-20 border-t border-[var(--border-color)]" style="background-color: var(--bg-secondary);" aria-labelledby="related-posts-heading">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 id="related-posts-heading" class="blog-posts-section-title text-3xl text-center mb-10">
+          Related Posts
+        </h2>
+        <div class="blog-posts-grid">
+          {relatedPosts.map((relatedPost) => (
+            <BlogPostCard post={relatedPost} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- CTA Section -->
   <section class="py-20 cta-bg">
@@ -235,14 +220,6 @@ const blogPost = allBlogPosts.find((p: any) => p.slug === post.slug);
     background-color: rgba(0, 212, 255, 0.2);
     color: var(--accent-color);
     border: 1px solid var(--accent-color);
-  }
-
-  .article-image {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  }
-
-  html.light .article-image {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   }
 
   .article-content {
@@ -333,61 +310,6 @@ const blogPost = allBlogPosts.find((p: any) => p.slug === post.slug);
     color: var(--accent-color);
   }
 
-  /* Related Posts Styles */
-  .related-posts-bg {
-    background-color: var(--bg-secondary);
-  }
-
-  .related-posts-title {
-    color: var(--text-primary);
-  }
-
-  .related-post-card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-color);
-  }
-
-  .related-post-image-bg {
-    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-card) 100%);
-  }
-
-  .related-post-icon {
-    color: var(--accent-color);
-  }
-
-  .related-post-meta {
-    color: var(--text-secondary);
-  }
-
-  .related-post-title {
-    color: var(--text-primary);
-  }
-
-  .related-post-description {
-    color: var(--text-secondary);
-  }
-
-  .related-post-tag {
-    background-color: rgba(0, 212, 255, 0.2);
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-  }
-
-  .related-post-link {
-    color: var(--accent-color);
-    font-weight: 500;
-    transition: color 0.3s;
-    cursor: pointer;
-    pointer-events: auto;
-    position: relative;
-    z-index: 10;
-    text-decoration: none;
-  }
-
-  .related-post-link:hover {
-    color: var(--accent-hover);
-  }
-
   /* CTA Styles */
   .cta-bg {
     background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-dark) 100%);
@@ -447,19 +369,6 @@ const blogPost = allBlogPosts.find((p: any) => p.slug === post.slug);
   }
 
   html.light .author-title {
-    color: #475569;
-  }
-
-  html.light .related-posts-title {
-    color: #0f172a;
-    font-weight: 700;
-  }
-
-  html.light .related-post-title {
-    color: #0f172a;
-  }
-
-  html.light .related-post-description {
     color: #475569;
   }
 

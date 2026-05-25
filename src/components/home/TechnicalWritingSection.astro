@@ -1,0 +1,30 @@
+---
+import BlogPostCard from '../BlogPostCard.astro';
+import { getRecentPosts } from '../../data/blog';
+
+const recentPosts = await getRecentPosts(3);
+---
+
+<section class="home-writing py-16 lg:py-20 border-t border-[var(--border-color)]" aria-labelledby="writing-heading">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-10 max-w-2xl">
+      <span class="home-eyebrow">Technical writing</span>
+      <h2 id="writing-heading" class="home-section-title text-3xl md:text-4xl mt-3 mb-4">
+        Notes from building real systems
+      </h2>
+      <p class="home-section-subtitle">
+        Case studies and deep dives on scaling, observability, caching, and the operational lessons that don't show up in tutorials.
+      </p>
+    </div>
+
+    <div class="blog-posts-grid">
+      {recentPosts.map((post) => (
+        <BlogPostCard post={post} />
+      ))}
+    </div>
+
+    <div class="text-center mt-10">
+      <a href="/blog" class="home-btn-secondary">Read all posts</a>
+    </div>
+  </div>
+</section>

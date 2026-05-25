@@ -11,7 +11,7 @@ const currentProjects = getProjectsByStatus('current');
 const roadmapProjects = getProjectsByStatus('roadmap');
 ---
 
-<Layout title="Projects - David Martin | DJM Tech" description="Explore my portfolio of web development projects, from completed applications to current work and future roadmap.">
+<Layout title="Projects - David Martin | DJM Tech" description="Backend systems, observability tooling, edge infrastructure, and self-hosted services I build and operate in TypeScript.">
   <Header />
   
   <!-- Hero Section -->
@@ -19,9 +19,9 @@ const roadmapProjects = getProjectsByStatus('roadmap');
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
         <h1 class="text-4xl md:text-5xl font-bold hero-title mb-6">My Projects</h1>
-        <p class="text-xl hero-subtitle max-w-3xl mx-auto">
-          A collection of web applications, tools, and experiments that showcase my journey as a developer. 
-          From completed projects to current work and future roadmap.
+        <p class="text-xl hero-subtitle max-w-3xl mx-auto text-balance">
+          I build and operate backend systems, observability platforms, edge infrastructure, and self-hosted services, mostly in TypeScript on Cloudflare and my VPS.
+          These are projects I run in production and labs I am still hardening.
         </p>
       </div>
     </div>
@@ -63,10 +63,9 @@ const roadmapProjects = getProjectsByStatus('roadmap');
               <Folder class="h-5 w-5 project-icon" />
               <p class="text-sm font-semibold uppercase tracking-wide project-label">VPS Laboratory</p>
             </div>
-            <h2 class="text-2xl md:text-3xl font-bold section-title mb-3">Follow my self-hosted deployment lab</h2>
+            <h2 class="text-2xl md:text-3xl font-bold section-title mb-3">Self-hosted on my VPS</h2>
             <p class="project-description max-w-3xl">
-              I use a VPS as a portfolio laboratory for hosting and deployment experiments that are not always a great fit for Cloudflare-style platforms.
-              This includes full stack PHP apps today, and eventually Java, C, and other server-side projects.
+              Platform projects like Sentinel, edge experiments, and observability tooling live on my personal VPS. Apache handles reverse proxying and TLS termination; each app runs in Docker. The stack is mostly TypeScript today: Next.js services, Node backends, Postgres, and Compose-based deployments behind Cloudflare.
             </p>
           </div>
           <a
@@ -76,7 +75,7 @@ const roadmapProjects = getProjectsByStatus('roadmap');
             class="primary-cta-button flex items-center justify-center whitespace-nowrap"
           >
             <ExternalLink class="h-4 w-4 mr-2" />
-            Visit DJM Apps
+            Open VPS Dashboard
           </a>
         </div>
       </div>

@@ -5,7 +5,7 @@ summary: "LLMs are great at plausible solutions, but engineers still own assumpt
 description: "Using place deduplication as a real example, this post explores what LLMs do well, what they miss, and how to ship responsibly without outsourcing judgment."
 tags: ["AI", "LLMs", "Development", "Systems Design", "MVP"]
 readTime: 12
-image: "/assets/the-limits-of-llms.png"
+image: "the-limits-of-llms.png"
 author: "David Martin"
 canonicalURL: "https://djmtech.dev/blog/the-limits-of-llms"
 ---
@@ -284,35 +284,36 @@ Only engineers decide when it's safe to ship.
 
 ### Geospatial Distance & Matching
 
-- **[Haversine Formula](https://www.movable-type.co.uk/scripts/latlong.html)**: Movable Type Scripts - *Calculate distance, bearing and more between Latitude/Longitude points*
-- **[Haversine Formula (Reference)](https://en.wikipedia.org/wiki/Haversine_formula)**: Wikipedia - *Haversine formula*
-- **[Levenshtein Distance (Edit Distance)](https://en.wikipedia.org/wiki/Levenshtein_distance)**: Wikipedia - *Levenshtein distance*
-- **[Original Levenshtein Paper (1966)](https://nymity.ch/sybilhunting/pdf/Levenshtein1966a.pdf)**: Levenshtein, V. I. - *Binary codes capable of correcting deletions, insertions, and reversals*
-- **[Wagner-Fischer Algorithm (1974)](https://par.cse.nsysu.edu.tw/resource/lab_relative/Wagn74.pdf)**: Wagner, R. A., & Fischer, M. J. - *The String-to-String Correction Problem*
+- **[Haversine Formula](https://www.movable-type.co.uk/scripts/latlong.html)**: Movable Type Scripts - _Calculate distance, bearing and more between Latitude/Longitude points_
+- **[Haversine Formula (Reference)](https://en.wikipedia.org/wiki/Haversine_formula)**: Wikipedia - _Haversine formula_
+- **[Levenshtein Distance (Edit Distance)](https://en.wikipedia.org/wiki/Levenshtein_distance)**: Wikipedia - _Levenshtein distance_
+- **[Original Levenshtein Paper (1966)](https://nymity.ch/sybilhunting/pdf/Levenshtein1966a.pdf)**: Levenshtein, V. I. - _Binary codes capable of correcting deletions, insertions, and reversals_
+- **[Wagner-Fischer Algorithm (1974)](https://par.cse.nsysu.edu.tw/resource/lab_relative/Wagn74.pdf)**: Wagner, R. A., & Fischer, M. J. - _The String-to-String Correction Problem_
 
 ---
 
 ### Google-Scale Geospatial & Infrastructure References
 
-- **[S2 Geometry Library (Open Source)](https://github.com/google/s2geometry)**: Google - *S2 Geometry Library*
-- **[S2 Geometry in Practice (Google Cloud)](https://cloud.google.com/blog/products/data-analytics/best-practices-for-spatial-clustering-in-bigquery)**: Google Cloud Blog - *Best practices for spatial clustering in BigQuery*
-- **[Spatial Indexing with S2 Cells](https://cloud.google.com/bigquery/docs/grid-systems-spatial-analysis)**: Google Cloud Docs - *Grid systems for spatial analysis*
+- **[S2 Geometry Library (Open Source)](https://github.com/google/s2geometry)**: Google - _S2 Geometry Library_
+- **[S2 Geometry in Practice (Google Cloud)](https://cloud.google.com/blog/products/data-analytics/best-practices-for-spatial-clustering-in-bigquery)**: Google Cloud Blog - _Best practices for spatial clustering in BigQuery_
+- **[Spatial Indexing with S2 Cells](https://cloud.google.com/bigquery/docs/grid-systems-spatial-analysis)**: Google Cloud Docs - _Grid systems for spatial analysis_
 
 ---
 
 ### Large-Scale Systems & Reliability
 
 - **[Bigtable: A Distributed Storage System](https://research.google.com/archive/bigtable-osdi06.pdf)**: Chang et al. (Google Research, 2006)
-- **[Cloud Spanner](https://cloud.google.com/spanner)**: Google Cloud - *Spanner: Globally distributed, strongly consistent database*
-- **[Site Reliability Engineering](https://sre.google/sre-book/monitoring-distributed-systems/)**: Google - *Monitoring Distributed Systems*
+- **[Cloud Spanner](https://cloud.google.com/spanner)**: Google Cloud - _Spanner: Globally distributed, strongly consistent database_
+- **[Site Reliability Engineering](https://sre.google/sre-book/monitoring-distributed-systems/)**: Google - _Monitoring Distributed Systems_
 
 ---
 
 ### Experimentation, Tuning, and Human-in-the-Loop
 
-- **[Controlled Experiments at Scale](https://ai.stanford.edu/~ronnyk/2007GuideControlledExperiments.pdf)**: Kohavi et al. - *Practical Guide to Controlled Experiments on the Web*
-- **[Google Local Guides Program](https://transparency.google/intl/en/our-policies/product-terms/local-guides/)**: Google Transparency Center - *Local Guides Program Policies*
+- **[Controlled Experiments at Scale](https://ai.stanford.edu/~ronnyk/2007GuideControlledExperiments.pdf)**: Kohavi et al. - _Practical Guide to Controlled Experiments on the Web_
+- **[Google Local Guides Program](https://transparency.google/intl/en/our-policies/product-terms/local-guides/)**: Google Transparency Center - _Local Guides Program Policies_
 
 ---
+
 \
-*Note: The "Google-scale" architecture described in this post is an informed synthesis based on public documentation, research papers, and industry-standard patterns. It is intended as a conceptual calibration tool rather than a literal description of any single internal Google system.*
+_Note: The "Google-scale" architecture described in this post is an informed synthesis based on public documentation, research papers, and industry-standard patterns. It is intended as a conceptual calibration tool rather than a literal description of any single internal Google system._

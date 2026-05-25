@@ -1,24 +1,25 @@
 ---
+import '../styles/blog-card.css';
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { Image } from 'astro:assets';
+import BlogPostCard from '../components/BlogPostCard.astro';
 import { getAllBlogPosts, getAllTags } from '../data/blog';
 
 const blogPosts = await getAllBlogPosts();
 const allTags = await getAllTags();
 ---
 
-<Layout title="Build Logs - DJM Tech" description="Notes, experiments, breakdowns, and venting sessions about building DJM Tech. Real thoughts on web development.">
+<Layout title="Technical Writing | DJM Tech" description="Case studies and notes on scaling, observability, caching, and operating backend systems in production.">
   <Header />
   
   <!-- Hero Section -->
   <section class="relative hero-bg py-20 lg:py-32 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
-        <h1 class="text-4xl md:text-5xl font-bold hero-title mb-6">Build Logs</h1>
-        <p class="text-xl hero-subtitle max-w-3xl mx-auto">
-          Notes, experiments, breakdowns, and venting sessions about building DJM Tech.
+        <h1 class="text-4xl md:text-5xl font-bold hero-title mb-6">Technical Writing</h1>
+        <p class="text-xl hero-subtitle max-w-3xl mx-auto text-balance">
+          Case studies and notes on scaling, observability, and operating real systems in production.
         </p>
       </div>
     </div>
@@ -50,43 +51,11 @@ const allTags = await getAllTags();
   <section class="py-20 section-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl font-bold section-title mb-8">All Posts</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="posts-grid">
+      <div class="blog-posts-grid" id="posts-grid">
         {blogPosts.map((post) => (
-          <article class={`blog-post neon-card overflow-hidden hover:shadow-neon-glow transition-all duration-300 ${post.tags.join(' ')} flex flex-col`}>
-            <div class="h-64 blog-image-bg flex items-center justify-center overflow-hidden">
-              <Image 
-                src={post.image || "/assets/og-default.png"} 
-                alt={post.title}
-                width={400}
-                height={300}
-                class="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-            <div class="p-6 flex flex-col flex-grow">
-              <div class="flex items-center text-sm blog-meta mb-3">
-                <span>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                <span class="mx-2">•</span>
-                <span>{post.readTime} min read</span>
-                {post.featured && (
-                  <>
-                    <span class="mx-2">•</span>
-                    <span class="text-yellow-500 font-medium">Featured</span>
-                  </>
-                )}
-              </div>
-              <h3 class="text-xl font-semibold blog-post-title mb-3">{post.title}</h3>
-              <p class="blog-post-description mb-4">{post.description}</p>
-              <div class="flex flex-wrap gap-2 mb-4">
-                {post.tags.map((tag) => (
-                  <span class="px-2 py-1 blog-tag text-xs rounded">{tag}</span>
-                ))}
-              </div>
-              <a href={`/blog/${post.slug}`} class="blog-link mt-auto">
-                Read More →
-              </a>
-            </div>
-          </article>
+          <div class="blog-post-filter" data-tags={post.tags.join(',')}>
+            <BlogPostCard post={post} />
+          </div>
         ))}
       </div>
     </div>
@@ -97,24 +66,21 @@ const allTags = await getAllTags();
     // Tag filtering functionality
     document.addEventListener('DOMContentLoaded', function() {
       const tagFilters = document.querySelectorAll('.tag-filter');
-      const blogPosts = document.querySelectorAll('.blog-post');
+      const postItems = document.querySelectorAll('.blog-post-filter');
       
       tagFilters.forEach(filter => {
         filter.addEventListener('click', function(this: HTMLElement) {
           const tag = this.getAttribute('data-tag');
           
-          // Update active filter
           tagFilters.forEach(btn => btn.classList.remove('active'));
           this.classList.add('active');
           
-          // Filter posts
-          blogPosts.forEach(post => {
-            if (tag === 'all' || (tag && post.classList.contains(tag!))) {
-              (post as HTMLElement).style.display = 'block';
-              (post as HTMLElement).style.animation = 'fadeIn 0.3s ease-in';
-            } else {
-              (post as HTMLElement).style.display = 'none';
-            }
+          postItems.forEach((item) => {
+            const el = item as HTMLElement;
+            const tags = el.getAttribute('data-tags')?.split(',') ?? [];
+            const show = tag === 'all' || (tag && tags.includes(tag));
+            el.style.display = show ? '' : 'none';
+            if (show) el.style.animation = 'fadeIn 0.3s ease-in';
           });
         });
       });
@@ -187,67 +153,6 @@ const allTags = await getAllTags();
 
     .section-title {
       color: var(--text-primary);
-    }
-
-    .blog-bg {
-      background-color: var(--bg-secondary);
-    }
-
-    .blog-title {
-      color: var(--text-primary);
-    }
-
-    .blog-image-bg {
-      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%);
-    }
-
-    .blog-icon {
-      color: var(--accent-color);
-    }
-
-    .blog-meta {
-      color: var(--text-secondary);
-    }
-
-    .blog-post-title {
-      color: var(--text-primary);
-    }
-
-    .blog-post-description {
-      color: var(--text-secondary);
-    }
-
-    .blog-tag {
-      background-color: rgba(0, 212, 255, 0.2);
-      color: var(--accent-color);
-      border: 1px solid var(--accent-color);
-    }
-
-    .blog-link {
-      color: var(--accent-color);
-      font-weight: 500;
-      transition: color 0.3s;
-      cursor: pointer;
-      pointer-events: auto;
-      position: relative;
-      z-index: 10;
-      text-decoration: none;
-    }
-
-    .blog-link:hover {
-      color: var(--accent-hover);
-    }
-
-    .cta-bg {
-      background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-dark) 100%);
-    }
-
-    .cta-title {
-      color: var(--bg-primary);
-    }
-
-    .cta-subtitle {
-      color: rgba(255, 255, 255, 0.9);
     }
 
     .tag-filter {

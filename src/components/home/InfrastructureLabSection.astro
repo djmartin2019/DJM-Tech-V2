@@ -1,0 +1,55 @@
+---
+import { ArrowDown, ExternalLink, Server } from 'lucide-astro';
+import {
+  infrastructureLayers,
+  infrastructureStack,
+  vpsDashboardHighlights,
+} from '../../data/homepage';
+---
+
+<section class="home-infra py-16 lg:py-24" aria-labelledby="infra-heading">
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+      <div class="lg:col-span-6 space-y-5">
+        <div class="flex items-center gap-2">
+          <Server class="h-5 w-5" style="color: var(--accent-color)" aria-hidden="true" />
+          <span class="home-eyebrow">Self-hosted</span>
+        </div>
+        <h2 id="infra-heading" class="home-section-title text-3xl md:text-4xl text-balance">
+          Infrastructure Lab
+        </h2>
+        <p class="home-section-subtitle max-w-xl">
+          I run a personal VPS as a production-style lab: Apache in front, Docker Compose behind it, and mostly TypeScript services I deploy and maintain myself.
+        </p>
+        <div class="home-infra-stack pt-2">
+          {infrastructureStack.map((item) => (
+            <span class="home-infra-tag">{item}</span>
+          ))}
+        </div>
+      </div>
+
+      <div class="lg:col-span-6 flex flex-col gap-4">
+        <div class="home-infra-cta">
+          <p class="home-infra-cta-label">VPS dashboard</p>
+          <p class="home-section-subtitle text-sm">
+            I keep a simple index at djm-apps.com so visitors can open what is running on the server without guessing hostnames.
+          </p>
+          <ul class="home-infra-highlights" role="list">
+            {vpsDashboardHighlights.map((item) => (
+              <li>{item}</li>
+            ))}
+          </ul>
+          <a
+            href="https://djm-apps.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="home-btn-primary gap-2"
+          >
+            Open VPS Dashboard
+            <ExternalLink class="h-4 w-4" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

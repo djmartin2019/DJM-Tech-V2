@@ -16,38 +16,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "texas-frontstep",
-    title: "Texas Frontstep Media",
-    description:
-      "Website and photography system for a Texas real estate media business.",
-    longDescription:
-      "Texas Frontstep Media helps real estate agents and small business owners in Texas get online quickly with professional photography and clean, fast websites. The site itself is built for speed and reliability, and the service is designed to be simple: you get a professional result without the back-and-forth.",
-    image: "/assets/websites/TexasFrontstep.png",
-    technologies: ["Astro", "TailwindCSS", "TypeScript", "Cloudflare"],
-    status: "completed",
-    liveUrl: "https://texasfrontstep.com/",
-    githubUrl: "https://github.com/djmartin2019/texas-frontstep",
-    featured: true,
-    category: "Business",
-    startDate: "2025-08",
-  },
-  {
-    id: "how-god-speaks-to-us",
-    title: "How God Speaks to Us",
-    description:
-      "Content platform for a Bible study group: verses, sermons, and posts scheduled ahead of time.",
-    longDescription:
-      "Built a full content-managed website for a Bible study group that needed a simple way to share daily verses, blogs, sermons, and documents with their community. The platform integrates with a CMS so new content can be added and scheduled ahead of time without touching code. Designed for reliability, ease of use, and consistent daily engagement.",
-    image: "/assets/websites/HowGodSpeaks.png", // update if needed
-    technologies: ["Astro", "TailwindCSS", "TypeScript", "Contentful"],
-    status: "completed",
-    liveUrl: "https://howgodspeakstous.com/",
-    githubUrl: "", // leave empty if private
-    featured: true,
-    category: "Business",
-    startDate: "2025-12",
-  },
-  {
     id: "foodly-map",
     title: "Foodly Map",
     description:
@@ -71,6 +39,22 @@ export const projects: Project[] = [
     startDate: "2026-01",
   },
   {
+    id: "how-god-speaks-to-us",
+    title: "How God Speaks to Us",
+    description:
+      "Content platform for a Bible study group: verses, sermons, and posts scheduled ahead of time.",
+    longDescription:
+      "Built a full content-managed website for a Bible study group that needed a simple way to share daily verses, blogs, sermons, and documents with their community. The platform integrates with a CMS so new content can be added and scheduled ahead of time without touching code. Designed for reliability, ease of use, and consistent daily engagement.",
+    image: "/assets/websites/HowGodSpeaks.png", // update if needed
+    technologies: ["Astro", "TailwindCSS", "TypeScript", "Contentful"],
+    status: "completed",
+    liveUrl: "https://howgodspeakstous.com/",
+    githubUrl: "", // leave empty if private
+    featured: true,
+    category: "Business",
+    startDate: "2025-12",
+  },
+  {
     id: "astrocontentfulstarter",
     title: "Astro Contentful Starter Template",
 
@@ -88,6 +72,23 @@ export const projects: Project[] = [
     category: "Portfolio",
     startDate: "2025-09",
   },
+  {
+    id: "texas-frontstep",
+    title: "Texas Frontstep Media",
+    description:
+      "Website and photography system for a Texas real estate media business.",
+    longDescription:
+      "Texas Frontstep Media helps real estate agents and small business owners in Texas get online quickly with professional photography and clean, fast websites. The site itself is built for speed and reliability, and the service is designed to be simple: you get a professional result without the back-and-forth.",
+    image: "/assets/websites/TexasFrontstep.png",
+    technologies: ["Astro", "TailwindCSS", "TypeScript", "Cloudflare"],
+    status: "completed",
+    liveUrl: "https://texasfrontstep.com/",
+    githubUrl: "https://github.com/djmartin2019/texas-frontstep",
+    featured: true,
+    category: "Business",
+    startDate: "2025-08",
+  },
+
   {
     id: "daveypics",
     title: "DaveyPics",
@@ -119,7 +120,7 @@ export const projects: Project[] = [
       "Isometric Rendering",
       "State Machines",
     ],
-    status: "current",
+    status: "roadmap",
     githubUrl: "https://github.com/djmartin2019/Oblique",
     featured: false,
     category: "Game Engine / Systems",

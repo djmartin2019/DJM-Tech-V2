@@ -2,10 +2,31 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Check } from 'lucide-astro';
+import { Zap, Shield, Users, BookOpen, Mail, Layers } from 'lucide-astro';
+import { rx } from '../lib/rendorix';
+
+const headshotUrl = rx.img('about-me-photo.jpeg', { preset: 'headshotAbout' });
+
+const stackGroups = [
+  {
+    title: 'Backend & Apps',
+    items: ['TypeScript', 'Node.js', 'Next.js', 'Prisma'],
+  },
+  {
+    title: 'Data & APIs',
+    items: ['PostgreSQL', 'REST APIs', 'WebSockets'],
+  },
+  {
+    title: 'Infrastructure',
+    items: ['Docker', 'Apache', 'Cloudflare', 'VPS'],
+  },
+];
 ---
 
-<Layout title="About - DJM Tech" description="David Martin is a full-stack web developer and freelance engineer who builds production-grade websites, web apps, and backend systems.">
+<Layout
+  title="About | David Martin - Backend & Platform Engineer"
+  description="Backend and platform engineer focused on operational software, observability, infrastructure, and TypeScript systems in production."
+>
   <Header />
 
   <!-- Creator Section -->
@@ -14,34 +35,43 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <!-- Portrait -->
         <div class="relative flex justify-center lg:justify-start">
-          <div class="relative portrait-container">
-            <div class="portrait-glow"></div>
-            <img 
-              src="/assets/about-me-photo.jpeg" 
-              alt="David Martin - Web Developer and Freelance Engineer"
-              class="portrait-image"
-            />
-            <div class="absolute inset-0 portrait-border"></div>
+          <div class="portrait-container">
+            <div class="portrait-glow" aria-hidden="true"></div>
+            <div class="portrait-ring">
+              <img
+                src={headshotUrl}
+                alt="David Martin"
+                class="portrait-image"
+                width={960}
+                height={960}
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
+            </div>
           </div>
         </div>
 
         <!-- Intro Text -->
         <div class="space-y-6">
           <div>
-            <h2 class="text-3xl md:text-4xl font-bold creator-title mb-4">
-              Hey, I'm David
-            </h2>
-            <p class="text-xl md:text-2xl creator-subtitle mb-6">
-              I build websites, web applications, and the backend systems that power them.
+            <h1 class="text-3xl md:text-4xl font-bold creator-title mb-4 text-balance">
+              Hi, I'm David!
+            </h1>
+            <p class="text-xl md:text-2xl creator-subtitle mb-6 text-balance">
+              I build operational software, developer infrastructure, and scalable backend systems using TypeScript, Postgres, Docker, and cloud platforms.
             </p>
           </div>
-          
+
           <div class="space-y-4">
             <p class="creator-text">
-              I work across the full stack: frontend interfaces, APIs, databases, and deployment. I hold my work to a high engineering standard and own the entire lifecycle from architecture to launch.
+              I care about how software behaves in production, not just how it looks in a demo. My background includes platform-facing customer work at Vercel, where I helped customers troubleshoot deployments, routing, DNS, environment configuration, and the kinds of operational issues that appear once real systems are live.
             </p>
             <p class="creator-text">
-              I'm available for freelance projects and deliver working software to real clients. I'm also open to full-time engineering roles. If you're hiring, take a look at my <a href="https://github.com/djmartin2019" target="_blank" rel="noopener noreferrer" class="creator-link">GitHub</a> and <a href="/projects" class="creator-link">projects</a>.
+              Alongside that experience, I’ve spent years building and self-hosting projects focused on observability, telemetry, infrastructure, and backend architecture. I’m especially interested in the operational layers that keep systems reliable as complexity, traffic, and data scale.
+            </p>
+            <p class="creator-text">
+              Today I focus on backend architecture, observability, telemetry, and the operational layers that keep systems reliable as data and traffic grow. Explore my <a href="/projects" class="creator-link">projects</a>, <a href="/blog" class="creator-link">technical writing</a>, or <a href="https://github.com/djmartin2019" target="_blank" rel="noopener noreferrer" class="creator-link">GitHub</a>.
             </p>
           </div>
         </div>
@@ -50,61 +80,36 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
   </section>
 
   <!-- Tech Stack -->
-  <section class="py-10 tech-stack-section">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="text-xs font-semibold uppercase tracking-widest tech-stack-eyebrow mb-6">Tech I work with</p>
-      <div class="space-y-4">
-        <div class="about-stack-row">
-          <span class="about-stack-label">Websites & Apps</span>
-          <div class="about-stack-badges">
-            <span class="about-stack-badge">React</span>
-            <span class="about-stack-badge">TypeScript</span>
-            <span class="about-stack-badge">Node.js</span>
-            <span class="about-stack-badge">Astro</span>
+  <section class="about-stack-section" aria-labelledby="about-stack-heading">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="about-stack-panel">
+        <div class="about-stack-header">
+          <div class="about-stack-header-icon" aria-hidden="true">
+            <Layers class="h-5 w-5" />
+          </div>
+          <div>
+            <p class="about-stack-eyebrow">Stack</p>
+            <h2 id="about-stack-heading" class="about-stack-title">What I build with</h2>
+            <p class="about-stack-lead">
+              TypeScript-first backends and operational tooling, from the database layer through Dockerized deployment on Cloudflare and my VPS.
+            </p>
           </div>
         </div>
-        <div class="about-stack-row">
-          <span class="about-stack-label">Backend Systems</span>
-          <div class="about-stack-badges">
-            <span class="about-stack-badge">Python</span>
-            <span class="about-stack-badge">PostgreSQL</span>
-            <span class="about-stack-badge">REST APIs</span>
-          </div>
-        </div>
-        <div class="about-stack-row">
-          <span class="about-stack-label">Hosting & Deployment</span>
-          <div class="about-stack-badges">
-            <span class="about-stack-badge">Docker</span>
-            <span class="about-stack-badge">Cloudflare</span>
-            <span class="about-stack-badge">VPS</span>
-            <span class="about-stack-badge">GitHub Actions</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Story Section -->
-  <section class="py-20 lg:py-24 section-bg relative">
-    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00d4ff]/30 to-transparent"></div>
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">The Story</h2>
-        <p class="text-lg section-subtitle">What DJM Tech is and why it exists</p>
-      </div>
-      
-      <div class="space-y-6">
-        <p class="text-lg md:text-xl story-text leading-relaxed">
-          DJM Tech is my development practice. I build <strong>websites, web applications, and backend systems</strong> for clients and for my own products and I take every project from architecture through deployment.
-        </p>
-        
-        <p class="text-lg md:text-xl story-text leading-relaxed">
-          I also operate my own multi-stack hosting environment on a VPS with isolated Docker containers. That infrastructure work isn't the headline it's <strong>proof that I understand the full lifecycle</strong> of how software gets built, shipped, and kept running.
-        </p>
-        
-        <p class="text-lg md:text-xl story-text leading-relaxed">
-          The philosophy is simple: <strong>write clean code, deliver reliable software, and ship fast.</strong> Every project gets the same standard of engineering discipline regardless of size.
-        </p>
+        <div class="about-stack-grid">
+          {stackGroups.map((group) => (
+            <div class="about-stack-card">
+              <h3 class="about-stack-card-title">{group.title}</h3>
+              <ul class="about-stack-badges" role="list">
+                {group.items.map((item) => (
+                  <li>
+                    <span class="about-stack-badge">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
@@ -117,38 +122,38 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
         <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Engineering Principles</h2>
         <p class="text-lg section-subtitle">What guides my engineering decisions</p>
       </div>
-      
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="text-center">
-          <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-            <Zap class="h-8 w-8 value-icon" />
-          </div>
-          <h3 class="text-lg font-semibold value-title mb-2">Launch Velocity</h3>
-          <p class="value-description">Shorten the path from idea to production without sacrificing quality.</p>
-        </div>
-        
         <div class="text-center">
           <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
             <Shield class="h-8 w-8 value-icon" />
           </div>
-          <h3 class="text-lg font-semibold value-title mb-2">Reliability</h3>
-          <p class="value-description">Stable deployments and predictable operations come before hype.</p>
+          <h3 class="text-lg font-semibold value-title mb-2">Production first</h3>
+          <p class="value-description">Design for how systems behave under real traffic, auth, and failure modes after launch.</p>
         </div>
-        
+
+        <div class="text-center">
+          <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+            <Zap class="h-8 w-8 value-icon" />
+          </div>
+          <h3 class="text-lg font-semibold value-title mb-2">Observability</h3>
+          <p class="value-description">Metrics, health checks, and telemetry that tell operators what is actually happening.</p>
+        </div>
+
         <div class="text-center">
           <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
             <Users class="h-8 w-8 value-icon" />
           </div>
           <h3 class="text-lg font-semibold value-title mb-2">Ownership</h3>
-          <p class="value-description">Take the whole problem, not just your piece of it. Don't hand off half-finished work.</p>
+          <p class="value-description">Own architecture through deployment: data layer, APIs, proxies, and the ops around them.</p>
         </div>
-        
+
         <div class="text-center">
           <div class="value-icon-container rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
             <BookOpen class="h-8 w-8 value-icon" />
           </div>
-          <h3 class="text-lg font-semibold value-title mb-2">Systems Thinking</h3>
-          <p class="value-description">Understand the full picture from database to deployment, not just your piece of it.</p>
+          <h3 class="text-lg font-semibold value-title mb-2">Systems thinking</h3>
+          <p class="value-description">Query patterns, caching, and infrastructure choices that determine whether scale holds.</p>
         </div>
       </div>
     </div>
@@ -158,12 +163,12 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
   <!-- CTA Section -->
   <section class="py-20 cta-bg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold cta-title mb-4">Let's Work Together</h2>
-      <p class="text-xl cta-subtitle mb-8 max-w-2xl mx-auto">
-        Whether you need a website built, a broken project rescued, or you're looking to bring on an engineer, I'd like to hear about it.
+      <h2 class="text-3xl md:text-4xl font-bold cta-title mb-4">Get in touch</h2>
+      <p class="text-xl cta-subtitle mb-8 max-w-2xl mx-auto text-balance">
+        Open to backend and platform engineering conversations, whether you are hiring or want to talk through systems you are building.
       </p>
-      <a href="/contact" class="bg-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center">
-        <Mail class="h-5 w-5 mr-2" />
+      <a href="/contact" class="about-cta-button inline-flex items-center">
+        <Mail class="h-5 w-5 mr-2" aria-hidden="true" />
         Get In Touch
       </a>
     </div>
@@ -247,7 +252,8 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
     .portrait-container {
       position: relative;
       width: 100%;
-      max-width: 400px;
+      max-width: min(100%, 28rem);
+      aspect-ratio: 1 / 1;
     }
 
     .portrait-glow {
@@ -271,27 +277,49 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
       }
     }
 
-    .portrait-image {
+    .portrait-ring {
       position: relative;
-      width: 100%;
-      height: auto;
-      border-radius: 1rem;
-      border: 2px solid rgba(0, 212, 255, 0.3);
-      box-shadow: 0 0 40px rgba(0, 212, 255, 0.3), 0 0 80px rgba(0, 212, 255, 0.2);
       z-index: 1;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.85rem;
+      padding: 3px;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 212, 255, 0.55) 0%,
+        rgba(0, 212, 255, 0.12) 50%,
+        rgba(0, 212, 255, 0.4) 100%
+      );
+      box-shadow:
+        0 0 0 1px rgba(0, 212, 255, 0.12),
+        0 0 32px rgba(0, 212, 255, 0.2);
+    }
+
+    .portrait-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.75rem;
+      object-fit: cover;
+      object-position: center top;
       transition: transform 0.3s ease;
     }
 
-    .portrait-image:hover {
+    .portrait-ring:hover .portrait-image {
       transform: scale(1.02);
-      box-shadow: 0 0 60px rgba(0, 212, 255, 0.4), 0 0 120px rgba(0, 212, 255, 0.3);
     }
 
-    .portrait-border {
-      border-radius: 1rem;
-      border: 1px solid rgba(0, 212, 255, 0.2);
-      pointer-events: none;
-      z-index: 2;
+    .creator-eyebrow {
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+
+    html.light .creator-eyebrow {
+      color: #0077a8;
     }
 
     .creator-title {
@@ -307,87 +335,186 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
       line-height: 1.7;
     }
 
-    /* Tech Stack Section */
-    .tech-stack-section {
-      background-color: var(--bg-secondary);
-      border-top: 1px solid var(--border-color);
+    /* Tech stack */
+    .about-stack-section {
+      padding: 3rem 0 4rem;
+      position: relative;
+    }
+
+    .about-stack-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(0, 212, 255, 0.35) 50%,
+        transparent 100%
+      );
+    }
+
+    .about-stack-panel {
+      background: var(--bg-card);
+      border: 1px solid rgba(0, 212, 255, 0.22);
+      border-radius: 1rem;
+      padding: 1.75rem 1.5rem;
+      box-shadow:
+        0 0 0 1px rgba(0, 212, 255, 0.06),
+        0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    html.light .about-stack-panel {
+      background: #ffffff;
+      border-color: rgba(0, 119, 168, 0.25);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    .about-stack-header {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.5rem;
       border-bottom: 1px solid var(--border-color);
     }
 
-    .tech-stack-eyebrow {
-      color: #00d4ff;
-      opacity: 0.8;
-    }
-
-    .about-stack-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-    }
-
-    .about-stack-label {
-      color: var(--text-secondary);
-      font-size: 0.7rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      white-space: nowrap;
-      width: 9.5rem;
+    .about-stack-header-icon {
       flex-shrink: 0;
-      padding-top: 0.3rem;
-      opacity: 0.65;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 0.65rem;
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.28);
+      color: var(--accent-color);
+    }
+
+    .about-stack-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-color);
+      margin-bottom: 0.35rem;
+    }
+
+    .about-stack-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .about-stack-lead {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 40rem;
+      margin: 0;
+    }
+
+    .about-stack-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .about-stack-panel {
+        padding: 2rem 2rem 2.25rem;
+      }
+
+      .about-stack-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .about-stack-card {
+      background: rgba(0, 0, 0, 0.22);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      padding: 1.15rem 1.2rem 1.25rem;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .about-stack-card:hover {
+      border-color: rgba(0, 212, 255, 0.35);
+      transform: translateY(-2px);
+    }
+
+    html.light .about-stack-card {
+      background: #f8fafc;
+      border-color: #e2e8f0;
+    }
+
+    .about-stack-card-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-color);
+      margin-bottom: 0.85rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     }
 
     .about-stack-badges {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      flex: 1;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .about-stack-badges li {
+      margin: 0;
     }
 
     .about-stack-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.25rem 0.65rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 0.45rem 0.75rem;
+      border-radius: 0.45rem;
+      font-size: 0.85rem;
       font-weight: 500;
       background: rgba(0, 212, 255, 0.06);
-      border: 1px solid rgba(0, 212, 255, 0.2);
-      color: var(--text-secondary);
-      letter-spacing: 0.01em;
-      transition: all 0.2s ease;
+      border: 1px solid rgba(0, 212, 255, 0.18);
+      color: var(--text-primary);
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
 
     .about-stack-badge:hover {
       background: rgba(0, 212, 255, 0.12);
       border-color: rgba(0, 212, 255, 0.4);
-      color: #00d4ff;
+      color: var(--accent-color);
     }
 
-    html.light .tech-stack-section {
-      background-color: var(--bg-secondary);
-      border-color: #e2e8f0;
-    }
-
-    html.light .tech-stack-eyebrow {
+    html.light .about-stack-eyebrow,
+    html.light .about-stack-card-title {
       color: #0077a8;
-      opacity: 1;
     }
 
-    html.light .about-stack-label {
+    html.light .about-stack-title {
+      color: #0f172a;
+    }
+
+    html.light .about-stack-lead {
       color: #475569;
     }
 
     html.light .about-stack-badge {
-      background: rgba(0, 212, 255, 0.07);
-      border-color: rgba(0, 212, 255, 0.22);
-      color: #334155;
+      background: rgba(0, 212, 255, 0.06);
+      border-color: rgba(0, 119, 168, 0.2);
+      color: #0f172a;
     }
 
     html.light .about-stack-badge:hover {
-      background: rgba(0, 212, 255, 0.14);
-      border-color: rgba(0, 212, 255, 0.4);
       color: #0077a8;
     }
 
@@ -419,13 +546,41 @@ import { User, Monitor, Server, Wrench, Zap, Shield, Users, BookOpen, Mail, Chec
       background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, rgba(0, 212, 255, 0.05) 40%, transparent 70%);
     }
 
-    html.light .portrait-image {
-      border-color: rgba(0, 212, 255, 0.4);
-      box-shadow: 0 0 30px rgba(0, 212, 255, 0.2), 0 0 60px rgba(0, 212, 255, 0.1);
+    html.light .portrait-ring {
+      background: linear-gradient(
+        135deg,
+        rgba(0, 153, 204, 0.75) 0%,
+        rgba(0, 153, 204, 0.2) 50%,
+        rgba(0, 153, 204, 0.55) 100%
+      );
     }
 
-    html.light .portrait-image:hover {
-      box-shadow: 0 0 40px rgba(0, 212, 255, 0.3), 0 0 80px rgba(0, 212, 255, 0.2);
+    .about-cta-button {
+      background-color: #0a0a0a;
+      color: #ffffff;
+      padding: 1rem 2rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      font-size: 1.05rem;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    .about-cta-button:hover {
+      background-color: #141414;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    }
+
+    html.light .about-cta-button {
+      background-color: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+    }
+
+    html.light .about-cta-button:hover {
+      background-color: #f8fafc;
     }
 
     .section-bg {
