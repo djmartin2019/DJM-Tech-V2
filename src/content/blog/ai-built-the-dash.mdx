@@ -49,7 +49,7 @@ Sentinel started as a straightforward observability project:
 
 Observability systems have a very different growth pattern than traditional CRUD applications. The data is append-only, time-series oriented, and constantly accumulating. Even with only seven monitored targets, Sentinel was already generating roughly **20,000 new rows per day**.
 
-Every page load fetched fresh operational data directly from Postgres — current status, latency trends, uptime percentages, active incidents, and historical charts. The application wasn't just rendering UI anymore. It was continuously aggregating operational history across growing time windows.
+Every page load fetched fresh operational data directly from Postgres: current status, latency trends, uptime percentages, active incidents, and historical charts. The application wasn't just rendering UI anymore. It was continuously aggregating operational history across growing time windows.
 
 Nothing initially looked broken. The queries worked. The charts rendered. The UI felt fast enough during early development. But Sentinel became the first project where I really felt the distinction between **building an application** and **engineering a system that could keep scaling as the workload changed**.
 
@@ -75,11 +75,11 @@ const latestByTarget = new Map();
 
 Technically correct. Architecturally expensive. The database returned thousands of rows so Node.js could throw most of them away to find the newest record per target.
 
-The same pattern showed up across uptime calculations, daily chart bucketing, and latency percentiles — all aggregated in application code after large result sets had already left Postgres. Individually, none of these queries looked alarming. That's what makes this kind of problem tricky. AI tends to generate code that is locally reasonable, but systems performance problems are usually **global**, not local.
+The same pattern showed up across uptime calculations, daily chart bucketing, and latency percentiles, all aggregated in application code after large result sets had already left Postgres. Individually, none of these queries looked alarming. That's what makes this kind of problem tricky. AI tends to generate code that is locally reasonable, but systems performance problems are usually **global**, not local.
 
 The overview page was the clearest example. Multiple widgets fetched overlapping 30-day datasets simultaneously. Some loaders even called other loaders internally, meaning the same time window could be scanned multiple times during a single page render.
 
-The core issue wasn't a single bad query. It was the cumulative effect of reasonable decisions stacking together — and an unanswered systems design question: **where should the computation actually happen?**
+The core issue wasn't a single bad query. It was the cumulative effect of reasonable decisions stacking together, plus an unanswered systems design question: **where should the computation actually happen?**
 
 PostgreSQL is optimized for aggregation, grouping, and time-series rollups. Node.js is not. But the original implementation treated Postgres mostly as storage while application code handled the analytical work.
 
@@ -160,7 +160,7 @@ By the end of the refactor, the dashboard became a thin analytical layer on top 
 
 ---
 
-## What AI Accelerates — and What It Doesn't
+## What AI Accelerates and What It Doesn't
 
 Working on Sentinel reinforced something I think a lot of AI-assisted projects are running into.
 
@@ -179,6 +179,6 @@ But once the application started behaving like an actual observability system in
 - "Why is Node.js doing analytical work instead of Postgres?"
 - "How does this architecture behave six months from now?"
 
-Those are engineering questions. And I think that's the future: not AI versus engineers, but engineers who understand systems — and use AI as leverage to move faster through version one while still doing the work that makes version one survive real conditions.
+Those are engineering questions. And I think that's the future: not AI versus engineers, but engineers who understand systems and use AI as leverage to move faster through version one while still doing the work that makes version one survive real conditions.
 
 AI built the dashboard faster than I could have manually. Understanding Postgres, query design, and systems architecture is what made it viable as the data started growing.
