@@ -201,3 +201,64 @@ html.light .blog-inline-figure-frame {
   text-align: center;
   color: var(--text-secondary);
 }
+
+/* Pull quotes — highlighted thesis lines in blog MDX */
+.article-content .pull-quote,
+.pull-quote {
+  position: relative;
+  margin: 2.5rem 0;
+  padding: 1.5rem 1.5rem 1.5rem 1.75rem;
+  border: none;
+  border-left: 4px solid var(--accent-color);
+  border-radius: 0 0.75rem 0.75rem 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 212, 255, 0.08) 0%,
+    var(--bg-secondary) 55%
+  );
+  box-shadow:
+    0 0 0 1px rgba(0, 212, 255, 0.06),
+    0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+html.light .article-content .pull-quote,
+html.light .pull-quote {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 119, 168, 0.06) 0%,
+    #f8fafc 55%
+  );
+  box-shadow:
+    0 0 0 1px rgba(0, 119, 168, 0.08),
+    0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.article-content .pull-quote::before,
+.pull-quote::before {
+  content: "\201C";
+  position: absolute;
+  top: 0.35rem;
+  left: 0.85rem;
+  font-size: 2.5rem;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--accent-color);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.article-content .pull-quote p,
+.pull-quote p {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: clamp(1.125rem, 2vw, 1.35rem);
+  line-height: 1.55;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+html.light .article-content .pull-quote p,
+html.light .pull-quote p {
+  color: #0f172a;
+}

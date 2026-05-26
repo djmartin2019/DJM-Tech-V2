@@ -19,6 +19,8 @@ export const rx = createRendorix({
     cardSquare: { w: 600, h: 600, q: 80, f: "webp" },
     /** Home hero headshot: .hero-portrait is 360px; 720px covers 2x DPR. */
     headshot: { w: 720, h: 720, q: 86, f: "webp" },
+    /** Blog author byline: 4rem display; 128px covers 2x DPR. */
+    authorAvatar: { w: 128, h: 128, q: 86, f: "webp" },
     /** About page portrait: larger square, up to ~480px display. */
     headshotAbout: { w: 960, h: 960, q: 86, f: "webp" },
     /** Open Graph / social link previews (1.91:1). */

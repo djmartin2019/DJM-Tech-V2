@@ -19,6 +19,7 @@ canonicalURL: "https://djmtech.dev/blog/ai-built-the-dash"
 ---
 
 import BlogFigure from "../../components/BlogFigure.astro";
+import PullQuote from "../../components/PullQuote.astro";
 
 I used Cursor to generate most of Sentinel's initial dashboard UI. Within a few minutes, I had a professional-looking Next.js app with uptime tables, latency charts, incident feeds, and typed Prisma integrations. It worked, it looked polished... and then the data started growing.
 
@@ -49,7 +50,9 @@ Sentinel started as a straightforward observability project:
 - Results are written into PostgreSQL through Prisma
 - A Next.js dashboard visualizes uptime, incidents, and latency trends
 
-Observability systems have a very different growth pattern than traditional CRUD applications. The data is append-only, time-series oriented, and constantly accumulating. Even with only seven monitored targets, Sentinel was already generating roughly **20,000 new rows per day**.
+Observability systems have a very different growth pattern than traditional CRUD applications. Every query pattern that feels harmless during development compounds over time.
+
+The data is append-only, time-series oriented, and constantly accumulating. Even with only seven monitored targets, Sentinel was already generating roughly **20,000 new rows per day**.
 
 Every page load fetched fresh operational data directly from Postgres: current status, latency trends, uptime percentages, active incidents, and historical charts. The application wasn't just rendering UI anymore. It was continuously aggregating operational history across growing time windows.
 
@@ -61,7 +64,7 @@ Nothing initially looked broken. The queries worked. The charts rendered. The UI
 
 The first version was functionally correct. Uptime charts rendered, incidents appeared, latency graphs updated, and service status cards reflected real data. From the outside, it looked production-ready.
 
-This wasn't broken AI code. It was plausible code doing the wrong kind of work.
+This wasn't broken AI code. It was **_plausible_** code doing the wrong kind of work.
 
 The original pattern was consistent everywhere: fetch data with Prisma, load rows into Node.js, aggregate in TypeScript, render charts. One of the clearest examples was how the dashboard loaded "latest status" for monitored services:
 
@@ -93,7 +96,9 @@ The biggest realization was that most dashboard components didn't need raw rows.
 
 That distinction changed how I approached the data layer. Instead of querying large windows and deriving summaries in Node.js, the optimized architecture pushed aggregation into Postgres and returned only the minimal datasets the UI actually needed.
 
-**AI is very good at generating applications that work. It is not automatically good at generating systems that scale.**
+<PullQuote>
+  AI is very good at generating applications that work. It is not automatically good at generating systems that scale.
+</PullQuote>
 
 ---
 
@@ -188,7 +193,7 @@ The improvement came entirely from reducing unnecessary computation and database
 
 ---
 
-## What AI Accelerates and What It Doesn't
+## AI Accelerates Implementation, Not Architecture
 
 Working on Sentinel reinforced something I think a lot of AI-assisted projects are running into.
 

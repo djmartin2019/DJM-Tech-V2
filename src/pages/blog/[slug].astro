@@ -8,6 +8,7 @@ import { ChevronRight, Twitter, Linkedin, Github, Mail } from 'lucide-astro';
 import { getCollection } from 'astro:content';
 import { getAllBlogPosts } from '../../data/blog';
 import { imageUrl } from '../../lib/rendorix-images';
+import { rx } from '../../lib/rendorix';
 import RendorixImage from '../../components/RendorixImage.astro';
 
 export async function getStaticPaths() {
@@ -32,6 +33,8 @@ const leadImageUrl = post.data.image
 const ogImageUrl = post.data.image
   ? imageUrl(post.data.image, { preset: 'og' })
   : '/assets/og-default.png';
+
+const authorHeadshotUrl = rx.img('about-me-photo.jpeg', { preset: 'authorAvatar' });
 
 const relatedPosts = allBlogPosts
   .filter(
@@ -117,11 +120,21 @@ const relatedPosts = allBlogPosts
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-4">
             <div class="author-icon-container">
-              <img src="/assets/about-me-photo.jpeg" alt="David Martin" class="author-profile-image" />
+              <RendorixImage
+                src={authorHeadshotUrl}
+                alt="David Martin"
+                class="author-profile-image"
+                wrapClass="rx-image-wrap--fill"
+                width={128}
+                height={128}
+                loading="lazy"
+                decoding="async"
+                rounded="full"
+              />
             </div>
             <div>
               <h3 class="text-lg font-semibold author-name">David Martin</h3>
-              <p class="author-title">Full Stack Developer</p>
+              <p class="author-title">Backend & Platform Engineer</p>
             </div>
           </div>
           
@@ -283,6 +296,14 @@ const relatedPosts = allBlogPosts
     color: var(--text-secondary);
   }
 
+  .article-content .pull-quote {
+    border-left-color: var(--accent-color);
+  }
+
+  .article-content .pull-quote p {
+    color: var(--text-primary);
+  }
+
   .article-footer-border {
     border-top: 1px solid var(--border-color);
   }
@@ -290,17 +311,20 @@ const relatedPosts = allBlogPosts
   .author-icon-container {
     width: 4rem;
     height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-shrink: 0;
     overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .author-icon-container .rx-image-wrap {
+    width: 100%;
+    height: 100%;
   }
 
   .author-profile-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
   }
 
   .author-icon {
