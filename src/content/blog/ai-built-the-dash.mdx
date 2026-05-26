@@ -12,11 +12,13 @@ tags:
     "AI",
     "Systems Engineering",
   ]
-readTime: 8
+readTime: 10
 image: "AIBuiltTheDash.png"
 author: "David Martin"
 canonicalURL: "https://djmtech.dev/blog/ai-built-the-dash"
 ---
+
+import BlogFigure from "../../components/BlogFigure.astro";
 
 I used Cursor to generate most of Sentinel's initial dashboard UI. Within a few minutes, I had a professional-looking Next.js app with uptime tables, latency charts, incident feeds, and typed Prisma integrations. It worked, it looked polished... and then the data started growing.
 
@@ -157,6 +159,32 @@ Chart datasets dropped from massive raw result sets to roughly 30 rows for 30-da
 The final fix was architectural. I replaced independent widget loaders with a single coordinated overview loader that fetched shared datasets once, ran aggregate queries in parallel, derived view models centrally, and reused results across widgets.
 
 By the end of the refactor, the dashboard became a thin analytical layer on top of PostgreSQL: aggregate in SQL, return minimal datasets, compose lightweight view models, render efficiently.
+
+---
+
+## The Moment the Optimizations Went Live
+
+The most interesting part of the refactor wasn't the SQL itself. It was watching the system behavior change immediately after deployment. After deploying the query and aggregation changes, the impact showed up almost instantly in the telemetry graphs.
+
+**Average latency across the applications hosted on my VPS dropped by more than 60% within minutes of deployment.**
+
+<BlogFigure
+  s3Key="BlogImages/sentry-performance-improvement.jpeg"
+  alt="Sentinel latency graph showing a sharp drop in avg, p95, and p99 after query optimizations deployed"
+  caption="Average latency dropped from ~600ms to 203ms within minutes of deployment. Same VPS, same traffic."
+/>
+
+The graph was honestly a little surreal to watch in real time. The system stabilized almost instantly.
+
+What made this especially interesting is that nothing about the infrastructure itself changed:
+
+- Same VPS
+- Same Docker containers
+- Same applications
+- Same network
+- Same traffic
+
+The improvement came entirely from reducing unnecessary computation and database load. That was an important reminder that performance bottlenecks are often **architectural**, not hardware-related.
 
 ---
 

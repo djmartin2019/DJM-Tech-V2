@@ -23,5 +23,7 @@ export const rx = createRendorix({
     headshotAbout: { w: 960, h: 960, q: 86, f: "webp" },
     /** Open Graph / social link previews (1.91:1). */
     og: { w: 1200, h: 630, q: 85, f: "jpeg" },
+    /** Wide inline blog figures (screenshots, diagrams). */
+    blogInline: { w: 1200, q: 85, f: "webp" },
   },
 });

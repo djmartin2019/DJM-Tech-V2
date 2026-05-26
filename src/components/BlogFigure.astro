@@ -1,0 +1,27 @@
+---
+import { rx } from '../lib/rendorix';
+import RendorixImage from './RendorixImage.astro';
+
+interface Props {
+  s3Key: string;
+  alt: string;
+  caption?: string;
+}
+
+const { s3Key, alt, caption } = Astro.props;
+const src = rx.img(s3Key, { preset: 'blogInline' });
+---
+
+<figure class="blog-inline-figure">
+  <div class="blog-inline-figure-frame">
+    <RendorixImage
+      src={src}
+      alt={alt}
+      class="blog-inline-figure-image"
+      width={1200}
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  {caption && <figcaption class="blog-inline-figure-caption">{caption}</figcaption>}
+</figure>

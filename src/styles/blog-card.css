@@ -155,3 +155,49 @@ html.light .blog-posts-section-title {
   border: 1px solid var(--border-color);
   background: var(--bg-card);
 }
+
+/* Inline blog figures — MDX screenshots and diagrams */
+.blog-inline-figure {
+  margin: 2.5rem auto;
+  max-width: 100%;
+  width: 100%;
+}
+
+.blog-inline-figure-frame {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  box-shadow:
+    0 0 0 1px rgba(0, 212, 255, 0.04),
+    0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+html.light .blog-inline-figure-frame {
+  box-shadow:
+    0 0 0 1px rgba(0, 119, 168, 0.06),
+    0 12px 32px rgba(15, 23, 42, 0.08);
+}
+
+.blog-inline-figure .rx-image-wrap {
+  width: 100%;
+  line-height: 0;
+  background: var(--bg-secondary);
+}
+
+.blog-inline-figure .rx-image-wrap .rx-image,
+.blog-inline-figure-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+.blog-inline-figure-caption {
+  margin-top: 0.875rem;
+  padding: 0 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  text-align: center;
+  color: var(--text-secondary);
+}
