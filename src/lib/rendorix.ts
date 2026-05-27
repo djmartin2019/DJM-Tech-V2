@@ -21,8 +21,8 @@ export const rx = createRendorix({
     headshot: { w: 720, h: 720, q: 86, f: "webp" },
     /** Blog author byline: 4rem display; 128px covers 2x DPR. */
     authorAvatar: { w: 128, h: 128, q: 86, f: "webp" },
-    /** About page portrait: larger square, up to ~480px display. */
-    headshotAbout: { w: 960, h: 960, q: 86, f: "webp" },
+    /** About page portrait: vertical frame, up to ~22.7rem display width. */
+    headshotAbout: { w: 708, h: 884, q: 86, f: "webp" },
     /** Open Graph / social link previews (1.91:1). */
     og: { w: 1200, h: 630, q: 85, f: "jpeg" },
     /** Wide inline blog figures (screenshots, diagrams). */
