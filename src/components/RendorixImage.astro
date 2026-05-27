@@ -26,9 +26,18 @@ const {
 } = Astro.props;
 
 const roundedClass = rounded === 'full' ? 'rx-rounded-full' : '';
+const fillsParent = wrapClass.includes('rx-image-wrap--fill');
+const wrapStyle =
+  !fillsParent && width != null && height != null
+    ? { aspectRatio: `${width} / ${height}` }
+    : undefined;
 ---
 
-<div class:list={['rx-image-wrap', wrapClass, roundedClass]} data-rx-image-wrap>
+<div
+  class:list={['rx-image-wrap', wrapClass, roundedClass]}
+  style={wrapStyle}
+  data-rx-image-wrap
+>
   <div class="rx-image-shimmer" aria-hidden="true"></div>
   <img
     class:list={['rx-image', imgClass]}
