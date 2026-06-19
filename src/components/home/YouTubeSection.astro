@@ -1,0 +1,53 @@
+---
+import { ExternalLink, Youtube } from 'lucide-astro';
+import YouTubeVideoCard from './YouTubeVideoCard.astro';
+import {
+  YOUTUBE_CHANNEL_NAME,
+  YOUTUBE_CHANNEL_URL,
+  getRecentYouTubeVideos,
+} from '../../data/youtube';
+
+const recentVideos = await getRecentYouTubeVideos(3);
+---
+
+<section id="youtube" class="home-youtube" aria-labelledby="youtube-heading">
+  <div class="home-youtube-glow" aria-hidden="true"></div>
+  <div class="home-youtube-grid" aria-hidden="true"></div>
+
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-16">
+    <div class="home-youtube-header">
+      <div class="home-youtube-intro">
+        <div class="home-youtube-badge">
+          <Youtube class="h-4 w-4" aria-hidden="true" />
+          <span>New on YouTube</span>
+        </div>
+        <h2 id="youtube-heading" class="home-youtube-title">
+          Building in public on {YOUTUBE_CHANNEL_NAME}
+        </h2>
+        <p class="home-youtube-subtitle">
+          I started a YouTube channel to share the real engineering behind my projects: Docker ops, Astro builds, observability, and the mistakes that don't make it into blog posts.
+        </p>
+      </div>
+
+      <div class="home-youtube-actions">
+        <a
+          href={YOUTUBE_CHANNEL_URL}
+          class="home-youtube-btn-primary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Subscribe on YouTube
+          <ExternalLink class="h-4 w-4" aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+
+    {recentVideos.length > 0 && (
+      <div class="home-youtube-videos">
+        {recentVideos.map((video) => (
+          <YouTubeVideoCard video={video} />
+        ))}
+      </div>
+    )}
+  </div>
+</section>

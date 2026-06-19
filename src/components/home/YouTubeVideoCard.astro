@@ -1,0 +1,43 @@
+---
+import { Play } from 'lucide-astro';
+import type { YouTubeVideo } from '../../data/youtube';
+
+interface Props {
+  video: YouTubeVideo;
+}
+
+const { video } = Astro.props;
+---
+
+<article class="home-youtube-card">
+  <a href={video.url} class="home-youtube-card-link" target="_blank" rel="noopener noreferrer">
+    <div class="home-youtube-card-thumb">
+      <img
+        src={video.thumbnailUrl}
+        alt=""
+        width={480}
+        height={360}
+        loading="lazy"
+        decoding="async"
+      />
+      <span class="home-youtube-card-play" aria-hidden="true">
+        <Play class="h-5 w-5" fill="currentColor" />
+      </span>
+    </div>
+    <div class="home-youtube-card-body">
+      <p class="home-youtube-card-meta">
+        <time datetime={video.published}>
+          {new Date(video.published).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          })}
+        </time>
+      </p>
+      <h3 class="home-youtube-card-title">{video.title}</h3>
+      <span class="home-youtube-card-cta">
+        Watch on YouTube
+      </span>
+    </div>
+  </a>
+</article>

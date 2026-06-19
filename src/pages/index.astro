@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import HeroSection from '../components/home/HeroSection.astro';
+import YouTubeSection from '../components/home/YouTubeSection.astro';
 import AboutSection from '../components/home/AboutSection.astro';
 import FeaturedProjectsSection from '../components/home/FeaturedProjectsSection.astro';
 import InfrastructureLabSection from '../components/home/InfrastructureLabSection.astro';
@@ -21,6 +22,7 @@ const canonical = 'https://djmtech.dev/';
   <main>
     <HeroSection />
     <AboutSection />
+    <YouTubeSection />
     <FeaturedProjectsSection />
     <InfrastructureLabSection />
     <TechnicalWritingSection />
@@ -36,5 +38,8 @@ const canonical = 'https://djmtech.dev/';
   jobTitle: 'Backend & Platform Engineer',
   url: canonical,
   description,
-  sameAs: ['https://github.com/djmartin2019'],
+  sameAs: [
+    'https://github.com/djmartin2019',
+    'https://www.youtube.com/channel/UC0UfDRsXPQ6A7s98_2fXMOg',
+  ],
 })} />
