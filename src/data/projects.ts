@@ -73,23 +73,6 @@ export const projects: Project[] = [
     startDate: "2025-09",
   },
   {
-    id: "texas-frontstep",
-    title: "Texas Frontstep Media",
-    description:
-      "Website and photography system for a Texas real estate media business.",
-    longDescription:
-      "Texas Frontstep Media helps real estate agents and small business owners in Texas get online quickly with professional photography and clean, fast websites. The site itself is built for speed and reliability, and the service is designed to be simple: you get a professional result without the back-and-forth.",
-    image: "/assets/websites/TexasFrontstep.png",
-    technologies: ["Astro", "TailwindCSS", "TypeScript", "Cloudflare"],
-    status: "completed",
-    liveUrl: "https://texasfrontstep.com/",
-    githubUrl: "https://github.com/djmartin2019/texas-frontstep",
-    featured: true,
-    category: "Business",
-    startDate: "2025-08",
-  },
-
-  {
     id: "daveypics",
     title: "DaveyPics",
     description:
@@ -100,7 +83,7 @@ export const projects: Project[] = [
     technologies: ["NextJS", "TailwindCSS", "TypeScript", "Vercel"],
     status: "completed",
     liveUrl: "https://www.daveypicsstudio.com/",
-    githubUrl: "https://github.com/djmartin2019/DaveyPicsPortfolio",
+    githubUrl: "https://github.com/djmartin2019/davey-pics-astro",
     featured: true,
     category: "Portfolio",
     startDate: "2024-01",
