@@ -13,7 +13,7 @@ import TechnicalWritingSection from '../components/home/TechnicalWritingSection.
 const title = 'David Martin | Backend & Platform Engineer';
 const description =
   'Backend and platform engineer building operational software, developer infrastructure, and scalable systems with TypeScript, Postgres, Docker, and cloud platforms.';
-const canonical = 'https://djmtech.dev/';
+const canonical = 'https://www.djm-tech.dev/';
 ---
 
 <Layout {title} {description} canonical={canonical}>
@@ -30,16 +30,3 @@ const canonical = 'https://djmtech.dev/';
 
   <Footer />
 </Layout>
-
-<script type="application/ld+json" set:html={JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'David Martin',
-  jobTitle: 'Backend & Platform Engineer',
-  url: canonical,
-  description,
-  sameAs: [
-    'https://github.com/djmartin2019',
-    'https://www.youtube.com/channel/UC0UfDRsXPQ6A7s98_2fXMOg',
-  ],
-})} />

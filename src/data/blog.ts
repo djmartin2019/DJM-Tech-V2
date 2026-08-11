@@ -42,16 +42,18 @@ export async function getPostsByTag(tag: string) {
 
 export async function getRecentPosts(limit: number = 3) {
   const posts = await getAllBlogPosts();
-  return posts
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, limit);
+  return posts.slice(0, limit);
 }
 
-export async function getAllTags() {
-  const posts = await getAllBlogPosts();
+export function getTagsFromPosts(posts: BlogPost[]) {
   const tagSet = new Set<string>();
   posts.forEach((post) => {
     post.tags.forEach((tag) => tagSet.add(tag));
   });
   return Array.from(tagSet).sort();
+}
+
+export async function getAllTags() {
+  const posts = await getAllBlogPosts();
+  return getTagsFromPosts(posts);
 }

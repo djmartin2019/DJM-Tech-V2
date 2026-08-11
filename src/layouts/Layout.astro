@@ -12,7 +12,7 @@ export interface Props {
 
 const { 
   title, 
-  description = "David Martin - Full Stack Developer building scalable web experiences with Next.js, TypeScript, and modern web technologies.",
+  description = "David Martin - Backend & Platform Engineer building operational software, developer infrastructure, and scalable systems.",
   image = "/assets/og-default.png",
   canonical,
   noindex = false
@@ -20,6 +20,35 @@ const {
 
 const canonicalURL = canonical ? new URL(canonical, Astro.site) : Astro.url;
 const imageURL = image.startsWith('http') ? image : new URL(image, Astro.site).href;
+
+const rendorixBaseUrl = import.meta.env.RENDORIX_BASE_URL as string | undefined;
+let rendorixOrigin: string | undefined;
+try {
+  rendorixOrigin = rendorixBaseUrl ? new URL(rendorixBaseUrl).origin : undefined;
+} catch {
+  rendorixOrigin = undefined;
+}
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'David Martin',
+  url: 'https://www.djm-tech.dev',
+  image: 'https://www.djm-tech.dev/assets/og-default.png',
+  description:
+    'Backend and platform engineer building operational software, developer infrastructure, and scalable systems.',
+  jobTitle: 'Backend & Platform Engineer',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'DJM Tech',
+  },
+  sameAs: [
+    'https://github.com/djmartin2019',
+    'https://www.linkedin.com/in/davidjmartin2025',
+    'https://x.com/djmartin2019',
+    'https://www.youtube.com/channel/UC0UfDRsXPQ6A7s98_2fXMOg',
+  ],
+};
 ---
 
 <!DOCTYPE html>
@@ -28,6 +57,8 @@ const imageURL = image.startsWith('http') ? image : new URL(image, Astro.site).h
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    {rendorixOrigin && <link rel="preconnect" href={rendorixOrigin} />}
+    {rendorixOrigin && <link rel="dns-prefetch" href={rendorixOrigin} />}
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
@@ -83,31 +114,9 @@ const imageURL = image.startsWith('http') ? image : new URL(image, Astro.site).h
     </script>
     
     <!-- Structured Data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "David Martin",
-        "url": "https://www.djm-tech.dev",
-        "image": "https://www.djm-tech.dev/assets/og-default.png",
-        "description": "Full Stack Developer building scalable web experiences",
-        "jobTitle": "Full Stack Developer",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "DJM Tech"
-        },
-        "sameAs": [
-          "https://github.com/djmartin2019",
-          "https://www.linkedin.com/in/davidjmartin2025",
-          "https://x.com/djmartin2019"
-        ]
-      }
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
   </head>
   <body class="antialiased">
     <slot />
-    <script>
-      import '../scripts/init-rendorix-images.ts';
-    </script>
   </body>
 </html>

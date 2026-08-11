@@ -4,10 +4,10 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BlogPostCard from '../components/BlogPostCard.astro';
-import { getAllBlogPosts, getAllTags } from '../data/blog';
+import { getAllBlogPosts, getTagsFromPosts } from '../data/blog';
 
 const blogPosts = await getAllBlogPosts();
-const allTags = await getAllTags();
+const allTags = getTagsFromPosts(blogPosts);
 ---
 
 <Layout title="Technical Writing | DJM Tech" description="Case studies and notes on scaling, observability, caching, and operating backend systems in production.">
